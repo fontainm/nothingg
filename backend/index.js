@@ -1,9 +1,13 @@
 import express from 'express'
-import { getUser, createUser, getUsers } from './database.js'
+import { getUser, getUsers, createUser } from './database.js'
 
 const app = express()
 
 app.use(express.json())
+
+app.get('/info', async (req, res) => {
+  res.send('Working!')
+})
 
 app.get('/users', async (req, res) => {
   const users = await getUsers()
@@ -17,12 +21,12 @@ app.get('/users/:id', async (req, res) => {
 })
 
 app.post('/users', async (req, res) => {
-  const { email, password } = req.body
-  const user = await createUser(email, password)
+  const { username, email, password } = req.body
+  const user = await createUser(username, email, password)
   res.status(201).send(user)
 })
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   console.error(err.stack)
   res.status(500).send('something went wrong')
 })
