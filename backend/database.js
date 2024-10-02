@@ -17,6 +17,11 @@ export async function getUsers() {
   return rows
 }
 
+export async function getUsersCount() {
+  const { rows } = await pool.query('SELECT COUNT(*) as total FROM users')
+  return rows[0]
+}
+
 export async function getUser(id) {
   const { rows } = await pool.query(`SELECT * FROM users WHERE id = $1`, [id])
   return rows[0]

@@ -1,5 +1,5 @@
 import express from 'express'
-import { getUser, getUsers, createUser } from './database.js'
+import { getUser, getUsers, getUsersCount, createUser } from './database.js'
 
 const app = express()
 
@@ -11,6 +11,11 @@ app.get('/info', async (req, res) => {
 
 app.get('/users', async (req, res) => {
   const users = await getUsers()
+  res.send(users)
+})
+
+app.get('/countusers', async (req, res) => {
+  const users = await getUsersCount()
   res.send(users)
 })
 
