@@ -8,7 +8,7 @@ const getAll = () => {
 }
 
 const countAll = () => {
-  const request = axios.get(`${baseUrl}/countusers`)
+  const request = axios.get(`${baseUrl}/users/total`)
   return request.then((response) => response.data)
 }
 
