@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.static('dist'))
 
 app.get('/api/info', async (req, res) => {
-  res.send('Working!')
+  res.status(200).send('Working!')
 })
 
 app.use('/api/users', usersRouter)
