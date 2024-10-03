@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'https://nothing.uber.space/api' // TODO: LOCAL vs Production
+const baseUrl = '/api'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
