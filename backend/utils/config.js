@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-dotenv.config({ path: `.env.local`, override: true })
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
 const PORT = process.env.PORT || 3001
 const HOST = process.env.SQL_HOST
