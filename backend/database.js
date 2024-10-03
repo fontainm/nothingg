@@ -1,5 +1,6 @@
 import pg from 'pg'
 import config from './utils/config.js'
+import logger from './utils/logger.js'
 
 const { Pool } = pg
 
@@ -10,6 +11,10 @@ const pool = new Pool({
   password: config.SQL_PASSWORD
 })
 
-export const query = (text, params, callback) => {
-  return pool.query(text, params, callback)
+export const query = async (text, params) => {
+  const start = Date.now()
+  const res = await pool.query(text, params)
+  const duration = Date.now() - start
+  logger.info('executed query', { text, duration, rows: res.rowCount })
+  return res
 }
