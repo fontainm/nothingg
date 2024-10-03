@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config({ path: `.env.local`, override: true })
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001
 const HOST = process.env.SQL_HOST
 const SQL_DATABASE = process.env.SQL_DATABASE
 const SQL_USER = process.env.SQL_USER
