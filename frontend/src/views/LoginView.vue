@@ -1,7 +1,12 @@
+<script setup>
+import AppLogin from '../components/AppLogin.vue'
+</script>
+
 <template>
-  <div class="login">
-    <h1>This is a login page</h1>
-  </div>
+  <main>
+    <h1>Login for nothing</h1>
+    <AppLogin />
+  </main>
 </template>
 
 <style></style>
