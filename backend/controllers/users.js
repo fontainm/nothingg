@@ -14,7 +14,15 @@ export async function getUsersCount() {
 }
 
 export async function getUser(id) {
+  // TODO: Rename
   const { rows } = await db.query(`SELECT * FROM users WHERE id = $1`, [id])
+  return rows[0]
+}
+
+export async function getUserByUsername(username) {
+  const { rows } = await db.query(`SELECT * FROM users WHERE username = $1`, [
+    username,
+  ])
   return rows[0]
 }
 

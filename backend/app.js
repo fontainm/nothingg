@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import usersRouter from './routes/users.js'
+import loginRouter from './routes/login.js'
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.get('/api/info', async (req, res) => {
 })
 
 app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 
 app.use((err, req, res, next) => {
   console.error(err.stack)
