@@ -1,7 +1,10 @@
 import * as db from '../database.js'
+import bcrypt from 'bcrypt'
 
 export async function getUsers() {
-  const { rows } = await db.query('SELECT id, username, email, created_at FROM users')
+  const { rows } = await db.query(
+    'SELECT id, username, email, created_at, password FROM users'
+  )
   return rows
 }
 
@@ -16,15 +19,22 @@ export async function getUser(id) {
 }
 
 export async function createUser(username, email, password) {
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
   const created_at = new Date()
   const result = await db.query(
     `INSERT INTO users (username, email, password, created_at) VALUES ($1, $2, $3, $4) RETURNING *`,
-    [username, email, password, created_at]
+    [username, email, passwordHash, created_at]
   )
   return {
     id: result.rows[0].id,
     username,
     email,
-    password
   }
+}
+
+export async function deleteUsers() {
+  await db.query('TRUNCATE TABLE users')
+  await db.query('ALTER SEQUENCE users_id_seq RESTART WITH 1')
 }
