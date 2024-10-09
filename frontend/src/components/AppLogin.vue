@@ -31,12 +31,12 @@ export default {
   methods: {
     async handleLogin() {
       event.preventDefault()
+      this.errorMessage = ''
 
       try {
         await this.usersStore.loginUser({ username: this.username, password: this.password })
-        console.log('Login successful')
-      } catch (exception) {
-        this.errorMessage = 'Wrong Credentials!'
+      } catch (error) {
+        this.errorMessage = error.response.data.message
       }
     }
   }

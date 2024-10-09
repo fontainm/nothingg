@@ -20,16 +20,23 @@ usersRouter.get('/total', async (req, res) => {
 })
 
 usersRouter.get('/:id', async (req, res) => {
-  const id = req.params.id
-  const user = await getUser(id)
-  res.send(user)
+  try {
+    const id = req.params.id
+    const user = await getUser(id)
+    res.send(user)
+  } catch (error) {
+    next(error)
+  }
 })
 
-usersRouter.post('/', async (req, res) => {
-  const { username, email, password } = req.body
-  const user = await createUser(username, email, password)
-  // TODO: add error handler
-  res.status(201).send(user)
+usersRouter.post('/', async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body
+    const user = await createUser(username, email, password)
+    res.status(201).send(user)
+  } catch (error) {
+    next(error)
+  }
 })
 
 usersRouter.delete('/', async (req, res) => {

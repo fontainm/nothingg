@@ -17,34 +17,22 @@ export const useUsersStore = defineStore('user', {
     },
 
     async createUser(credentials) {
-      try {
-        const response = await usersService.createUser({
-          username: credentials.username,
-          email: credentials.email,
-          password: credentials.password
-        })
-        console.log(response)
-      } catch (error) {
-        console.error('Sign Up failed:', error)
-        throw error // Throw the error so the component can handle it
-      }
+      await usersService.createUser({
+        username: credentials.username,
+        email: credentials.email,
+        password: credentials.password
+      })
     },
 
     async loginUser(credentials) {
-      try {
-        const response = await loginService.login({
-          username: credentials.username,
-          password: credentials.password
-        })
-        console.log(response)
-        this.user = response.username
-        this.token = response.token
-        this.isLoggedIn = true
-        localStorage.setItem('user', JSON.stringify(response.token))
-      } catch (error) {
-        console.error('Login failed:', error)
-        throw error // Throw the error so the component can handle it
-      }
+      const response = await loginService.login({
+        username: credentials.username,
+        password: credentials.password
+      })
+      this.user = response.username
+      this.token = response.token
+      this.isLoggedIn = true
+      localStorage.setItem('user', JSON.stringify(response.token))
     },
 
     async logoutUser() {

@@ -33,6 +33,7 @@ export default {
   methods: {
     async handleSignUp() {
       event.preventDefault()
+      this.errorMessage = ''
 
       try {
         await this.usersStore.createUser({
@@ -40,8 +41,8 @@ export default {
           email: this.email,
           password: this.password
         })
-      } catch (exception) {
-        this.errorMessage = 'Something went wrong!'
+      } catch (error) {
+        this.errorMessage = error.response.data.message
       }
     }
   }
