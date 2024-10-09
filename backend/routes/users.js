@@ -1,5 +1,11 @@
 import express from 'express'
-import { getUser, getUsers, getUsersCount, createUser } from '../controllers/users.js'
+import {
+  getUser,
+  getUsers,
+  getUsersCount,
+  createUser,
+  deleteUsers,
+} from '../controllers/users.js'
 
 const usersRouter = express.Router()
 
@@ -22,7 +28,13 @@ usersRouter.get('/:id', async (req, res) => {
 usersRouter.post('/', async (req, res) => {
   const { username, email, password } = req.body
   const user = await createUser(username, email, password)
+  // TODO: add error handler
   res.status(201).send(user)
+})
+
+usersRouter.delete('/', async (req, res) => {
+  await deleteUsers()
+  res.status(204).end()
 })
 
 export default usersRouter

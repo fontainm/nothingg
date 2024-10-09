@@ -1,5 +1,5 @@
 <script setup>
-import usersService from '@/services/users'
+import { useUsersStore } from '../stores/users'
 </script>
 
 <template>
@@ -15,18 +15,25 @@ import usersService from '@/services/users'
 export default {
   data() {
     return {
-      totalUsers: 0
+      usersStore: useUsersStore()
+    }
+  },
+
+  computed: {
+    totalUsers() {
+      return this.usersStore.totalUsers
     }
   },
 
   mounted() {
-    this.countUsers()
+    if (!this.totalUsers) {
+      this.countUsers()
+    }
   },
 
   methods: {
     async countUsers() {
-      const response = await usersService.countAll()
-      this.totalUsers = response.total
+      this.usersStore.getTotalUsers()
     }
   }
 }

@@ -12,4 +12,9 @@ const countAll = () => {
   return request.then((response) => response.data)
 }
 
-export default { getAll, countAll }
+const createUser = (credentials) => {
+  const request = axios.post(baseUrl, credentials)
+  return request.then((response) => response.data)
+}
+
+export default { getAll, countAll, createUser }

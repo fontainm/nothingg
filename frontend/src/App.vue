@@ -1,5 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { useUsersStore } from '@/stores/users'
+const usersStore = useUsersStore()
 </script>
 
 <template>
@@ -9,8 +11,10 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/#benefits">Benefits</RouterLink>
       <RouterLink to="/#products">Products</RouterLink>
       <div>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/demo">Demo</RouterLink>
+        <RouterLink v-if="!usersStore.isLoggedIn" to="/signup">Sign Up</RouterLink>
+        <RouterLink v-if="!usersStore.isLoggedIn" to="/login">Login</RouterLink>
+        <RouterLink v-if="!usersStore.isLoggedIn" to="/demo">Demo</RouterLink>
+        <button v-if="usersStore.isLoggedIn" @click="usersStore.logoutUser()">Logout</button>
       </div>
     </nav>
   </header>
@@ -22,6 +26,14 @@ import { RouterLink, RouterView } from 'vue-router'
   </footer>
 </template>
 
+<script>
+export default {
+  mounted() {
+    console.log('check login')
+  }
+}
+</script>
+
 <style scoped lang="scss">
 nav {
   padding: 16px 0;
@@ -32,5 +44,6 @@ nav {
 footer {
   text-align: center;
   padding: 64px 0;
+  background: lightseagreen;
 }
 </style>
