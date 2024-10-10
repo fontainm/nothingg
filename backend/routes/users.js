@@ -19,11 +19,15 @@ usersRouter.get('/total', async (req, res) => {
   res.send(users)
 })
 
-usersRouter.get('/:id', async (req, res) => {
+usersRouter.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id
     const user = await getUser(id)
-    res.send(user)
+    if (user) {
+      res.send(user)
+    } else {
+      res.status(404).end()
+    }
   } catch (error) {
     next(error)
   }
