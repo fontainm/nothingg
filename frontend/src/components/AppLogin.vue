@@ -35,6 +35,7 @@ export default {
 
       try {
         await this.usersStore.loginUser({ username: this.username, password: this.password })
+        this.$router.push('/dashboard')
       } catch (error) {
         this.errorMessage = error.response.data.message
       }

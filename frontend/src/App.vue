@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { useUsersStore } from '@/stores/users'
-const usersStore = useUsersStore()
 </script>
 
 <template>
@@ -14,7 +13,7 @@ const usersStore = useUsersStore()
         <RouterLink v-if="!usersStore.isLoggedIn" to="/signup">Sign Up</RouterLink>
         <RouterLink v-if="!usersStore.isLoggedIn" to="/login">Login</RouterLink>
         <RouterLink v-if="!usersStore.isLoggedIn" to="/demo">Demo</RouterLink>
-        <button v-if="usersStore.isLoggedIn" @click="usersStore.logoutUser()">Logout</button>
+        <button v-if="usersStore.isLoggedIn" @click="handleLogout">Logout</button>
       </div>
     </nav>
   </header>
@@ -28,8 +27,26 @@ const usersStore = useUsersStore()
 
 <script>
 export default {
+  data() {
+    return {
+      usersStore: useUsersStore()
+    }
+  },
+
   mounted() {
     console.log('check login')
+    const loggedUserJSON = window.localStorage.getItem('user')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      this.usersStore.setUser(user)
+    }
+  },
+
+  methods: {
+    handleLogout() {
+      this.usersStore.logoutUser()
+      this.$router.push('/')
+    }
   }
 }
 </script>

@@ -5,8 +5,7 @@ import loginService from '../services/login'
 export const useUsersStore = defineStore('user', {
   state: () => ({
     totalUsers: 0,
-    username: null,
-    token: null,
+    user: null,
     isLoggedIn: false
   }),
 
@@ -29,17 +28,19 @@ export const useUsersStore = defineStore('user', {
         username: credentials.username,
         password: credentials.password
       })
-      this.user = response.username
-      this.token = response.token
-      this.isLoggedIn = true
-      localStorage.setItem('user', JSON.stringify(response.token))
+      this.setUser(response)
+      localStorage.setItem('user', JSON.stringify(response))
     },
 
-    async logoutUser() {
-      localStorage.removeItem('user')
-      this.token = null
-      this.username = null
+    logoutUser() {
+      this.user = null
       this.isLoggedIn = false
+      localStorage.removeItem('user')
+    },
+
+    setUser(user) {
+      this.user = user
+      this.isLoggedIn = true
     }
   }
 })

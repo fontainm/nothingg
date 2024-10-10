@@ -7,7 +7,7 @@ const usersStore = useUsersStore()
   <section class="intro" id="home">
     <div class="container">
       <h2>Nothing</h2>
-      <p v-if="usersStore.isLoggedIn">Welcome {{ usersStore.user }}</p>
+      <p v-if="usersStore.isLoggedIn">Welcome {{ usersStore.user.username }}</p>
       <p v-else>Sign up now for nothing</p>
     </div>
   </section>
