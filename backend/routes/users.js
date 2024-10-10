@@ -2,7 +2,7 @@ import express from 'express'
 import { validationHandler } from '../utils/middleware.js'
 import { userIdRules, userSignUpRules } from '../validators/userValidator.js'
 import {
-  getUser,
+  getUserById,
   getUsers,
   getUsersCount,
   createUser,
@@ -28,7 +28,7 @@ usersRouter.get(
   async (req, res, next) => {
     try {
       const id = req.params.id
-      const user = await getUser(id)
+      const user = await getUserById(id)
       if (user) {
         res.send(user)
       } else {
