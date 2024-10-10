@@ -1,7 +1,3 @@
-<script setup>
-import { useUsersStore } from '../stores/users'
-</script>
-
 <template>
   <section class="login">
     <div class="container">
@@ -23,8 +19,7 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: '',
-      usersStore: useUsersStore()
+      errorMessage: ''
     }
   },
 
@@ -34,7 +29,7 @@ export default {
       this.errorMessage = ''
 
       try {
-        await this.usersStore.loginUser({ username: this.username, password: this.password })
+        await this.$usersStore.loginUser({ username: this.username, password: this.password })
         this.$router.push('/dashboard')
       } catch (error) {
         this.errorMessage = error.response.data.message

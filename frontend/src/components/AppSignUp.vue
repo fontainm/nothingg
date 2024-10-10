@@ -1,7 +1,3 @@
-<script setup>
-import { useUsersStore } from '../stores/users'
-</script>
-
 <template>
   <section class="signup">
     <div class="container">
@@ -25,8 +21,7 @@ export default {
       username: '',
       email: '',
       password: '',
-      errorMessage: '',
-      usersStore: useUsersStore()
+      errorMessage: ''
     }
   },
 
@@ -36,7 +31,7 @@ export default {
       this.errorMessage = ''
 
       try {
-        await this.usersStore.createUser({
+        await this.$usersStore.createUser({
           username: this.username,
           email: this.email,
           password: this.password

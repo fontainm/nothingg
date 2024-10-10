@@ -1,7 +1,3 @@
-<script setup>
-import { useUsersStore } from '../stores/users'
-</script>
-
 <template>
   <section class="users">
     <div class="container">
@@ -13,15 +9,9 @@ import { useUsersStore } from '../stores/users'
 
 <script>
 export default {
-  data() {
-    return {
-      usersStore: useUsersStore()
-    }
-  },
-
   computed: {
     totalUsers() {
-      return this.usersStore.totalUsers
+      return this.$usersStore.totalUsers
     }
   },
 
@@ -33,7 +23,7 @@ export default {
 
   methods: {
     async countUsers() {
-      this.usersStore.getTotalUsers()
+      this.$usersStore.getTotalUsers()
     }
   }
 }
