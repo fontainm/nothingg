@@ -1,5 +1,5 @@
 <template>
-  <section class="login">
+  <div class="login">
     <div class="container">
       <div>
         {{ errorMessage }}
@@ -10,7 +10,7 @@
         <button type="submit">Login</button>
       </form>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -41,6 +41,5 @@ export default {
 
 <style scoped lang="scss">
 .login {
-  text-align: center;
 }
 </style>

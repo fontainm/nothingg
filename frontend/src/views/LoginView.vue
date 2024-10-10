@@ -3,10 +3,8 @@ import AppLogin from '../components/AppLogin.vue'
 </script>
 
 <template>
-  <main>
-    <h1>Login for nothing</h1>
+  <section class="login">
+    <h2>Login for nothing</h2>
     <AppLogin />
-  </main>
+  </section>
 </template>
-
-<style></style>

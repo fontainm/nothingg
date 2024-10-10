@@ -1,7 +1,6 @@
 <template>
-  <div class="demo">
-    <h1>This is a demo page</h1>
-  </div>
+  <section class="demo">
+    <h2>This is a demo page</h2>
+    <p>User Info</p>
+  </section>
 </template>
-
-<style></style>

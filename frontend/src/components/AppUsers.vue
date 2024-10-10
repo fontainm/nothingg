@@ -3,6 +3,9 @@
     <div class="container">
       <h2>Our Users</h2>
       <p>{{ totalUsers }} users signed up!</p>
+      <p>"Nothing is the perfect escape from my busy life!"</p>
+      <p>"I never knew doing nothing could be so refreshing."</p>
+      <p>"I feel indifferent about it."</p>
     </div>
   </section>
 </template>

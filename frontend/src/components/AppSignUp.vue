@@ -1,5 +1,5 @@
 <template>
-  <section class="signup">
+  <div class="signup">
     <div class="container">
       <div>
         {{ errorMessage }}
@@ -11,7 +11,7 @@
         <button type="submit">Sign Up</button>
       </form>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>

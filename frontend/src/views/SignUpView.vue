@@ -3,10 +3,8 @@ import AppSignUp from '../components/AppSignUp.vue'
 </script>
 
 <template>
-  <main>
-    <h1>Sign Up for nothing</h1>
+  <section>
+    <h2>Sign Up for nothing</h2>
     <AppSignUp />
-  </main>
+  </section>
 </template>
-
-<style></style>
