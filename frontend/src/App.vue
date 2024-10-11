@@ -8,7 +8,7 @@ import AppFooter from '@/components/AppFooter.vue'
     <nav v-if="$usersStore.isLoggedIn">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/dashboard">Dashboard</RouterLink>
-      <button @click="handleLogout">Logout</button>
+      <button class="small" @click="handleLogout">Logout</button>
     </nav>
     <nav v-else>
       <RouterLink to="/#home">Home</RouterLink>
@@ -50,6 +50,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 nav {
   padding: 16px 0;
   display: flex;
@@ -59,6 +61,8 @@ nav {
   background: white;
   top: 0;
   height: 60px;
+  z-index: 10;
+  border-bottom: 1px solid $primary-color;
 }
 
 .content {

@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <section class="products" id="products">
+  <section class="products alternate" id="products">
     <div class="container">
       <h2>Our Products</h2>
       <p>Choose here!</p>

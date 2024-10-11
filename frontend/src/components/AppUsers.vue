@@ -1,11 +1,25 @@
 <template>
-  <section class="users">
+  <section class="users alternate">
     <div class="container">
       <h2>Our Users</h2>
-      <p>{{ totalUsers }} users signed up!</p>
-      <p>"Nothing is the perfect escape from my busy life!"</p>
-      <p>"I never knew doing nothing could be so refreshing."</p>
-      <p>"I feel indifferent about it."</p>
+      <div class="users-total">
+        So far
+        <span>
+          {{ totalUsers }}
+        </span>
+        users signed up
+      </div>
+      <div class="users-quotes">
+        <div class="users-quote">
+          <p>"Nothing is the perfect escape from my busy life!"</p>
+        </div>
+        <div class="users-quote">
+          <p>"I never knew doing nothing could be so refreshing."</p>
+        </div>
+        <div class="users-quote">
+          <p>"I feel indifferent about it."</p>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -33,7 +47,43 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .users {
   text-align: center;
+
+  .users-total {
+    font-size: 32px;
+    margin-bottom: 32px;
+
+    span {
+      background: $primary-color;
+      color: white;
+      padding: 8px;
+      border-radius: 10px;
+      width: 100px;
+      display: inline-block;
+      font-weight: 700;
+    }
+  }
+
+  .users-quotes {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+
+    .users-quote {
+      text-align: left;
+      background-color: white;
+      padding: 16px;
+      margin: 16px;
+      border-radius: 10px;
+
+      &:nth-child(2) {
+        text-align: right;
+      }
+    }
+  }
 }
 </style>

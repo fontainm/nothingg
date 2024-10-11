@@ -1,20 +1,25 @@
 <script setup></script>
 
 <template>
-  <section class="benefits" id="benefits">
+  <section class="benefits alternate" id="benefits">
     <div class="container">
-      <h2>Why Choose Nothing?</h2>
-      <p>So many benefits!</p>
-      <p>
-        "Unplug and Unwind: Take a break from the digital noise." "No Distractions: Focus on what
-        really matters—doing nothing." "Your Time, Your Space: Create your own oasis of calm."
-      </p>
+      <p>Unplug and Unwind: Take a break from the digital noise.</p>
     </div>
   </section>
 </template>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .benefits {
   text-align: center;
+
+  p {
+    margin: 16px;
+    font-size: 48px;
+    font-weight: 100;
+    font-style: italic;
+    color: $primary-color;
+  }
 }
 </style>

@@ -23,6 +23,10 @@ section {
   padding: 128px 0;
   text-align: center;
 
+  &.alternate {
+    background-color: #e3f2f3;
+  }
+
   .container {
     padding: 0 32px;
   }
@@ -33,6 +37,8 @@ h2 {
   color: $primary-color;
   text-transform: uppercase;
   font-weight: 900;
+  margin-bottom: 32px;
+  line-height: 1;
 }
 
 a {
@@ -55,18 +61,30 @@ form {
 }
 
 button {
-  font-weight: 400;
+  font-weight: 700;
   padding: 16px;
   border-radius: 10px;
   border: 0;
   font-size: 24px;
   text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.25s ease;
   background: $primary-color;
   color: white;
+  box-shadow: 0 5px 0 black;
 
   &.negative {
     background: white;
     color: $primary-color;
+  }
+
+  &.small {
+    font-size: 16px;
+    padding: 0 12px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 black;
+    transform: translateY(5px);
   }
 }
