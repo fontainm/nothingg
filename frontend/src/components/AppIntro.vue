@@ -13,7 +13,7 @@
 
 .intro {
   text-align: center;
-  background-color: $primary-color;
+  background: $primary-gradient;
   color: white;
   height: 100vh;
   display: flex;

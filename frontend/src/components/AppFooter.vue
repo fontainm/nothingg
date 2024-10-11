@@ -17,10 +17,11 @@
 @import '@/styles/variables.scss';
 
 footer {
-  background: $primary-color;
+  background: $primary-gradient;
 
   h2 {
     color: white;
+    -webkit-text-fill-color: white;
   }
 }
 </style>

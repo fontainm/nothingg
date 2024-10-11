@@ -49,6 +49,7 @@
 
     &:hover {
       transform: translateY(-10px);
+      background: $primary-light;
     }
 
     h3 {

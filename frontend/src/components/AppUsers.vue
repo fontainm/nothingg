@@ -57,7 +57,7 @@ export default {
     margin-bottom: 32px;
 
     span {
-      background: $primary-color;
+      background: $primary-gradient;
       color: white;
       padding: 8px;
       border-radius: 10px;

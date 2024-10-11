@@ -24,7 +24,7 @@ section {
   text-align: center;
 
   &.alternate {
-    background-color: #e3f2f3;
+    background-color: $primary-light;
   }
 
   .container {
@@ -35,6 +35,9 @@ section {
 h2 {
   font-size: 50px;
   color: $primary-color;
+  background: $primary-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   font-weight: 900;
   margin-bottom: 32px;
@@ -69,7 +72,7 @@ button {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: $primary-color;
+  background: $primary-gradient;
   color: white;
   box-shadow: 0 5px 0 black;
 
@@ -86,5 +89,6 @@ button {
   &:hover {
     box-shadow: 0 0 0 black;
     transform: translateY(5px);
+    background: $primary-light;
   }
 }

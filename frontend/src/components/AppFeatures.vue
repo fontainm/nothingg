@@ -35,7 +35,7 @@
   }
 
   .features-item {
-    background-color: $primary-color;
+    background: $primary-gradient;
     width: 50%;
     color: white;
     padding: 16px 32px;
