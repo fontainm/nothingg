@@ -25,9 +25,9 @@ import IconEmail from '~icons/mdi/email-outline'
 
 footer {
   background: $primary-gradient;
+  color: white;
 
   h2 {
-    color: white;
     -webkit-text-fill-color: white;
   }
 
@@ -37,6 +37,10 @@ footer {
     a {
       padding: 0 8px;
       position: relative;
+
+      &:hover {
+        color: black;
+      }
 
       &:not(:last-child)::after {
         content: '';
@@ -50,8 +54,14 @@ footer {
 
   .footer-socials {
     svg {
+      cursor: pointer;
       font-size: 30px;
       margin: 0 8px;
+      transition: all 0.25s ease;
+
+      &:hover {
+        color: black;
+      }
     }
   }
 }

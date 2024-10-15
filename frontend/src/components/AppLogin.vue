@@ -7,6 +7,7 @@
       <form @submit="handleLogin">
         <input v-model="username" type="text" placeholder="Username" />
         <input v-model="password" type="password" placeholder="Password" />
+        <RouterLink to="/forgot-password" class="login-forgot">Forgot your password?</RouterLink>
         <button type="submit">Login</button>
       </form>
     </div>
@@ -41,5 +42,9 @@ export default {
 
 <style scoped lang="scss">
 .login {
+  .login-forgot {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
 }
 </style>

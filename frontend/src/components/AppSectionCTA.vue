@@ -4,7 +4,7 @@
   <section class="cta">
     <h2>Ready to Embrace Nothing?</h2>
     <p>Sign up, log in, and enjoy the freedom of doing nothing!</p>
-    <button>Sign Up Today</button>
+    <RouterLink to="/signup" class="products-list__cta btn">Sign Up Today</RouterLink>
   </section>
 </template>
 

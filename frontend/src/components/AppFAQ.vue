@@ -11,7 +11,7 @@
           <div class="faq-answer">
             <p>
               On "Nothing," you can sign up, log in, log out, and update your email or password.
-              That's it—embrace the simplicity!
+              That's it - embrace the simplicity!
             </p>
           </div>
         </div>
@@ -33,7 +33,7 @@
           <div class="faq-answer">
             <p>
               Yes, you can delete your account anytime. However, after deleting it, you'll have
-              truly <em>nothing</em>—no access to your account or data.
+              truly <em>nothing</em> - no access to your account or data.
             </p>
           </div>
         </div>

@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Nothing</h1>
       <p class="intro-subheader">A place where simplicity meets tranquility</p>
-      <button class="negative">Get started for free</button>
+      <RouterLink to="/signup" class="btn btn-negative">Get started for free</RouterLink>
     </div>
   </section>
 </template>
@@ -27,6 +27,11 @@
     text-shadow: 0 10px 0 black;
     transition: all 0.25s ease;
     cursor: pointer;
+
+    &:hover {
+      text-shadow: 0 0 0 black;
+      transform: translateY(5px);
+    }
   }
 
   p {

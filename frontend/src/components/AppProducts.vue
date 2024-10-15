@@ -9,38 +9,37 @@ import IconCheck from '~icons/mdi/check'
       <div class="products-list">
         <div class="products-list__item">
           <div class="products-list__wrapper">
-            <h3>Nothing FREE</h3>
+            <h3>NOTHING</h3>
             <p class="products-list__price">Free forever</p>
             <p class="products-list__info">
-              Get access to the full Nothing experience. Sign up, log in, log out, and update your
+              Get access to the full NOTHING experience. Sign up, log in, log out, and update your
               profile details. Enjoy the pure simplicity of doing absolutely nothing! No ads, no
-              distractions—just you, your account, and a peaceful digital void.
+              distractions - just you, your account, and a peaceful digital void.
             </p>
             <ul class="products-list__features">
               <li><IconCheck />Sign up and create your account.</li>
               <li><IconCheck />Log in, log out, and change your email or password.</li>
               <li><IconCheck />100% free, forever.</li>
             </ul>
-            <button class="products-list__cta">Start Nothing FREE</button>
+            <RouterLink to="/signup" class="products-list__cta btn"> Start NOTHING </RouterLink>
           </div>
         </div>
 
         <div class="products-list__item">
           <div class="products-list__wrapper">
-            <h3>Nothing PLUS</h3>
+            <h3>NOTHING+</h3>
             <p class="products-list__price">€ 1,- per month</p>
             <p class="products-list__info">
-              Nothing PLUS doesn't do more, but it means more. By choosing Nothing PLUS, you're not
-              just signing up—you're supporting a solo developer who built this project from
-              scratch. Enjoy the same minimalism as the free tier, plus a warm sense of
-              contribution.
+              NOTHING+ doesn't do more, but it means more. By choosing NOTHING+, you're not just
+              signing up - you're supporting a solo developer who built this project from scratch.
+              Enjoy the same minimalism as the free tier, plus a warm sense of contribution.
             </p>
             <ul class="products-list__features">
               <li><IconCheck />All the same features as the free tier.</li>
               <li><IconCheck />A heartfelt thank you from the developer.</li>
               <li><IconCheck />The satisfaction of supporting a one-person project.</li>
             </ul>
-            <button class="products-list__cta">Start Nothing PLUS</button>
+            <RouterLink to="/signup" class="products-list__cta btn"> Start NOTHING+ </RouterLink>
           </div>
         </div>
       </div>
@@ -59,6 +58,11 @@ import IconCheck from '~icons/mdi/check'
     .products-list__item {
       width: 50%;
       margin: 16px;
+
+      h3 {
+        font-size: 32px;
+        font-weight: 900;
+      }
 
       .products-list__wrapper {
         display: flex;

@@ -1,26 +1,11 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import AppNavbar from '@/components/AppNavbar.vue'
 import AppFooter from '@/components/AppFooter.vue'
 </script>
 
 <template>
-  <header>
-    <nav v-if="$usersStore.isLoggedIn">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/dashboard">Dashboard</RouterLink>
-      <button class="small" @click="handleLogout">Logout</button>
-    </nav>
-    <nav v-else>
-      <RouterLink to="/#home">Home</RouterLink>
-      <RouterLink to="/#howto">How it works</RouterLink>
-      <RouterLink to="/#features">Features</RouterLink>
-      <RouterLink to="/#products">Products</RouterLink>
-      <RouterLink to="/#faq">FAQ</RouterLink>
-      <RouterLink to="/signup">Sign Up</RouterLink>
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/demo">Demo</RouterLink>
-    </nav>
-  </header>
+  <AppNavbar />
 
   <div class="content">
     <RouterView />

@@ -4,7 +4,7 @@
 
     <div class="container">
       <p class="about-highlight">
-        Welcome to <strong>Nothing</strong> — the SaaS platform that does absolutely nothing, by
+        Welcome to <strong>Nothing</strong> - the SaaS platform that does absolutely nothing, by
         design.
       </p>
 
