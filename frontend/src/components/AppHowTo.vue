@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import IconLogin from '~icons/mdi/login'
+import IconRegister from '~icons/mdi/account-plus'
+import IconEmoticon from '~icons/mdi/emoticon-excited-outline'
+</script>
 
 <template>
   <section class="howto" id="howto">
@@ -8,16 +12,25 @@
         <div class="howto-steps">
           <div class="howto-step">
             <p class="howto-step__title">Step 1</p>
+            <div class="howto-step__icon">
+              <IconRegister />
+            </div>
             <h3>Sign Up</h3>
             <p>Create your account effortlessly</p>
           </div>
           <div class="howto-step">
             <p class="howto-step__title">Step 2</p>
+            <div class="howto-step__icon">
+              <IconLogin />
+            </div>
             <h3>Log In</h3>
             <p>Access your personal space.</p>
           </div>
           <div class="howto-step">
             <p class="howto-step__title">Step 3</p>
+            <div class="howto-step__icon">
+              <IconEmoticon />
+            </div>
             <h3>Enjoy Nothing</h3>
             <p>Experience the tranquility of doing absolutely nothing.</p>
           </div>
@@ -39,7 +52,10 @@
   }
 
   .howto-step {
-    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
     border: 1px solid $primary-color;
     border-radius: 10px;
     padding: 16px;
@@ -62,6 +78,17 @@
       text-transform: uppercase;
       letter-spacing: 3px;
       margin-bottom: 16px;
+    }
+
+    .howto-step__icon {
+      margin-bottom: 16px;
+
+      svg {
+        color: $primary-color;
+        height: 40px;
+        width: 40px;
+        font-size: 40px;
+      }
     }
   }
 }

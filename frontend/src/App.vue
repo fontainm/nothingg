@@ -12,8 +12,7 @@ import AppFooter from '@/components/AppFooter.vue'
     </nav>
     <nav v-else>
       <RouterLink to="/#home">Home</RouterLink>
-      <RouterLink to="/#howto">How?</RouterLink>
-      <RouterLink to="/#benefits">Why?</RouterLink>
+      <RouterLink to="/#howto">How it works</RouterLink>
       <RouterLink to="/#features">Features</RouterLink>
       <RouterLink to="/#products">Products</RouterLink>
       <RouterLink to="/#faq">FAQ</RouterLink>

@@ -73,7 +73,7 @@
   .faq-question {
     display: block;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 600;
     padding: 10px 0;
     color: black;
   }

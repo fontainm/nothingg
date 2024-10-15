@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
+</script>
 
 <template>
   <section class="features" id="features">
@@ -6,16 +8,25 @@
       <h2>Features</h2>
       <div class="features-list">
         <div class="features-item">
-          <h3>Easy Sign-Up</h3>
-          <p>No complicated forms, just your email and a password.</p>
+          <div class="features-item__icon"><IconCheckCircleOutline /></div>
+          <div>
+            <h3>Easy Sign-Up</h3>
+            <p>No complicated forms, just your email and a password.</p>
+          </div>
         </div>
         <div class="features-item">
-          <h3>Secure Log In</h3>
-          <p>“Your information is safe and secure, allowing you to do nothing worry-free.</p>
+          <div class="features-item__icon"><IconCheckCircleOutline /></div>
+          <div>
+            <h3>Secure Log In</h3>
+            <p>Your information is safe and secure, allowing you to do nothing worry-free.</p>
+          </div>
         </div>
         <div class="features-item">
-          <h3>Privacy Focused</h3>
-          <p>“We don't track your activity. Just log in and disconnect.</p>
+          <div class="features-item__icon"><IconCheckCircleOutline /></div>
+          <div>
+            <h3>Privacy Focused</h3>
+            <p>We don't track your activity. Just log in and disconnect.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -35,13 +46,25 @@
   }
 
   .features-item {
+    display: flex;
     background: $primary-gradient;
     width: 50%;
     color: white;
-    padding: 16px 32px;
+    padding: 32px;
     margin: 16px;
     border-radius: 10px;
     text-align: left;
+    align-items: center;
+
+    .features-item__icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 32px;
+
+      svg {
+        font-size: 30px;
+      }
+    }
 
     h3 {
       text-transform: uppercase;

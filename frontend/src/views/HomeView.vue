@@ -6,7 +6,7 @@ import AppBenefits from '../components/AppBenefits.vue'
 import AppProducts from '../components/AppProducts.vue'
 import AppFAQ from '../components/AppFAQ.vue'
 import AppUsers from '../components/AppUsers.vue'
-import AppMap from '../components/AppMap.vue'
+import AppSectionCTA from '../components/AppSectionCTA.vue'
 </script>
 
 <template>
@@ -18,13 +18,6 @@ import AppMap from '../components/AppMap.vue'
     <AppProducts />
     <AppFAQ />
     <AppUsers />
-    <AppMap />
-    <section class="cta">
-      <h2>Ready to Embrace Nothing?</h2>
-      <p>Sign up, log in, and enjoy the freedom of doing nothing!</p>
-      <button>Sign Up Today</button>
-    </section>
+    <AppSectionCTA />
   </main>
 </template>
-
-<style scoped lang="scss"></style>

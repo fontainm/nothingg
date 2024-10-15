@@ -1,3 +1,7 @@
+<script setup>
+import IconCommentQuote from '~icons/mdi/comment-quote'
+</script>
+
 <template>
   <section class="users alternate">
     <div class="container">
@@ -11,12 +15,21 @@
       </div>
       <div class="users-quotes">
         <div class="users-quote">
+          <div class="users-quote__icon">
+            <IconCommentQuote />
+          </div>
           <p>"Nothing is the perfect escape from my busy life!"</p>
         </div>
         <div class="users-quote">
+          <div class="users-quote__icon">
+            <IconCommentQuote />
+          </div>
           <p>"I never knew doing nothing could be so refreshing."</p>
         </div>
         <div class="users-quote">
+          <div class="users-quote__icon">
+            <IconCommentQuote />
+          </div>
           <p>"I feel indifferent about it."</p>
         </div>
       </div>
@@ -74,14 +87,30 @@ export default {
     margin: 0 auto;
 
     .users-quote {
-      text-align: left;
+      display: flex;
+      align-items: center;
       background-color: white;
       padding: 16px;
       margin: 16px;
       border-radius: 10px;
 
+      .users-quote__icon {
+        margin-right: 16px;
+
+        svg {
+          font-size: 30px;
+          height: 30px;
+          width: 30px;
+          color: $primary-color;
+        }
+      }
+
       &:nth-child(2) {
-        text-align: right;
+        flex-direction: row-reverse;
+
+        .users-quote__icon {
+          margin-left: 16px;
+        }
       }
     }
   }

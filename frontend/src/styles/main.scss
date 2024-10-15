@@ -79,6 +79,10 @@ button {
   &.negative {
     background: white;
     color: $primary-color;
+
+    &:hover {
+      background: $primary-light;
+    }
   }
 
   &.small {
@@ -89,6 +93,5 @@ button {
   &:hover {
     box-shadow: 0 0 0 black;
     transform: translateY(5px);
-    background: $primary-light;
   }
 }
