@@ -22,6 +22,5 @@ export default {
 
 <style scoped lang="scss">
 .dashboard {
-  text-align: center;
 }
 </style>

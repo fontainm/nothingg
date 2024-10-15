@@ -44,8 +44,6 @@ import IconEmoticon from '~icons/mdi/emoticon-excited-outline'
 @import '@/styles/variables.scss';
 
 .howto {
-  text-align: center;
-
   .howto-steps {
     display: flex;
     justify-content: center;

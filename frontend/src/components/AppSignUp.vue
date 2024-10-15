@@ -46,6 +46,5 @@ export default {
 
 <style scoped lang="scss">
 .signup {
-  text-align: center;
 }
 </style>

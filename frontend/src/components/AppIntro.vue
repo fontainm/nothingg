@@ -12,7 +12,6 @@
 @import '@/styles/variables.scss';
 
 .intro {
-  text-align: center;
   background: $primary-gradient;
   color: white;
   height: 100vh;

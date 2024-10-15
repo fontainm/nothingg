@@ -37,8 +37,6 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
 @import '@/styles/variables.scss';
 
 .features {
-  text-align: center;
-
   .features-list {
     display: flex;
     flex-direction: column;

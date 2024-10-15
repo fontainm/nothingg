@@ -57,8 +57,6 @@
 @import '@/styles/variables.scss';
 
 .faq {
-  text-align: center;
-
   .faq-container {
     max-width: 600px;
     text-align: left;

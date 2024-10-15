@@ -52,11 +52,8 @@ import IconCheck from '~icons/mdi/check'
 @import '@/styles/variables.scss';
 
 .products {
-  text-align: center;
-
   .products-list {
     display: flex;
-    max-width: 1024px;
     margin: 0 auto;
 
     .products-list__item {

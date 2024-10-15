@@ -63,8 +63,6 @@ export default {
 @import '@/styles/variables.scss';
 
 .users {
-  text-align: center;
-
   .users-total {
     font-size: 32px;
     margin-bottom: 32px;

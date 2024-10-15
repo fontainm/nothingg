@@ -12,8 +12,6 @@
 @import '@/styles/variables.scss';
 
 .benefits {
-  text-align: center;
-
   p {
     margin: 16px;
     font-size: 48px;
