@@ -35,7 +35,7 @@ section {
 }
 
 h2 {
-  font-size: 50px;
+  font-size: 48px;
   color: $primary-color;
   background: $primary-gradient;
   -webkit-background-clip: text;
@@ -104,3 +104,5 @@ button {
     transform: translateY(5px);
   }
 }
+
+@import './responsive.scss';

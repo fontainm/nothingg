@@ -10,6 +10,7 @@
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';
+@import '@/styles/responsive.scss';
 
 .intro {
   background: $primary-gradient;
@@ -34,15 +35,33 @@
     }
   }
 
-  p {
-    font-size: 24px;
-    margin-bottom: 24px;
-  }
-
   .intro-subheader {
+    font-size: 24px;
     text-transform: uppercase;
     letter-spacing: 4px;
     margin: 64px 0;
+  }
+
+  @media screen and (max-width: $desktop) {
+    h1 {
+      font-size: 180px;
+    }
+  }
+
+  @media screen and (max-width: $tablet) {
+    h1 {
+      font-size: 100px;
+    }
+
+    .intro-subheader {
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    h1 {
+      font-size: 64px;
+    }
   }
 }
 </style>
