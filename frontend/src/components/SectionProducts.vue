@@ -17,9 +17,18 @@ import IconCheck from '~icons/mdi/check'
               distractions - just you, your account, and a peaceful digital void.
             </p>
             <ul class="products-list__features">
-              <li><IconCheck />Sign up and create your account.</li>
-              <li><IconCheck />Log in, log out, and change your email or password.</li>
-              <li><IconCheck />100% free, forever.</li>
+              <li>
+                <IconCheck />
+                <p>Sign up and create your account.</p>
+              </li>
+              <li>
+                <IconCheck />
+                <p>Log in, log out, and change your email or password.</p>
+              </li>
+              <li>
+                <IconCheck />
+                <p>100% free, forever.</p>
+              </li>
             </ul>
             <RouterLink to="/signup" class="products-list__cta btn"> Start NOTHING </RouterLink>
           </div>
@@ -35,9 +44,18 @@ import IconCheck from '~icons/mdi/check'
               Enjoy the same minimalism as the free tier, plus a warm sense of contribution.
             </p>
             <ul class="products-list__features">
-              <li><IconCheck />All the same features as the free tier.</li>
-              <li><IconCheck />A heartfelt thank you from the developer.</li>
-              <li><IconCheck />The satisfaction of supporting a one-person project.</li>
+              <li>
+                <IconCheck />
+                <p>All the same features as the free tier.</p>
+              </li>
+              <li>
+                <IconCheck />
+                <p>A heartfelt thank you from the developer.</p>
+              </li>
+              <li>
+                <IconCheck />
+                <p>The satisfaction of supporting a one-person project.</p>
+              </li>
             </ul>
             <RouterLink to="/signup" class="products-list__cta btn"> Start NOTHING+ </RouterLink>
           </div>
@@ -53,11 +71,11 @@ import IconCheck from '~icons/mdi/check'
 .products {
   .products-list {
     display: flex;
+    flex-wrap: wrap;
     margin: 0 auto;
 
     .products-list__item {
       width: 50%;
-      margin: 16px;
 
       h3 {
         font-size: 32px;
@@ -65,6 +83,7 @@ import IconCheck from '~icons/mdi/check'
       }
 
       .products-list__wrapper {
+        margin: 16px;
         display: flex;
         flex-direction: column;
         height: 100%;
@@ -93,17 +112,37 @@ import IconCheck from '~icons/mdi/check'
         li {
           display: flex;
           align-items: center;
+          justify-content: space-between;
           margin-bottom: 8px;
 
           svg {
             color: $primary-color;
             margin-right: 8px;
+            width: auto;
+          }
+
+          p {
+            width: 90%;
           }
         }
       }
 
       .products-list__cta {
         margin-top: auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+}
+
+@media screen and (max-width: $tablet) {
+  .products {
+    .products-list {
+      .products-list__item {
+        width: 100%;
+        margin: 0 0 16px 0;
       }
     }
   }

@@ -9,10 +9,20 @@
 </template>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .cta {
   p {
     font-size: 24px;
     margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: $phone) {
+  .cta {
+    p {
+      font-size: 18px;
+    }
   }
 }
 </style>

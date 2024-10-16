@@ -64,10 +64,15 @@ export default {
       font-size: 30px;
     }
 
-    .navbar-left,
-    .navbar-right {
-      display: flex;
-      align-items: center;
+    .navbar-cta {
+      border: 1px solid $primary-color;
+      border-radius: 10px;
+      padding: 8px;
+
+      &:hover {
+        background: $primary-gradient;
+        color: white !important;
+      }
     }
 
     a {
@@ -84,7 +89,7 @@ export default {
   }
 }
 
-@media screen and (max-width: $tablet) {
+@media screen and (max-width: $desktop) {
   .navbar {
     nav {
       &.open {

@@ -110,18 +110,22 @@ button {
 @media screen and (max-width: $tablet) {
   footer,
   section {
-    padding: 96px 0;
+    padding: 96px 16px;
   }
 
   h2 {
     font-size: 44px;
+  }
+
+  .container {
+    padding: 0 16px;
   }
 }
 
 @media screen and (max-width: $phone) {
   footer,
   section {
-    padding: 64px 0;
+    padding: 64px 16px;
   }
 
   h2 {

@@ -91,6 +91,7 @@ export default {
       padding: 16px;
       margin: 16px;
       border-radius: 10px;
+      text-align: left;
 
       .users-quote__icon {
         margin-right: 16px;
@@ -105,11 +106,20 @@ export default {
 
       &:nth-child(2) {
         flex-direction: row-reverse;
+        text-align: right;
 
         .users-quote__icon {
           margin-left: 16px;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .users {
+    .users-total {
+      font-size: 24px;
     }
   }
 }

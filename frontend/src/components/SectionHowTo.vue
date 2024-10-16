@@ -47,6 +47,7 @@ import IconEmoticon from '~icons/mdi/emoticon-excited-outline'
   .howto-steps {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .howto-step {
@@ -89,5 +90,17 @@ import IconEmoticon from '~icons/mdi/emoticon-excited-outline'
       }
     }
   }
+}
+
+@media screen and (max-width: $tablet) {
+  .howto {
+    .howto-step {
+      width: 100%;
+      margin: 16px 0;
+    }
+  }
+}
+
+@media screen and (max-width: $phone) {
 }
 </style>

@@ -20,4 +20,20 @@
     color: $primary-color;
   }
 }
+
+@media screen and (max-width: $tablet) {
+  .benefits {
+    p {
+      font-size: 38px;
+    }
+  }
+}
+
+@media screen and (max-width: $phone) {
+  .benefits {
+    p {
+      font-size: 32px;
+    }
+  }
+}
 </style>

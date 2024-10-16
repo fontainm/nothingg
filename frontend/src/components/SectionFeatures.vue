@@ -78,4 +78,16 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
     }
   }
 }
+
+@media screen and (max-width: $tablet) {
+  .features {
+    .features-item {
+      width: 100%;
+      transform: unset !important;
+    }
+  }
+}
+
+@media screen and (max-width: $phone) {
+}
 </style>
