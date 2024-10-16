@@ -114,9 +114,13 @@ export default {
 
         a {
           margin: 0;
-          padding: 12px;
-          width: 100%;
+          padding: 16px;
           text-align: center;
+          font-size: 20px;
+
+          &:not(.navbar-cta) {
+            width: 100%;
+          }
         }
       }
 
