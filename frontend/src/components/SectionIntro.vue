@@ -10,7 +10,6 @@
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';
-@import '@/styles/responsive.scss';
 
 .intro {
   background: $primary-gradient;

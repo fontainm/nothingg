@@ -34,6 +34,7 @@ section {
   margin: 0 auto;
 }
 
+.app-title,
 h2 {
   font-size: 48px;
   color: $primary-color;
@@ -46,6 +47,7 @@ h2 {
   line-height: 1;
 }
 
+.link,
 a {
   text-decoration: none;
   color: inherit;
@@ -105,4 +107,29 @@ button {
   }
 }
 
-@import './responsive.scss';
+@media screen and (max-width: $tablet) {
+  footer,
+  section {
+    padding: 96px 0;
+  }
+
+  h2 {
+    font-size: 44px;
+  }
+}
+
+@media screen and (max-width: $phone) {
+  footer,
+  section {
+    padding: 64px 0;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  .btn,
+  button {
+    font-size: 18px;
+  }
+}

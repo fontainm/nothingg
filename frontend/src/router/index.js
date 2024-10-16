@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { useAppStore } from '@/stores/app'
 import { useUsersStore } from '@/stores/users'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
   scrollBehavior(to) {
+    useAppStore().closeMenu()
+
     if (to.hash) {
       return { el: to.hash }
     }
