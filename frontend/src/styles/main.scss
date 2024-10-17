@@ -81,6 +81,14 @@ svg.icon-lg {
   color: $primary-color;
 }
 
+.color-success {
+  color: $success-color;
+}
+
+.color-danger {
+  color: $error-color;
+}
+
 form {
   display: flex;
   flex-direction: column;

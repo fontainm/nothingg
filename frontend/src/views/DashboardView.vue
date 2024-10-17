@@ -1,3 +1,8 @@
+<script setup>
+import IconCheckCircle from '~icons/mdi/check-circle'
+import IconCloseCircle from '~icons/mdi/close-circle'
+</script>
+
 <template>
   <section v-if="user" class="dashboard">
     <h2>Welcome to nothing!</h2>
@@ -20,11 +25,15 @@
         </div>
         <div class="dashboard-row">
           <div>Member since</div>
-          <div>{{ user.created_at }}</div>
+          <div>{{ formatDate(user.created_at) }}</div>
         </div>
         <div class="dashboard-row">
           <div>Email confirmed</div>
-          <div>{{ user.confirmed ? 'yes' : 'no' }}</div>
+          <div>
+            <IconCheckCircle class="color-success" v-if="user.confirmed" />
+            <IconCloseCircle class="color-danger" v-else />
+          </div>
+          <div v-if="!user.confirmed" class="link">Resend</div>
         </div>
       </div>
       <div class="dashboard-info">
@@ -45,6 +54,16 @@ export default {
   computed: {
     user() {
       return this.$usersStore.user
+    }
+  },
+
+  methods: {
+    formatDate(date) {
+      return new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
     }
   }
 }
