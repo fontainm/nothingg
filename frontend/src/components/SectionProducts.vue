@@ -94,7 +94,7 @@ import IconCheck from '~icons/mdi/check'
       }
 
       .products-list__price {
-        color: #aaa;
+        color: $light-gray;
         margin: 16px;
         text-transform: uppercase;
       }

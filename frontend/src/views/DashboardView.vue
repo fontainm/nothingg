@@ -6,7 +6,10 @@
       <li>Username: {{ user.username }}</li>
       <li>Email: {{ user.email }}</li>
       <li>Member since: {{ user.created_at }}</li>
+      <li>Email confirmed: {{ user.confirmed }}</li>
+      <li>Product: {{ user.product }}</li>
     </ul>
+    <button class="btn btn-small">Delete account</button>
   </section>
 </template>
 
