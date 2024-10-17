@@ -6,14 +6,14 @@ import IconMail from '~icons/mdi/email'
   <div class="signup">
     <div class="container">
       <div v-if="step === 0">
-        <div>
-          {{ errorMessage }}
-        </div>
-        <form @submit="handleSignUp">
+        <form @submit="handleSignUp" :class="{ disabled: loading }">
+          <div class="signup-error error-message" :class="{ invisible: errorMessage === '' }">
+            {{ errorMessage }}
+          </div>
           <input v-model="username" type="text" placeholder="Username" />
           <input v-model="email" type="email" placeholder="Email address" />
           <input v-model="password" type="password" placeholder="Password" />
-          <button type="submit">Sign Up</button>
+          <button type="submit"><span v-if="loading">...</span><span v-else>Sign Up</span></button>
         </form>
         <div class="signup-login">
           <p>
@@ -36,6 +36,7 @@ import IconMail from '~icons/mdi/email'
 export default {
   data() {
     return {
+      loading: false,
       username: '',
       email: '',
       password: '',
@@ -47,6 +48,7 @@ export default {
   methods: {
     async handleSignUp(event) {
       event.preventDefault()
+      this.loading = true
       this.errorMessage = ''
 
       try {
@@ -57,7 +59,12 @@ export default {
         })
         this.step = 1
       } catch (error) {
-        this.errorMessage = error.response.data.message
+        this.errorMessage = error.response.data.errors[0].msg
+        setTimeout(() => {
+          this.errorMessage = ''
+        }, 3000)
+      } finally {
+        this.loading = false
       }
     }
   }
@@ -65,7 +72,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .signup {
+  .signup-error {
+  }
+
   .signup-login {
     margin-top: 16px;
   }

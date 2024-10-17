@@ -1,10 +1,10 @@
 <template>
   <div class="login">
     <div class="container">
-      <div>
-        {{ errorMessage }}
-      </div>
-      <form @submit="handleLogin">
+      <form @submit="handleLogin" :class="{ disabled: loading }">
+        <div class="login-error error-message" :class="{ invisible: errorMessage === '' }">
+          {{ errorMessage }}
+        </div>
         <input v-model="username" type="text" placeholder="Username" />
         <input v-model="password" type="password" placeholder="Password" />
         <RouterLink to="/forgot-password" class="login-forgot">Forgot your password?</RouterLink>
@@ -18,6 +18,7 @@
 export default {
   data() {
     return {
+      loading: false,
       username: '',
       password: '',
       errorMessage: ''
@@ -25,15 +26,21 @@ export default {
   },
 
   methods: {
-    async handleLogin() {
+    async handleLogin(event) {
       event.preventDefault()
+      this.loading = true
       this.errorMessage = ''
 
       try {
         await this.$usersStore.loginUser({ username: this.username, password: this.password })
         this.$router.push('/dashboard')
       } catch (error) {
-        this.errorMessage = error.response.data.message
+        this.errorMessage = error.response.data.errors[0].msg
+        setTimeout(() => {
+          this.errorMessage = ''
+        }, 3000)
+      } finally {
+        this.loading = false
       }
     }
   }

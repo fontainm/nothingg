@@ -12,7 +12,16 @@ const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 
   if (error.code == '23505') {
-    return res.status(400).send({ message: 'Username already taken' })
+    return res.status(400).send({
+      errors: [
+        {
+          value: req.body.username,
+          msg: 'Username already taken',
+          type: 'field',
+          path: 'username',
+        },
+      ],
+    })
   }
 
   next(error)

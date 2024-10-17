@@ -45,6 +45,10 @@ h2 {
   font-weight: 900;
   margin-bottom: 32px;
   line-height: 1;
+
+  &.mb-16 {
+    margin-bottom: 16px;
+  }
 }
 
 .link,
@@ -84,6 +88,36 @@ form {
     &:focus-visible {
       outline: 0;
       border: 1px solid $primary-color;
+    }
+  }
+
+  &.disabled {
+    input,
+    button {
+      pointer-events: none;
+    }
+
+    input {
+      background: #eee;
+    }
+  }
+
+  .error-message {
+    background: $error-color;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 12px;
+    box-sizing: content-box;
+    line-height: 1;
+    min-height: 1rem;
+    opacity: 1;
+    transition: all 0.25s ease;
+
+    &.invisible {
+      opacity: 0;
     }
   }
 }
