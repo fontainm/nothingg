@@ -39,8 +39,8 @@ import IconCloseCircle from '~icons/mdi/close-circle'
       <div class="dashboard-info">
         <h3>Product</h3>
         <div class="dashboard-row">
-          <div>Product</div>
-          <div>{{ user.product_id }}</div>
+          <div>{{ product.title }}</div>
+          <div>{{ formatPrice(product.price) }} / month</div>
           <div class="link">Upgrade</div>
         </div>
       </div>
@@ -54,6 +54,10 @@ export default {
   computed: {
     user() {
       return this.$usersStore.user
+    },
+
+    product() {
+      return this.$appStore.products.find((p) => p.id === this.user.product_id)
     }
   },
 
@@ -64,6 +68,9 @@ export default {
         month: 'long',
         day: 'numeric'
       })
+    },
+    formatPrice(price) {
+      return `€ ${price}`
     }
   }
 }

@@ -22,6 +22,7 @@ export default {
       const user = JSON.parse(loggedUserJSON)
       this.$usersStore.setUser(user)
     }
+    this.$appStore.getProducts()
   },
 
   methods: {
