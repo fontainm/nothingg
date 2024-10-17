@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import usersRouter from './routes/users.js'
 import loginRouter from './routes/login.js'
+import productsRouter from './routes/products.js'
 import { errorHandler } from './utils/middleware.js'
 
 const app = express()
@@ -16,6 +17,7 @@ app.get('/api/info', async (req, res) => {
 
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/products', productsRouter)
 
 app.use(errorHandler)
 

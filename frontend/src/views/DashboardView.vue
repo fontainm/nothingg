@@ -40,7 +40,7 @@ import IconCloseCircle from '~icons/mdi/close-circle'
         <h3>Product</h3>
         <div class="dashboard-row">
           <div>Product</div>
-          <div>{{ user.product }}</div>
+          <div>{{ user.product_id }}</div>
           <div class="link">Upgrade</div>
         </div>
       </div>
