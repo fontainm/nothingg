@@ -17,7 +17,10 @@ const userSignUpRules = () => {
 }
 
 const userLoginRules = () => {
-  return [body('password').notEmpty().withMessage('Password is required')]
+  return [
+    body('username').notEmpty().withMessage('Username is required'),
+    body('password').notEmpty().withMessage('Password is required'),
+  ]
 }
 
 export { userIdRules, userSignUpRules, userLoginRules }
