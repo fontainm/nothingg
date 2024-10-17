@@ -37,7 +37,7 @@ import IconCloseCircle from '~icons/mdi/close-circle'
         </div>
       </div>
       <div class="dashboard-info">
-        <h3>Product</h3>
+        <h3>Your Product</h3>
         <div class="dashboard-row">
           <div>{{ product.title }}</div>
           <div>{{ formatPrice(product.price) }} / month</div>
