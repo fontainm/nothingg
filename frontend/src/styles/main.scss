@@ -61,6 +61,17 @@ a {
   &:not(.btn):hover {
     color: $primary-color;
   }
+
+  &.link-bordered {
+    border: 1px solid $primary-color;
+    border-radius: 10px;
+    padding: 8px;
+
+    &:hover {
+      background: $primary-gradient;
+      color: white !important;
+    }
+  }
 }
 
 svg.icon-lg {

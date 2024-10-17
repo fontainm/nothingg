@@ -1,15 +1,42 @@
 <template>
   <section v-if="user" class="dashboard">
     <h2>Welcome to nothing!</h2>
-    <ul>
-      <li>ID: {{ user.id }}</li>
-      <li>Username: {{ user.username }}</li>
-      <li>Email: {{ user.email }}</li>
-      <li>Member since: {{ user.created_at }}</li>
-      <li>Email confirmed: {{ user.confirmed }}</li>
-      <li>Product: {{ user.product }}</li>
-    </ul>
-    <button class="btn btn-small">Delete account</button>
+    <div class="dashboard-wrapper">
+      <div class="dashboard-info">
+        <h3>Personal info</h3>
+        <div class="dashboard-row">
+          <div>ID</div>
+          <div>{{ user.id }}</div>
+        </div>
+        <div class="dashboard-row">
+          <div>Username</div>
+          <div>{{ user.username }}</div>
+          <div class="link">Edit</div>
+        </div>
+        <div class="dashboard-row">
+          <div>Email</div>
+          <div>{{ user.email }}</div>
+          <div class="link">Edit</div>
+        </div>
+        <div class="dashboard-row">
+          <div>Member since</div>
+          <div>{{ user.created_at }}</div>
+        </div>
+        <div class="dashboard-row">
+          <div>Email confirmed</div>
+          <div>{{ user.confirmed ? 'yes' : 'no' }}</div>
+        </div>
+      </div>
+      <div class="dashboard-info">
+        <h3>Product</h3>
+        <div class="dashboard-row">
+          <div>Product</div>
+          <div>{{ user.product }}</div>
+          <div class="link">Upgrade</div>
+        </div>
+      </div>
+      <button class="btn btn-small">Delete account</button>
+    </div>
   </section>
 </template>
 
@@ -24,6 +51,67 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .dashboard {
+  .dashboard-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .dashboard-info {
+    text-align: left;
+    border: 1px solid $primary-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin-bottom: 16px;
+
+    h3 {
+      color: $primary-color;
+    }
+
+    .dashboard-row {
+      display: grid;
+      grid-template-columns: 25% 50% 25%;
+      grid-template-rows: auto;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $primary-light;
+      }
+
+      > div {
+        margin: 8px 0;
+
+        &:first-child {
+          font-weight: 700;
+        }
+
+        &:nth-child(3) {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .dashboard {
+    .dashboard-info {
+      grid-template-columns: 100%;
+
+      .dashboard-row {
+        grid-template-columns: 75% 25%;
+
+        > div {
+          &:first-child {
+            margin-bottom: 0;
+            grid-column: 1 / -1;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

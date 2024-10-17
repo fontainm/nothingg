@@ -12,7 +12,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
         <RouterLink v-if="!$usersStore.isLoggedIn" to="/#products">Products</RouterLink>
         <RouterLink v-if="!$usersStore.isLoggedIn" to="/#faq">FAQ</RouterLink>
         <RouterLink v-if="$usersStore.isLoggedIn" to="/dashboard">Dashboard</RouterLink>
-        <RouterLink v-if="!$usersStore.isLoggedIn" to="/signup" class="navbar-cta">
+        <RouterLink v-if="!$usersStore.isLoggedIn" to="/signup" class="link link-bordered">
           Start for free
         </RouterLink>
         <RouterLink v-if="!$usersStore.isLoggedIn" to="/login">Login</RouterLink>
@@ -64,17 +64,6 @@ export default {
       font-size: 30px;
     }
 
-    .navbar-cta {
-      border: 1px solid $primary-color;
-      border-radius: 10px;
-      padding: 8px;
-
-      &:hover {
-        background: $primary-gradient;
-        color: white !important;
-      }
-    }
-
     a {
       transition: all 0.25s ease;
 
@@ -118,7 +107,7 @@ export default {
           text-align: center;
           font-size: 20px;
 
-          &:not(.navbar-cta) {
+          &:not(.link-bordered) {
             width: 100%;
           }
         }
