@@ -121,4 +121,11 @@ export default {
     justify-content: space-between;
   }
 }
+
+@media screen and (max-width: $phone) {
+  .modal-content {
+    padding: 16px;
+    margin: 0 16px;
+  }
+}
 </style>
