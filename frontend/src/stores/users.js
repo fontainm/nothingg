@@ -6,7 +6,8 @@ export const useUsersStore = defineStore('user', {
   state: () => ({
     totalUsers: 0,
     user: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    token: null
   }),
 
   actions: {
@@ -32,6 +33,13 @@ export const useUsersStore = defineStore('user', {
       localStorage.setItem('user', JSON.stringify(response))
     },
 
+    async updateUsername(username) {
+      const response = await usersService.updateUsername({
+        username
+      })
+      this.user.username = response.username
+    },
+
     logoutUser() {
       this.user = null
       this.isLoggedIn = false
@@ -40,6 +48,7 @@ export const useUsersStore = defineStore('user', {
 
     setUser(user) {
       this.user = user
+      this.token = `Bearer ${user.token}`
       this.isLoggedIn = true
     }
   }

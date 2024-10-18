@@ -1,6 +1,7 @@
 <script setup>
 import IconCheckCircle from '~icons/mdi/check-circle'
 import IconCloseCircle from '~icons/mdi/close-circle'
+import AppEditModal from '@/components/AppEditModal.vue'
 </script>
 
 <template>
@@ -16,7 +17,7 @@ import IconCloseCircle from '~icons/mdi/close-circle'
         <div class="dashboard-row">
           <div>Username</div>
           <div>{{ user.username }}</div>
-          <div class="link">Edit</div>
+          <div class="link" @click="showModal = true">Edit</div>
         </div>
         <div class="dashboard-row">
           <div>Email</div>
@@ -41,7 +42,7 @@ import IconCloseCircle from '~icons/mdi/close-circle'
           <div v-if="!user.confirmed" class="link">Resend</div>
         </div>
       </div>
-      <div class="dashboard-info">
+      <div v-if="product" class="dashboard-info">
         <h3>Your Product</h3>
         <div class="dashboard-row">
           <div>{{ product.title }}</div>
@@ -52,10 +53,17 @@ import IconCloseCircle from '~icons/mdi/close-circle'
       <button class="btn btn-small">Delete account</button>
     </div>
   </section>
+  <AppEditModal :isVisible="showModal" @close="showModal = false" />
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      showModal: false
+    }
+  },
+
   computed: {
     user() {
       return this.$usersStore.user

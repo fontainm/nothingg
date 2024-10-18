@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="container">
-      <form @submit="handleLogin" :class="{ disabled: loading }">
+      <form @submit="handleLogin" class="form-small" :class="{ disabled: loading }">
         <div class="login-error error-message" :class="{ invisible: errorMessage === '' }">
           {{ errorMessage }}
         </div>

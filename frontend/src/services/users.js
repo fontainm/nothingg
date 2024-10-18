@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useUsersStore } from '@/stores/users'
 
 const baseUrl = 'http://localhost:3001/api/users'
 
@@ -17,4 +18,13 @@ const createUser = (credentials) => {
   return request.then((response) => response.data)
 }
 
-export default { getAll, countAll, createUser }
+const updateUsername = async (username) => {
+  const config = {
+    headers: { Authorization: useUsersStore().token }
+  }
+
+  const response = await axios.put(`${baseUrl}/username`, username, config)
+  return response.data
+}
+
+export default { getAll, countAll, createUser, updateUsername }

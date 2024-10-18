@@ -4,11 +4,24 @@ const userIdRules = () => {
   return [param('id').isInt().withMessage('User ID must be an integer')]
 }
 
-const userSignUpRules = () => {
+const usernameRules = () => {
   return [
     body('username')
-      .isLength({ min: 3 })
-      .withMessage('Username must be at least 3 characters long'),
+      .isLength({ min: 3, max: 20 })
+      .withMessage('Username must be between 3 and 20 characters.')
+      .matches(/^[a-zA-Z0-9._]+$/)
+      .withMessage(
+        'Username can only contain letters, numbers, underscores, and dots.'
+      )
+      .matches(/^(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/)
+      .withMessage(
+        'Username cannot have consecutive dots or underscores, and cannot start or end with them.'
+      ),
+  ]
+}
+
+const userSignUpRules = () => {
+  return [
     body('email').isEmail().withMessage('Please provide a valid email address'),
     body('password')
       .isLength({ min: 6 })
@@ -23,4 +36,4 @@ const userLoginRules = () => {
   ]
 }
 
-export { userIdRules, userSignUpRules, userLoginRules }
+export { userIdRules, userSignUpRules, userLoginRules, usernameRules }

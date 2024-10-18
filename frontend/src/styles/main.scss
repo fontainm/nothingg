@@ -92,8 +92,11 @@ svg.icon-lg {
 form {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
   margin: auto;
+
+  &.form-small {
+    max-width: 300px;
+  }
 
   input {
     text-align: center;
@@ -170,6 +173,10 @@ button {
     padding: 8px;
   }
 
+  &.btn-danger {
+    background: $error-color;
+  }
+
   &:hover {
     box-shadow: 0 0 0 black;
     transform: translateY(5px);
@@ -205,4 +212,18 @@ button {
   button {
     font-size: 18px;
   }
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-to {
+  opacity: 1;
 }

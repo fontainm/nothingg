@@ -6,7 +6,7 @@ import IconMail from '~icons/mdi/email'
   <div class="signup">
     <div class="container">
       <div v-if="step === 0">
-        <form @submit="handleSignUp" :class="{ disabled: loading }">
+        <form @submit="handleSignUp" class="form-small" :class="{ disabled: loading }">
           <div class="signup-error error-message" :class="{ invisible: errorMessage === '' }">
             {{ errorMessage }}
           </div>

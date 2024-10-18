@@ -19,7 +19,7 @@ content-type: application/json
 ###
 PUT http://localhost:3001/api/users/username HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFwaWd1eTIzNCIsImlkIjoiMTEzIiwiaWF0IjoxNzI5MjQ0NzcwLCJleHAiOjE3MjkyNDgzNzB9.hFDlMxIFTO3yc1VeaKmxOzByGFQiwxW7QdapCC-v4jQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwiaWQiOiIxMTMiLCJpYXQiOjE3MjkyNTI4OTIsImV4cCI6MTcyOTI1NjQ5Mn0.pTxD825Ge-LkibB8l7unmJ52MPVCdnhDaBCkUXt6pHQ
 
 {
     "username": "newusername"

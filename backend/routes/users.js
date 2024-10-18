@@ -1,6 +1,10 @@
 import express from 'express'
 import { validationHandler } from '../utils/middleware.js'
-import { userIdRules, userSignUpRules } from '../validators/userValidator.js'
+import {
+  userIdRules,
+  userSignUpRules,
+  usernameRules,
+} from '../validators/userValidator.js'
 import {
   getUserById,
   getUsers,
@@ -52,6 +56,7 @@ usersRouter.get(
 
 usersRouter.post(
   '/',
+  usernameRules(),
   userSignUpRules(),
   validationHandler,
   async (req, res, next) => {
@@ -65,16 +70,21 @@ usersRouter.post(
   }
 )
 
-usersRouter.put('/username', validationHandler, async (req, res, next) => {
-  try {
-    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
-    const user = await getUserById(decodedToken.id)
-    const updatedUser = await updateUsername(user.id, req.body.username)
-    res.status(200).send(updatedUser)
-  } catch (error) {
-    next(error)
+usersRouter.put(
+  '/username',
+  usernameRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+      const user = await getUserById(decodedToken.id)
+      const updatedUsername = await updateUsername(user.id, req.body.username)
+      res.status(200).send(updatedUsername)
+    } catch (error) {
+      next(error)
+    }
   }
-})
+)
 
 usersRouter.delete('/', async (req, res) => {
   await deleteUsers()
