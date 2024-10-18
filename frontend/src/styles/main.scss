@@ -45,10 +45,6 @@ h2 {
   font-weight: 900;
   margin-bottom: 32px;
   line-height: 1;
-
-  &.mb-16 {
-    margin-bottom: 16px;
-  }
 }
 
 .link,
@@ -130,7 +126,6 @@ form {
     padding: 8px;
     border-radius: 10px;
     color: white;
-    font-size: 14px;
     margin-bottom: 12px;
     box-sizing: content-box;
     line-height: 1;
@@ -226,4 +221,14 @@ button {
 
 .modal-fade-enter-to {
   opacity: 1;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

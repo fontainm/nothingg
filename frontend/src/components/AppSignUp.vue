@@ -7,9 +7,6 @@ import IconMail from '~icons/mdi/email'
     <div class="container">
       <div v-if="step === 0">
         <form @submit="handleSignUp" class="form-small" :class="{ disabled: loading }">
-          <div class="signup-error error-message" :class="{ invisible: errorMessage === '' }">
-            {{ errorMessage }}
-          </div>
           <input v-model="username" type="text" placeholder="Username" />
           <input v-model="email" type="email" placeholder="Email address" />
           <input v-model="password" type="password" placeholder="Password" />
@@ -40,7 +37,6 @@ export default {
       username: '',
       email: '',
       password: '',
-      errorMessage: '',
       step: 0
     }
   },
@@ -49,7 +45,6 @@ export default {
     async handleSignUp(event) {
       event.preventDefault()
       this.loading = true
-      this.errorMessage = ''
 
       try {
         await this.$usersStore.createUser({
@@ -59,10 +54,7 @@ export default {
         })
         this.step = 1
       } catch (error) {
-        this.errorMessage = error.response.data.errors[0].msg
-        setTimeout(() => {
-          this.errorMessage = ''
-        }, 3000)
+        this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
       } finally {
         this.loading = false
       }
@@ -75,9 +67,6 @@ export default {
 @import '@/styles/variables.scss';
 
 .signup {
-  .signup-error {
-  }
-
   .signup-login {
     margin-top: 16px;
   }

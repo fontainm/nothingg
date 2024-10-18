@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import AppNavbar from '@/components/AppNavbar.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import InfoMessage from '@/components/InfoMessage.vue'
 </script>
 
 <template>
@@ -10,6 +11,8 @@ import AppFooter from '@/components/AppFooter.vue'
   <div class="content">
     <RouterView />
   </div>
+
+  <InfoMessage />
 
   <AppFooter />
 </template>

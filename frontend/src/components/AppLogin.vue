@@ -2,9 +2,6 @@
   <div class="login">
     <div class="container">
       <form @submit="handleLogin" class="form-small" :class="{ disabled: loading }">
-        <div class="login-error error-message" :class="{ invisible: errorMessage === '' }">
-          {{ errorMessage }}
-        </div>
         <input v-model="username" type="text" placeholder="Username" />
         <input v-model="password" type="password" placeholder="Password" />
         <RouterLink to="/forgot-password" class="login-forgot">Forgot your password?</RouterLink>
@@ -20,8 +17,7 @@ export default {
     return {
       loading: false,
       username: '',
-      password: '',
-      errorMessage: ''
+      password: ''
     }
   },
 
@@ -29,16 +25,14 @@ export default {
     async handleLogin(event) {
       event.preventDefault()
       this.loading = true
-      this.errorMessage = ''
+      this.$appStore.resetInfoMessage()
 
       try {
         await this.$usersStore.loginUser({ username: this.username, password: this.password })
         this.$router.push('/dashboard')
+        this.$appStore.showInfoMessage('success', 'Login successful')
       } catch (error) {
-        this.errorMessage = error.response.data.errors[0].msg
-        setTimeout(() => {
-          this.errorMessage = ''
-        }, 3000)
+        this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
       } finally {
         this.loading = false
       }

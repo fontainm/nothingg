@@ -4,6 +4,8 @@ import productsService from '../services/products'
 export const useAppStore = defineStore('app', {
   state: () => ({
     menuIsOpen: false,
+    infoMessage: null,
+    timeout: null,
     products: []
   }),
 
@@ -14,6 +16,23 @@ export const useAppStore = defineStore('app', {
 
     closeMenu() {
       this.menuIsOpen = false
+    },
+
+    showInfoMessage(type, message) {
+      if (this.timeout) {
+        clearTimeout(this.timeout)
+      }
+      this.infoMessage = {
+        type,
+        message
+      }
+      this.timeout = setTimeout(() => {
+        this.resetInfoMessage()
+      }, 5000)
+    },
+
+    resetInfoMessage() {
+      this.infoMessage = null
     },
 
     async getProducts() {

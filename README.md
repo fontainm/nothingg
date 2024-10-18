@@ -9,7 +9,6 @@ Sign up for nothing
   - Color Update
   - Intro Improvments
   - Button component
-  - Global error & success messages
 
 - Backend
 

@@ -15,7 +15,6 @@ import IconClose from '~icons/mdi/close'
         </div>
         <h3>Edit Username</h3>
         <form @submit="handleSubmit" :class="{ disabled: loading }">
-          <p>{{ errorMessage }}</p>
           <input v-model="username" placeholder="New username" />
           <div class="modal-buttons">
             <button class="btn btn-small btn-danger" @click="closeModal">Cancel</button>
@@ -41,15 +40,13 @@ export default {
   data() {
     return {
       loading: false,
-      username: '',
-      errorMessage: ''
+      username: ''
     }
   },
 
   methods: {
     closeModal() {
       this.username = ''
-      this.errorMessage = ''
       this.loading = false
       this.$emit('close')
     },
@@ -57,16 +54,13 @@ export default {
     async handleSubmit(event) {
       event.preventDefault()
       this.loading = true
-      this.errorMessage = ''
 
       try {
         await this.$usersStore.updateUsername(this.username)
+        this.$appStore.showInfoMessage('success', 'Username updated')
         this.closeModal()
       } catch (error) {
-        this.errorMessage = error.response.data.errors[0].msg
-        setTimeout(() => {
-          this.errorMessage = ''
-        }, 3000)
+        this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
       } finally {
         this.loading = false
       }
