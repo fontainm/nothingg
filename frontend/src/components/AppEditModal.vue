@@ -19,7 +19,9 @@ import IconClose from '~icons/mdi/close'
           <input v-model="username" placeholder="New username" />
           <div class="modal-buttons">
             <button class="btn btn-small btn-danger" @click="closeModal">Cancel</button>
-            <button class="btn btn-small" type="submit">Confirm</button>
+            <button class="btn btn-small" type="submit">
+              <span v-if="loading">...</span><span v-else>Confirm</span>
+            </button>
           </div>
         </form>
       </div>
@@ -46,6 +48,9 @@ export default {
 
   methods: {
     closeModal() {
+      this.username = ''
+      this.errorMessage = ''
+      this.loading = false
       this.$emit('close')
     },
 
