@@ -7,7 +7,17 @@ import {
   getUsersCount,
   createUser,
   deleteUsers,
+  updateUsername,
 } from '../controllers/users.js'
+import jwt from 'jsonwebtoken'
+
+const getTokenFrom = (req) => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
+}
 
 const usersRouter = express.Router()
 
@@ -54,6 +64,17 @@ usersRouter.post(
     }
   }
 )
+
+usersRouter.put('/username', validationHandler, async (req, res, next) => {
+  try {
+    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+    const user = await getUserById(decodedToken.id)
+    const updatedUser = await updateUsername(user.id, req.body.username)
+    res.status(200).send(updatedUser)
+  } catch (error) {
+    next(error)
+  }
+})
 
 usersRouter.delete('/', async (req, res) => {
   await deleteUsers()

@@ -24,6 +24,11 @@ import IconCloseCircle from '~icons/mdi/close-circle'
           <div class="link">Edit</div>
         </div>
         <div class="dashboard-row">
+          <div>Password</div>
+          <div>●●●●●●●●</div>
+          <div class="link">Edit</div>
+        </div>
+        <div class="dashboard-row">
           <div>Member since</div>
           <div>{{ formatDate(user.created_at) }}</div>
         </div>

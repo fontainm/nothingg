@@ -30,6 +30,19 @@ describe('when there is no user in users table', () => {
   })
 })
 
+test('user can log in', async () => {
+  const user = {
+    username: 'testuser',
+    password: 'password',
+  }
+
+  await api
+    .post('/api/login')
+    .send(user)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
+
 test('get one user', async () => {
   await api
     .get('/api/users/1')
@@ -54,3 +67,5 @@ test('get total number of users', async () => {
 
   // TODO: assert field total
 })
+
+test('')
