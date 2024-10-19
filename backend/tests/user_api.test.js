@@ -68,4 +68,5 @@ test('get total number of users', async () => {
   // TODO: assert field total
 })
 
+// TODO: Test login, update username, update email, update password
 test('')

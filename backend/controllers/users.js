@@ -49,6 +49,14 @@ export async function updateUsername(id, username) {
   return rows[0]
 }
 
+export async function updateEmail(id, email) {
+  const { rows } = await db.query(
+    `UPDATE users SET email = $1 WHERE id = $2 RETURNING email`,
+    [email, id]
+  )
+  return rows[0]
+}
+
 export async function deleteUsers() {
   await db.query('TRUNCATE TABLE users')
   await db.query('ALTER SEQUENCE users_id_seq RESTART WITH 1')

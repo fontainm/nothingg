@@ -4,6 +4,7 @@ import {
   userIdRules,
   userSignUpRules,
   usernameRules,
+  emailRules,
 } from '../validators/userValidator.js'
 import {
   getUserById,
@@ -12,6 +13,7 @@ import {
   createUser,
   deleteUsers,
   updateUsername,
+  updateEmail,
 } from '../controllers/users.js'
 import jwt from 'jsonwebtoken'
 
@@ -80,6 +82,22 @@ usersRouter.put(
       const user = await getUserById(decodedToken.id)
       const updatedUsername = await updateUsername(user.id, req.body.username)
       res.status(200).send(updatedUsername)
+    } catch (error) {
+      next(error)
+    }
+  }
+)
+
+usersRouter.put(
+  '/email',
+  emailRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+      const user = await getUserById(decodedToken.id)
+      const updatedEmail = await updateEmail(user.id, req.body.email)
+      res.status(200).send(updatedEmail)
     } catch (error) {
       next(error)
     }

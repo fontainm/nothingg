@@ -20,7 +20,14 @@ const usernameRules = () => {
   ]
 }
 
+const emailRules = () => {
+  return [
+    body('email').isEmail().withMessage('Please provide a valid email address'),
+  ]
+}
+
 const userSignUpRules = () => {
+  // TODO: Make password rule
   return [
     body('email').isEmail().withMessage('Please provide a valid email address'),
     body('password')
@@ -36,4 +43,10 @@ const userLoginRules = () => {
   ]
 }
 
-export { userIdRules, userSignUpRules, userLoginRules, usernameRules }
+export {
+  userIdRules,
+  userSignUpRules,
+  userLoginRules,
+  usernameRules,
+  emailRules,
+}
