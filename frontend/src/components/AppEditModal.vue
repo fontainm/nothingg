@@ -13,11 +13,13 @@ import IconClose from '~icons/mdi/close'
         <div class="modal-icon">
           <IconAccountEdit />
         </div>
-        <h3>Edit Username</h3>
-        <form @submit="handleSubmit" :class="{ disabled: loading }">
-          <input v-model="username" placeholder="New username" />
+        <h3>{{ title }}</h3>
+        <form :class="{ disabled: loading }">
+          <slot></slot>
           <div class="modal-buttons">
-            <button class="btn btn-small btn-danger" @click="closeModal">Cancel</button>
+            <button class="btn btn-small btn-danger" type="button" @click="closeModal">
+              Cancel
+            </button>
             <button class="btn btn-small" type="submit">
               <span v-if="loading">...</span><span v-else>Confirm</span>
             </button>
@@ -34,36 +36,22 @@ export default {
     isVisible: {
       type: Boolean,
       required: true
-    }
-  },
+    },
 
-  data() {
-    return {
-      loading: false,
-      username: ''
+    title: {
+      type: String,
+      default: 'Edit'
+    },
+
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
 
   methods: {
     closeModal() {
-      this.username = ''
-      this.loading = false
       this.$emit('close')
-    },
-
-    async handleSubmit(event) {
-      event.preventDefault()
-      this.loading = true
-
-      try {
-        await this.$usersStore.updateUsername(this.username)
-        this.$appStore.showInfoMessage('success', 'Username updated')
-        this.closeModal()
-      } catch (error) {
-        this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
-      } finally {
-        this.loading = false
-      }
     }
   }
 }

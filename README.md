@@ -10,8 +10,15 @@ Sign up for nothing
   - Intro Improvments
   - Button component
 
+- Content
+
+  - Privacy Policy
+  - About Page
+  - Terms
+
 - Backend
 
+  - Token httpCookies
   - Edit Email
   - Edit Password
 
@@ -22,5 +29,6 @@ Sign up for nothing
   - Add error testing
 
 - Deploy
+
   - Github Actions
   - Update db password
