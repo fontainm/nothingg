@@ -20,7 +20,7 @@ Sign up for nothing
 - Backend
 
   - Token httpCookies
-  - Edit Email
+  - Protect /delete routes
   - Edit Password
 
 - Testing
