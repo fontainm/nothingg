@@ -49,6 +49,12 @@ export default {
     }
   },
 
+  watch: {
+    isVisible() {
+      document.body.classList.toggle('modal-open')
+    }
+  },
+
   methods: {
     closeModal() {
       this.$emit('close')
