@@ -47,6 +47,13 @@ export const useUsersStore = defineStore('user', {
       this.user.email = response.email
     },
 
+    async updatePassword({ oldPassword, newPassword }) {
+      await usersService.updatePassword({
+        oldPassword,
+        newPassword
+      })
+    },
+
     logoutUser() {
       this.user = null
       this.isLoggedIn = false

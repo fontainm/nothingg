@@ -36,4 +36,13 @@ const updateEmail = async (email) => {
   return response.data
 }
 
-export default { getAll, countAll, createUser, updateUsername, updateEmail }
+const updatePassword = async ({ oldPassword, newPassword }) => {
+  const config = {
+    headers: { Authorization: useUsersStore().token }
+  }
+
+  const response = await axios.put(`${baseUrl}/password`, { oldPassword, newPassword }, config)
+  return response.data
+}
+
+export default { getAll, countAll, createUser, updateUsername, updateEmail, updatePassword }
