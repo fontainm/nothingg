@@ -9,6 +9,7 @@ Sign up for nothing
   - Color Update
   - Intro Improvments
   - Button component
+  - Error message handler
 
 - Content
 

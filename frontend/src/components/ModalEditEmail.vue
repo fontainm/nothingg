@@ -5,12 +5,12 @@ import AppEditModal from '@/components/AppEditModal.vue'
 <template>
   <AppEditModal
     :isVisible="show"
-    :title="'Edit Username'"
+    :title="'Edit Email'"
     :loading="loading"
-    @submit="updateUsername"
+    @submit="updateEmail"
     @close="closeModal"
   >
-    <input v-model="username" placeholder="New username" />
+    <input v-model="email" type="email" placeholder="New email address" required />
   </AppEditModal>
 </template>
 
@@ -25,25 +25,25 @@ export default {
 
   data() {
     return {
-      username: '',
+      email: '',
       loading: false
     }
   },
 
   methods: {
     closeModal() {
-      this.username = ''
+      this.email = ''
       this.loading = false
       this.$emit('close')
     },
 
-    async updateUsername(event) {
+    async updateEmail(event) {
       event.preventDefault()
       this.loading = true
 
       try {
-        await this.$usersStore.updateUsername(this.username)
-        this.$appStore.showInfoMessage('success', 'Username updated')
+        await this.$usersStore.updateEmail(this.email)
+        this.$appStore.showInfoMessage('success', 'Email updated')
         this.closeModal()
       } catch (error) {
         this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)

@@ -40,6 +40,13 @@ export const useUsersStore = defineStore('user', {
       this.user.username = response.username
     },
 
+    async updateEmail(email) {
+      const response = await usersService.updateEmail({
+        email
+      })
+      this.user.email = response.email
+    },
+
     logoutUser() {
       this.user = null
       this.isLoggedIn = false

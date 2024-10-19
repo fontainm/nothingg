@@ -2,6 +2,7 @@
 import IconCheckCircle from '~icons/mdi/check-circle'
 import IconCloseCircle from '~icons/mdi/close-circle'
 import ModalEditUsername from '@/components/ModalEditUsername.vue'
+import ModalEditEmail from '@/components/ModalEditEmail.vue'
 </script>
 
 <template>
@@ -22,7 +23,7 @@ import ModalEditUsername from '@/components/ModalEditUsername.vue'
         <div class="dashboard-row">
           <div>Email</div>
           <div>{{ user.email }}</div>
-          <div class="link">Edit</div>
+          <div class="link" @click="showEditEmailModal = true">Edit</div>
         </div>
         <div class="dashboard-row">
           <div>Password</div>
@@ -54,13 +55,15 @@ import ModalEditUsername from '@/components/ModalEditUsername.vue'
     </div>
   </section>
   <ModalEditUsername :show="showEditUsernameModal" @close="showEditUsernameModal = false" />
+  <ModalEditEmail :show="showEditEmailModal" @close="showEditEmailModal = false" />
 </template>
 
 <script>
 export default {
   data() {
     return {
-      showEditUsernameModal: false
+      showEditUsernameModal: false,
+      showEditEmailModal: false
     }
   },
 
