@@ -26,8 +26,9 @@ Sign up for nothing
 - Testing
 
   - Migration for test db
-  - Check test responses
+  - Check test responses .expect
   - Add error testing
+  - Cleaner tests
 
 - Deploy
 

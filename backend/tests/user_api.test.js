@@ -68,5 +68,37 @@ test('get total number of users', async () => {
   // TODO: assert field total
 })
 
-// TODO: Test login, update username, update email, update password
-test('')
+describe('as a logged in user', () => {
+  let authToken = null
+
+  beforeEach(async () => {
+    const user = {
+      username: 'testusernew',
+      password: 'password',
+    }
+
+    const response = await api.post('/api/login').send(user)
+
+    authToken = response.body.token
+  })
+
+  test('logged in user can update username', async () => {
+    await api
+      .put('/api/users/username')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ username: 'testusernew' })
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('logged in user can update email', async () => {
+    await api
+      .put('/api/users/email')
+      .set('Authorization', `Bearer ${authToken}`)
+      .send({ email: 'newmail@newmail.newmail' })
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+})
+
+// TODO: Test update password
