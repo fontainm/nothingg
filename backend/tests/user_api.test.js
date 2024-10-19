@@ -73,7 +73,7 @@ describe('as a logged in user', () => {
 
   beforeEach(async () => {
     const user = {
-      username: 'testusernew',
+      username: 'testuser', // TODO: After usernmae changed?
       password: 'password',
     }
 
@@ -86,7 +86,7 @@ describe('as a logged in user', () => {
     await api
       .put('/api/users/username')
       .set('Authorization', `Bearer ${authToken}`)
-      .send({ username: 'testusernew' })
+      .send({ username: 'testuser' })
       .expect(200)
       .expect('Content-Type', /application\/json/)
   })
