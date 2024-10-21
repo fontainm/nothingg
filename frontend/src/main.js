@@ -20,3 +20,10 @@ app.config.globalProperties.$appStore = appStore
 app.use(router)
 
 app.mount('#app')
+
+window.onload = () => {
+  const loader = document.getElementById('loading')
+  if (loader) {
+    loader.classList.add('hide')
+  }
+}
