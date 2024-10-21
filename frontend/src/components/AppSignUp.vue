@@ -1,4 +1,6 @@
 <script setup>
+import SubmitButton from '@/components/SubmitButton.vue'
+
 import IconMail from '~icons/mdi/email'
 </script>
 
@@ -10,7 +12,7 @@ import IconMail from '~icons/mdi/email'
           <input v-model="username" type="text" placeholder="Username" />
           <input v-model="email" type="email" placeholder="Email address" />
           <input v-model="password" type="password" placeholder="Password" />
-          <button type="submit"><span v-if="loading">...</span><span v-else>Sign Up</span></button>
+          <SubmitButton text="Sign Up" :loading="loading" />
         </form>
         <div class="signup-login">
           <p>

@@ -43,24 +43,6 @@ body {
     opacity: 0;
     visibility: hidden;
   }
-
-  .spinner {
-    border: 8px solid $primary-light;
-    border-top: 8px solid $primary-color;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 }
 
 footer,
@@ -223,6 +205,22 @@ button {
   }
 }
 
+.spinner {
+  border: 4px solid $primary-light;
+  border-top: 4px solid $primary-color;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+
+  &.spinner-lg {
+    width: 48px;
+    height: 48px;
+    border-width: 8px;
+  }
+}
+
 @media screen and (max-width: $tablet) {
   footer,
   section {
@@ -276,4 +274,13 @@ button {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

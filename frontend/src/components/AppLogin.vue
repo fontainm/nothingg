@@ -1,3 +1,7 @@
+<script setup>
+import SubmitButton from '@/components/SubmitButton.vue'
+</script>
+
 <template>
   <div class="login">
     <div class="container">
@@ -5,7 +9,7 @@
         <input v-model="username" type="text" placeholder="Username" />
         <input v-model="password" type="password" placeholder="Password" />
         <RouterLink to="/forgot-password" class="login-forgot">Forgot your password?</RouterLink>
-        <button type="submit">Login</button>
+        <SubmitButton text="Login" :loading="loading" />
       </form>
     </div>
   </div>

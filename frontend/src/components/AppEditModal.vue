@@ -1,4 +1,5 @@
 <script setup>
+import SubmitButton from '@/components/SubmitButton.vue'
 import IconAccountEdit from '~icons/mdi/account-edit'
 import IconClose from '~icons/mdi/close'
 </script>
@@ -20,9 +21,7 @@ import IconClose from '~icons/mdi/close'
             <button class="btn btn-small btn-danger" type="button" @click="closeModal">
               Cancel
             </button>
-            <button class="btn btn-small" type="submit">
-              <span v-if="loading">...</span><span v-else>Confirm</span>
-            </button>
+            <SubmitButton class="btn-small" text="Confirm" :loading="loading" />
           </div>
         </form>
       </div>
@@ -37,12 +36,10 @@ export default {
       type: Boolean,
       required: true
     },
-
     title: {
       type: String,
       default: 'Edit'
     },
-
     loading: {
       type: Boolean,
       default: false
