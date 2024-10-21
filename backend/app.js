@@ -19,6 +19,10 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/products', productsRouter)
 
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: 'dist' })
+})
+
 app.use(errorHandler)
 
 export default app
