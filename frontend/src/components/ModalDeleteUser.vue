@@ -45,6 +45,7 @@ export default {
         await this.$usersStore.deleteUser()
         this.$usersStore.logoutUser()
         this.$router.push('/')
+        this.$emit('close')
       } catch (error) {
         this.loading = false
       }
