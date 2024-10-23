@@ -46,4 +46,21 @@ const updatePassword = async ({ oldPassword, newPassword }) => {
   return response.data
 }
 
-export default { getAll, countAll, createUser, updateUsername, updateEmail, updatePassword }
+const deleteUser = async (userId) => {
+  const config = {
+    headers: { Authorization: useUsersStore().token }
+  }
+
+  const response = await api.delete(`${baseUrl}/${userId}`, config)
+  return response.data
+}
+
+export default {
+  getAll,
+  countAll,
+  createUser,
+  updateUsername,
+  updateEmail,
+  updatePassword,
+  deleteUser
+}

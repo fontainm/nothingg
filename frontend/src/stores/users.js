@@ -57,6 +57,10 @@ export const useUsersStore = defineStore('user', {
       })
     },
 
+    async deleteUser() {
+      await usersService.deleteUser(this.user.id)
+    },
+
     logoutUser() {
       this.user = null
       this.isLoggedIn = false

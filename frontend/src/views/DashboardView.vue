@@ -4,6 +4,7 @@ import IconCloseCircle from '~icons/mdi/close-circle'
 import ModalEditUsername from '@/components/ModalEditUsername.vue'
 import ModalEditEmail from '@/components/ModalEditEmail.vue'
 import ModalEditPassword from '@/components/ModalEditPassword.vue'
+import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
 </script>
 
 <template>
@@ -53,7 +54,9 @@ import ModalEditPassword from '@/components/ModalEditPassword.vue'
         </div>
       </div>
       <div class="dashboard-buttons">
-        <button class="btn btn-small btn-danger">Delete account</button>
+        <button class="btn btn-small btn-danger" @click="showDeleteUserModal = true">
+          Delete account
+        </button>
         <button class="btn btn-small" @click="handleLogout">Logout</button>
       </div>
     </div>
@@ -61,6 +64,7 @@ import ModalEditPassword from '@/components/ModalEditPassword.vue'
   <ModalEditUsername :show="showEditUsernameModal" @close="showEditUsernameModal = false" />
   <ModalEditEmail :show="showEditEmailModal" @close="showEditEmailModal = false" />
   <ModalEditPassword :show="showEditPasswordModal" @close="showEditPasswordModal = false" />
+  <ModalDeleteUser :show="showDeleteUserModal" @close="showDeleteUserModal = false" />
 </template>
 
 <script>
@@ -69,7 +73,8 @@ export default {
     return {
       showEditUsernameModal: false,
       showEditEmailModal: false,
-      showEditPasswordModal: false
+      showEditPasswordModal: false,
+      showDeleteUserModal: false
     }
   },
 
