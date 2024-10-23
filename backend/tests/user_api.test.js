@@ -79,7 +79,7 @@ describe('as a logged in user', () => {
 
     const response = await api.post('/api/login').send(user)
 
-    authToken = response.body.token
+    authToken = response.body.data.token
   })
 
   test('logged in user can update username', async () => {
