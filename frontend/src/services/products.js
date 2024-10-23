@@ -1,9 +1,9 @@
-import axios from 'axios'
+import api from '@/plugins/axios'
 
-const baseUrl = '/api/products'
+const baseUrl = '/products'
 
 const getProducts = async () => {
-  const response = await axios.get(baseUrl)
+  const response = await api.get(baseUrl)
   return response.data
 }
 

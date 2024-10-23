@@ -43,7 +43,7 @@ export async function createUser(username, email, password) {
 
 export async function updateUsername(id, username) {
   const { rows } = await db.query(
-    `UPDATE users SET username = $1 WHERE id = $2 RETURNING username`,
+    `UPDATE users SET username = $1 WHERE id = $2 RETURNING *`,
     [username, id]
   )
   return rows[0]

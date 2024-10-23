@@ -29,8 +29,9 @@ export const useUsersStore = defineStore('user', {
         username: credentials.username,
         password: credentials.password
       })
-      this.setUser(response)
-      localStorage.setItem('user', JSON.stringify(response))
+      this.setUser(response.data)
+      localStorage.setItem('user', JSON.stringify(response.data))
+      return response
     },
 
     async updateUsername(username) {
@@ -38,6 +39,7 @@ export const useUsersStore = defineStore('user', {
         username
       })
       this.user.username = response.username
+      // TODO: Update local storage!
     },
 
     async updateEmail(email) {
@@ -45,6 +47,7 @@ export const useUsersStore = defineStore('user', {
         email
       })
       this.user.email = response.email
+      // TODO: Update local storage!
     },
 
     async updatePassword({ oldPassword, newPassword }) {

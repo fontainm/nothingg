@@ -63,7 +63,6 @@ export default {
           oldPassword: this.oldPassword,
           newPassword: this.newPassword
         })
-        this.$appStore.showInfoMessage('success', 'Password updated')
         this.closeModal()
       } catch (error) {
         this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)

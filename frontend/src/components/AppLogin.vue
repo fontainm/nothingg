@@ -32,9 +32,11 @@ export default {
       this.$appStore.resetInfoMessage()
 
       try {
-        await this.$usersStore.loginUser({ username: this.username, password: this.password })
+        await this.$usersStore.loginUser({
+          username: this.username,
+          password: this.password
+        })
         this.$router.push('/dashboard')
-        this.$appStore.showInfoMessage('success', 'Login successful')
       } catch (error) {
         this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
       } finally {

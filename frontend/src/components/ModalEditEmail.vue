@@ -43,7 +43,6 @@ export default {
 
       try {
         await this.$usersStore.updateEmail(this.email)
-        this.$appStore.showInfoMessage('success', 'Email updated')
         this.closeModal()
       } catch (error) {
         this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)

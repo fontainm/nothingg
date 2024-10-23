@@ -32,12 +32,12 @@ const usersRouter = express.Router()
 
 usersRouter.get('/', async (req, res) => {
   const users = await getUsers()
-  res.send(users)
+  res.success(users, 'Users fetched successfully')
 })
 
 usersRouter.get('/total', async (req, res) => {
-  const users = await getUsersCount()
-  res.send(users)
+  const total = await getUsersCount()
+  res.success(total, 'Total users fetched successfully')
 })
 
 usersRouter.get(
@@ -49,7 +49,7 @@ usersRouter.get(
       const id = req.params.id
       const user = await getUserById(id)
       if (user) {
-        res.send(user)
+        res.success(user, 'User fetched successfully')
       } else {
         res.status(404).end()
       }
@@ -68,7 +68,7 @@ usersRouter.post(
     const { username, email, password } = req.body
     try {
       const user = await createUser(username, email, password)
-      res.status(201).send(user)
+      res.success(user, 'User created successfully', 201)
     } catch (error) {
       next(error)
     }
@@ -83,8 +83,8 @@ usersRouter.put(
     try {
       const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
       const user = await getUserById(decodedToken.id)
-      const updatedUsername = await updateUsername(user.id, req.body.username)
-      res.status(200).send(updatedUsername)
+      const response = await updateUsername(user.id, req.body.username)
+      res.success(response, 'Username updated successfully')
     } catch (error) {
       next(error)
     }
@@ -99,8 +99,8 @@ usersRouter.put(
     try {
       const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
       const user = await getUserById(decodedToken.id)
-      const updatedEmail = await updateEmail(user.id, req.body.email)
-      res.status(200).send(updatedEmail)
+      const response = await updateEmail(user.id, req.body.email)
+      res.success(response, 'Email updated successfully')
     } catch (error) {
       next(error)
     }
@@ -132,7 +132,7 @@ usersRouter.put(
       }
 
       await updatePassword(user.id, req.body.newPassword)
-      res.status(200).send({ message: 'Password updated' })
+      res.success(null, 'Password successfully updated')
     } catch (error) {
       next(error)
     }

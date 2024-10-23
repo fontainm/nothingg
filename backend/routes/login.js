@@ -40,7 +40,7 @@ loginRouter.post(
         expiresIn: 60 * 60,
       })
 
-      res.status(200).send({ token, ...user })
+      res.success({ token, ...user }, 'Login successful')
     } catch (error) {
       next(error)
     }

@@ -1,21 +1,22 @@
-import axios from 'axios'
+import api from '@/plugins/axios'
+
 import { useUsersStore } from '@/stores/users'
 
-const baseUrl = '/api/users'
+const baseUrl = '/users'
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then((response) => response.data)
+const getAll = async () => {
+  const response = await api.get(baseUrl)
+  return response.data
 }
 
-const countAll = () => {
-  const request = axios.get(`${baseUrl}/total`)
-  return request.then((response) => response.data)
+const countAll = async () => {
+  const response = await api.get(`${baseUrl}/total`)
+  return response.data
 }
 
-const createUser = (credentials) => {
-  const request = axios.post(baseUrl, credentials)
-  return request.then((response) => response.data)
+const createUser = async (credentials) => {
+  const response = await api.post(baseUrl, credentials)
+  return response.data
 }
 
 const updateUsername = async (username) => {
@@ -23,7 +24,7 @@ const updateUsername = async (username) => {
     headers: { Authorization: useUsersStore().token }
   }
 
-  const response = await axios.put(`${baseUrl}/username`, username, config)
+  const response = await api.put(`${baseUrl}/username`, username, config)
   return response.data
 }
 
@@ -32,7 +33,7 @@ const updateEmail = async (email) => {
     headers: { Authorization: useUsersStore().token }
   }
 
-  const response = await axios.put(`${baseUrl}/email`, email, config)
+  const response = await api.put(`${baseUrl}/email`, email, config)
   return response.data
 }
 
@@ -41,7 +42,7 @@ const updatePassword = async ({ oldPassword, newPassword }) => {
     headers: { Authorization: useUsersStore().token }
   }
 
-  const response = await axios.put(`${baseUrl}/password`, { oldPassword, newPassword }, config)
+  const response = await api.put(`${baseUrl}/password`, { oldPassword, newPassword }, config)
   return response.data
 }
 

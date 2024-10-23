@@ -43,12 +43,12 @@ export default {
 
       try {
         await this.$usersStore.updateUsername(this.username)
-        this.$appStore.showInfoMessage('success', 'Username updated')
         this.closeModal()
       } catch (error) {
+        console.log(error)
         this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
       } finally {
-        // this.loading = false
+        this.loading = false
       }
     }
   }

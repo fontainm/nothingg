@@ -8,6 +8,34 @@ const validationHandler = (req, res, next) => {
   next()
 }
 
+const createResponse = (
+  status,
+  success,
+  message,
+  data = null,
+  error = null
+) => {
+  return {
+    status,
+    success,
+    message,
+    data,
+    error,
+  }
+}
+
+const responseHandler = (req, res, next) => {
+  res.success = (data, message = 'Operation successful', status = 200) => {
+    res.status(status).json(createResponse(status, true, message, data, null))
+  }
+
+  res.error = (error, message = 'An error occurred', status = 500) => {
+    res.status(status).json(createResponse(status, false, message, null, error))
+  }
+
+  next()
+}
+
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 
@@ -43,4 +71,4 @@ const errorHandler = (error, req, res, next) => {
   next(error)
 }
 
-export { errorHandler, validationHandler }
+export { errorHandler, validationHandler, responseHandler }

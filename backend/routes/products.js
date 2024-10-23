@@ -4,8 +4,8 @@ import { getProductById, getProducts } from '../controllers/products.js'
 const productsRouter = express.Router()
 
 productsRouter.get('/', async (req, res) => {
-  const users = await getProducts()
-  res.send(users)
+  const products = await getProducts()
+  res.success(products, 'Products fetched successfully')
 })
 
 productsRouter.get('/:id', async (req, res, next) => {
@@ -13,7 +13,7 @@ productsRouter.get('/:id', async (req, res, next) => {
     const id = req.params.id
     const product = await getProductById(id)
     if (product) {
-      res.send(product)
+      res.success(product, 'Product fetched successfully')
     } else {
       res.status(404).end()
     }
