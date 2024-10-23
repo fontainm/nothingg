@@ -45,9 +45,6 @@ export default {
         await this.$usersStore.updateUsername(this.username)
         this.closeModal()
       } catch (error) {
-        console.log(error)
-        this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
-      } finally {
         this.loading = false
       }
     }

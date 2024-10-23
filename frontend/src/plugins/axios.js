@@ -7,10 +7,17 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (response) => {
-    useAppStore().showInfoMessage('success', response.data.message)
+    if (response.data.message) {
+      useAppStore().showInfoMessage('success', response.data.message)
+    }
     return response.data
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    if (error.response.data.message) {
+      useAppStore().showInfoMessage('error', error.response.data.message)
+    }
+    return Promise.reject(error)
+  }
 )
 
 export default api

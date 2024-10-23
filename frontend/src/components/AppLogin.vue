@@ -38,8 +38,6 @@ export default {
         })
         this.$router.push('/dashboard')
       } catch (error) {
-        this.$appStore.showInfoMessage('error', error.response.data.errors[0].msg)
-      } finally {
         this.loading = false
       }
     }

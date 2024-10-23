@@ -21,14 +21,7 @@ loginRouter.post(
         : await bcrypt.compare(password, user.password)
 
       if (!(user && passwordCorrect)) {
-        return res.status(401).send({
-          errors: [
-            {
-              msg: 'Invalid credentials',
-              type: 'field',
-            },
-          ],
-        })
+        return res.error(null, 'Invalid username or password', 401)
       }
 
       const userForToken = {

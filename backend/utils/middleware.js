@@ -3,7 +3,8 @@ import { validationResult } from 'express-validator'
 const validationHandler = (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() })
+    const firstErrorMessage = errors.array()[0].msg
+    return res.error(errors.array(), firstErrorMessage, 400)
   }
   next()
 }
@@ -40,32 +41,11 @@ const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 
   if (error.code == '23505') {
-    return res.status(400).send({
-      errors: [
-        {
-          value: req.body.username,
-          msg: 'Username already taken',
-          type: 'field',
-          path: 'username',
-        },
-      ],
-    })
+    return res.error(error, 'Username already taken', 400)
   } else if (error.name === 'JsonWebTokenError') {
-    return res.status(401).send({
-      errors: [
-        {
-          msg: 'Invalid Token',
-        },
-      ],
-    })
+    return res.error(error, 'Invalid token', 401)
   } else if (error.name === 'TokenExpiredError') {
-    return res.status(401).json({
-      errors: [
-        {
-          msg: 'Token expired',
-        },
-      ],
-    })
+    return res.error(error, 'Token expired', 401)
   }
 
   next(error)

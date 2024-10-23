@@ -15,7 +15,7 @@ productsRouter.get('/:id', async (req, res, next) => {
     if (product) {
       res.success(product, 'Product fetched successfully')
     } else {
-      res.status(404).end()
+      res.error(null, 'Product not found', 404)
     }
   } catch (error) {
     next(error)

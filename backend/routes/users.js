@@ -51,7 +51,7 @@ usersRouter.get(
       if (user) {
         res.success(user, 'User fetched successfully')
       } else {
-        res.status(404).end()
+        res.error(null, 'User not found', 404)
       }
     } catch (error) {
       next(error)
@@ -121,14 +121,7 @@ usersRouter.put(
         : await bcrypt.compare(req.body.oldPassword, user.password)
 
       if (!(user && passwordCorrect)) {
-        return res.status(401).send({
-          errors: [
-            {
-              msg: 'Current password is not correct',
-              type: 'field',
-            },
-          ],
-        })
+        return res.error(null, 'Current password is not correct', 401)
       }
 
       await updatePassword(user.id, req.body.newPassword)
@@ -141,7 +134,7 @@ usersRouter.put(
 
 usersRouter.delete('/', async (req, res) => {
   await deleteUsers()
-  res.status(204).end()
+  res.success(null, 'User deleted successfully')
 })
 
 export default usersRouter
