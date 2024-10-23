@@ -52,7 +52,10 @@ import ModalEditPassword from '@/components/ModalEditPassword.vue'
           <div class="link">Upgrade</div>
         </div>
       </div>
-      <button class="btn btn-small">Delete account</button>
+      <div class="dashboard-buttons">
+        <button class="btn btn-small btn-danger">Delete account</button>
+        <button class="btn btn-small" @click="handleLogout">Logout</button>
+      </div>
     </div>
   </section>
   <ModalEditUsername :show="showEditUsernameModal" @close="showEditUsernameModal = false" />
@@ -81,6 +84,11 @@ export default {
   },
 
   methods: {
+    handleLogout() {
+      this.$usersStore.logoutUser()
+      this.$router.push('/')
+    },
+
     formatDate(date) {
       return new Date(date).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -88,6 +96,7 @@ export default {
         day: 'numeric'
       })
     },
+
     formatPrice(price) {
       return `€ ${price}`
     }
@@ -138,6 +147,11 @@ export default {
         }
       }
     }
+  }
+
+  .dashboard-buttons {
+    display: flex;
+    justify-content: space-between;
   }
 }
 

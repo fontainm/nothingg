@@ -7,33 +7,23 @@ import IconBurgerMenu from '~icons/mdi/menu'
     <nav class="container">
       <RouterLink to="/" class="app-title navbar-title">Nothing</RouterLink>
       <div class="navbar-items" :class="{ open: $appStore.menuIsOpen }">
-        <RouterLink v-if="!$usersStore.isLoggedIn" to="/#howto">How it works</RouterLink>
-        <RouterLink v-if="!$usersStore.isLoggedIn" to="/#features">Features</RouterLink>
-        <RouterLink v-if="!$usersStore.isLoggedIn" to="/#products">Products</RouterLink>
-        <RouterLink v-if="!$usersStore.isLoggedIn" to="/#faq">FAQ</RouterLink>
-        <RouterLink v-if="$usersStore.isLoggedIn" to="/dashboard">Dashboard</RouterLink>
+        <RouterLink to="/#howto">How it works</RouterLink>
+        <RouterLink to="/#features">Features</RouterLink>
+        <RouterLink to="/#products">Products</RouterLink>
+        <RouterLink to="/#faq">FAQ</RouterLink>
+        <RouterLink v-if="$usersStore.isLoggedIn" class="link link-bordered" to="/dashboard">
+          Dashboard
+        </RouterLink>
         <RouterLink v-if="!$usersStore.isLoggedIn" to="/signup" class="link link-bordered">
           Start for free
         </RouterLink>
         <RouterLink v-if="!$usersStore.isLoggedIn" to="/login">Login</RouterLink>
         <RouterLink v-if="!$usersStore.isLoggedIn" to="/demo">Demo</RouterLink>
-        <RouterLink v-if="$usersStore.isLoggedIn" to="" @click="handleLogout">Logout</RouterLink>
       </div>
       <IconBurgerMenu class="link navbar-menu" @click="$appStore.toggleMenu()" />
     </nav>
   </div>
 </template>
-
-<script>
-export default {
-  methods: {
-    handleLogout() {
-      this.$usersStore.logoutUser()
-      this.$router.push('/')
-    }
-  }
-}
-</script>
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';

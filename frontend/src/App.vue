@@ -26,13 +26,6 @@ export default {
       this.$usersStore.setUser(user)
     }
     this.$appStore.getProducts()
-  },
-
-  methods: {
-    handleLogout() {
-      this.$usersStore.logoutUser()
-      this.$router.push('/')
-    }
   }
 }
 </script>

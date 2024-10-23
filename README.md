@@ -7,8 +7,8 @@ Sign up for nothing
 - Frontend
 
   - Color Update
-  - Intro Improvments
-  - Error message handler
+  - Intro Improvments, clouds
+  - Section rounded borders
 
 - Content
 
@@ -20,6 +20,8 @@ Sign up for nothing
 
   - Token httpCookies
   - Protect /delete routes
+  - Delete account
+  - Confirm email
 
 - Testing
 
