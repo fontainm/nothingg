@@ -5,6 +5,7 @@ import {
   userSignUpRules,
   usernameRules,
   emailRules,
+  passwordUpdateRules,
 } from '../validators/userValidator.js'
 import {
   getUserById,
@@ -14,8 +15,10 @@ import {
   deleteUsers,
   updateUsername,
   updateEmail,
+  updatePassword,
 } from '../controllers/users.js'
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 
 const getTokenFrom = (req) => {
   const authorization = req.get('authorization')
@@ -98,6 +101,38 @@ usersRouter.put(
       const user = await getUserById(decodedToken.id)
       const updatedEmail = await updateEmail(user.id, req.body.email)
       res.status(200).send(updatedEmail)
+    } catch (error) {
+      next(error)
+    }
+  }
+)
+
+usersRouter.put(
+  '/password',
+  passwordUpdateRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+      const user = await getUserById(decodedToken.id)
+
+      const passwordCorrect = !user
+        ? false
+        : await bcrypt.compare(req.body.oldPassword, user.password)
+
+      if (!(user && passwordCorrect)) {
+        return res.status(401).send({
+          errors: [
+            {
+              msg: 'Current password is not correct',
+              type: 'field',
+            },
+          ],
+        })
+      }
+
+      await updatePassword(user.id, req.body.newPassword)
+      res.status(200).send({ message: 'Password updated' })
     } catch (error) {
       next(error)
     }

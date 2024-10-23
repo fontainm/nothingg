@@ -26,6 +26,15 @@ const emailRules = () => {
   ]
 }
 
+const passwordUpdateRules = () => {
+  return [
+    body('oldPassword').not().isEmpty(),
+    body('newPassword')
+      .isLength({ min: 6 })
+      .withMessage('Password must be at least 6 characters long'),
+  ]
+}
+
 const userSignUpRules = () => {
   // TODO: Make password rule
   return [
@@ -49,4 +58,5 @@ export {
   userLoginRules,
   usernameRules,
   emailRules,
+  passwordUpdateRules,
 }

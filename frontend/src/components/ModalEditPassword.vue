@@ -10,7 +10,7 @@ import AppEditModal from '@/components/AppEditModal.vue'
     @submit="updatePassword"
     @close="closeModal"
   >
-    <input v-model="oldPassword" type="password" placeholder="Old password" required />
+    <input v-model="oldPassword" type="password" placeholder="Current password" required />
     <input v-model="newPassword" type="password" placeholder="New password" required />
     <input
       v-model="newPasswordConfirm"

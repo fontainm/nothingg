@@ -18,9 +18,9 @@ Sign up for nothing
 
 - Backend
 
+  - middleware for response structure
   - Token httpCookies
   - Protect /delete routes
-  - Edit Password
 
 - Testing
 

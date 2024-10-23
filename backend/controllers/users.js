@@ -57,6 +57,17 @@ export async function updateEmail(id, email) {
   return rows[0]
 }
 
+export async function updatePassword(id, password) {
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
+  const { rows } = await db.query(
+    `UPDATE users SET password = $1 WHERE id = $2`,
+    [passwordHash, id]
+  )
+  return rows[0]
+}
+
 export async function deleteUsers() {
   await db.query('TRUNCATE TABLE users')
   await db.query('ALTER SEQUENCE users_id_seq RESTART WITH 1')
