@@ -68,6 +68,10 @@ export async function updatePassword(id, password) {
   return rows[0]
 }
 
+export async function deleteUser(id) {
+  await db.query('DELETE FROM users WHERE id = $1', [id])
+}
+
 export async function deleteUsers() {
   await db.query('TRUNCATE TABLE users')
   await db.query('ALTER SEQUENCE users_id_seq RESTART WITH 1')

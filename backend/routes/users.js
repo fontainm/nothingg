@@ -12,6 +12,7 @@ import {
   getUsers,
   getUsersCount,
   createUser,
+  deleteUser,
   deleteUsers,
   updateUsername,
   updateEmail,
@@ -132,9 +133,19 @@ usersRouter.put(
   }
 )
 
+usersRouter.delete('/:id', async (req, res, next) => {
+  try {
+    jwt.verify(getTokenFrom(req), process.env.SECRET)
+    await deleteUser(req.params.id)
+    res.success(null, 'User deleted successfully')
+  } catch (error) {
+    next(error)
+  }
+})
+
 usersRouter.delete('/', async (req, res) => {
   await deleteUsers()
-  res.success(null, 'User deleted successfully')
+  res.success(null, 'Users deleted successfully')
 })
 
 export default usersRouter

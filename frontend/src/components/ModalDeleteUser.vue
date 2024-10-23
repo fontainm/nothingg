@@ -10,7 +10,9 @@ import AppEditModal from '@/components/AppEditModal.vue'
     @submit="deleteUser"
     @close="closeModal"
   >
-    <p>Are you sure you want to permanently delete your user?</p>
+    <p class="delete-info">
+      Are you sure you want to permanently delete your user? This cannot be undone!
+    </p>
   </AppEditModal>
 </template>
 
@@ -36,13 +38,13 @@ export default {
     },
 
     async deleteUser(event) {
-      console.log('DELETE!')
       event.preventDefault()
       this.loading = true
 
       try {
         await this.$usersStore.deleteUser()
-        this.closeModal()
+        this.$usersStore.logoutUser()
+        this.$router.push('/')
       } catch (error) {
         this.loading = false
       }
@@ -53,4 +55,8 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';
+
+.delete-info {
+  margin-bottom: 16px;
+}
 </style>
