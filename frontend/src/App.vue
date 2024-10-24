@@ -20,11 +20,6 @@ import InfoMessage from '@/components/InfoMessage.vue'
 <script>
 export default {
   mounted() {
-    const loggedUserJSON = localStorage.getItem('user')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      this.$usersStore.setUser(user)
-    }
     this.$appStore.getProducts()
   }
 }

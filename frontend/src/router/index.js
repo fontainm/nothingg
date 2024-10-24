@@ -78,11 +78,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isLoggedIn = useUsersStore().isLoggedIn
+  const hasToken = useUsersStore().token
 
-  if (to.meta.requiresAuth && !isLoggedIn) {
+  if (to.meta.requiresAuth && !hasToken) {
     next({ name: 'login' })
-  } else if (to.meta.requiresGuest && isLoggedIn) {
+  } else if (to.meta.requiresGuest && hasToken) {
     next({ name: 'dashboard' })
   } else {
     next()

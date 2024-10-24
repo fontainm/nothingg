@@ -30,7 +30,7 @@ export const useUsersStore = defineStore('user', {
         password: credentials.password
       })
       this.setUser(response.data)
-      localStorage.setItem('user', JSON.stringify(response.data))
+      this.setToken(response.data.token)
       return response
     },
 
@@ -39,7 +39,6 @@ export const useUsersStore = defineStore('user', {
         username
       })
       this.user.username = response.username
-      // TODO: Update local storage!
     },
 
     async updateEmail(email) {
@@ -47,7 +46,6 @@ export const useUsersStore = defineStore('user', {
         email
       })
       this.user.email = response.email
-      // TODO: Update local storage!
     },
 
     async updatePassword({ oldPassword, newPassword }) {
@@ -61,16 +59,29 @@ export const useUsersStore = defineStore('user', {
       await usersService.deleteUser(this.user.id)
     },
 
+    async fetchUser() {
+      const token = localStorage.getItem('nothing_token')
+      if (!token) return
+      this.setToken(token)
+      const response = await usersService.getMe()
+      this.setUser(response)
+    },
+
     logoutUser() {
       this.user = null
       this.isLoggedIn = false
-      localStorage.removeItem('user')
+      this.token = null
+      localStorage.removeItem('nothing_token')
     },
 
     setUser(user) {
       this.user = user
-      this.token = `Bearer ${user.token}`
       this.isLoggedIn = true
+    },
+
+    setToken(token) {
+      localStorage.setItem('nothing_token', token)
+      this.token = `Bearer ${token}`
     }
   }
 })

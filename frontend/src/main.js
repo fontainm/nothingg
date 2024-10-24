@@ -16,6 +16,7 @@ app.config.globalProperties.$api = api
 
 const usersStore = useUsersStore()
 app.config.globalProperties.$usersStore = usersStore
+usersStore.fetchUser()
 
 const appStore = useAppStore()
 app.config.globalProperties.$appStore = appStore

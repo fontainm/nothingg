@@ -21,11 +21,10 @@ api.interceptors.response.use(
 
     if (showMessage) {
       useAppStore().showInfoMessage('error', message)
-
-      if (message === 'Token expired') {
-        useUsersStore().logoutUser()
-        router.push('/login')
-      }
+    }
+    if (message === 'Token expired' || message === 'Invalid token') {
+      useUsersStore().logoutUser()
+      router.push('/login')
     }
     return Promise.reject(error)
   }

@@ -9,6 +9,15 @@ const getAll = async () => {
   return response.data
 }
 
+const getMe = async () => {
+  const config = {
+    headers: { Authorization: useUsersStore().token, 'x-hide-message': true }
+  }
+
+  const response = await api.get(`${baseUrl}/me`, config)
+  return response.data
+}
+
 const countAll = async () => {
   const response = await api.get(`${baseUrl}/total`, { headers: { 'x-hide-message': true } })
   return response.data
@@ -57,6 +66,7 @@ const deleteUser = async (userId) => {
 
 export default {
   getAll,
+  getMe,
   countAll,
   createUser,
   updateUsername,

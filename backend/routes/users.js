@@ -41,6 +41,16 @@ usersRouter.get('/total', async (req, res) => {
   res.success(total, 'Total users fetched successfully')
 })
 
+usersRouter.get('/me', async (req, res, next) => {
+  try {
+    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+    const user = await getUserById(decodedToken.id)
+    res.success(user, 'User fetched successfully')
+  } catch (error) {
+    next(error)
+  }
+})
+
 usersRouter.get(
   '/:id',
   userIdRules(),

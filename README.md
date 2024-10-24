@@ -14,9 +14,7 @@ Sign up for nothing
 
 - Backend
 
-  - Token httpCookies
   - Protect /delete route
-  - Delete account
   - Confirm email
 
 - Testing
