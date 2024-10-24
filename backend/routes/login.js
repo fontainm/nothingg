@@ -33,6 +33,8 @@ loginRouter.post(
         expiresIn: 60 * 60,
       })
 
+      delete user.password
+
       res.success({ token, ...user }, 'Login successful')
     } catch (error) {
       next(error)

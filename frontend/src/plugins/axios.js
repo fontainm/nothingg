@@ -17,14 +17,13 @@ api.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || 'Something went wrong'
-    const showMessage = error.response?.config?.headers['x-hide-message'] !== 'true'
 
-    if (showMessage) {
+    if (message) {
       useAppStore().showInfoMessage('error', message)
-    }
-    if (message === 'Token expired' || message === 'Invalid token') {
-      useUsersStore().logoutUser()
-      router.push('/login')
+      if (message === 'Token expired' || message === 'Invalid token') {
+        useUsersStore().logoutUser()
+        router.push('/login')
+      }
     }
     return Promise.reject(error)
   }

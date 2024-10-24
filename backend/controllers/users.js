@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 
 export async function getUsers() {
   const { rows } = await db.query(
-    'SELECT id, username, email, created_at, password FROM users'
+    'SELECT id, username, email, created_at, confirmed FROM users'
   )
   return rows
 }
@@ -14,7 +14,10 @@ export async function getUsersCount() {
 }
 
 export async function getUserById(id) {
-  const { rows } = await db.query(`SELECT * FROM users WHERE id = $1`, [id])
+  const { rows } = await db.query(
+    `SELECT id, username, product_id, confirmed, created_at, email FROM users WHERE id = $1`,
+    [id]
+  )
   return rows[0]
 }
 
