@@ -1,5 +1,5 @@
 import express from 'express'
-import { validationHandler } from '../utils/middleware.js'
+import { validationHandler, protectDeleteRoute } from '../utils/middleware.js'
 import {
   userIdRules,
   userSignUpRules,
@@ -153,7 +153,7 @@ usersRouter.delete('/:id', async (req, res, next) => {
   }
 })
 
-usersRouter.delete('/', async (req, res) => {
+usersRouter.delete('/', protectDeleteRoute, async (req, res) => {
   await deleteUsers()
   res.success(null, 'Users deleted successfully')
 })

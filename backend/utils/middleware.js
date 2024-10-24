@@ -51,4 +51,23 @@ const errorHandler = (error, req, res, next) => {
   next(error)
 }
 
-export { errorHandler, validationHandler, responseHandler }
+const protectDeleteRoute = (req, res, next) => {
+  if (process.env.NODE_ENV !== 'test') {
+    return res.error(
+      null,
+      'Forbidden: Cannot perform this action outside of test environment.',
+      403
+    )
+  }
+
+  // Additional authorization logic can be added here
+  // For example, check for a specific API key or token
+  // const apiKey = req.headers['x-api-key']
+  // if (apiKey !== process.env.TEST_API_KEY) {
+  //   return res.status(403).send('Forbidden: Invalid API Key')
+  // }
+
+  next()
+}
+
+export { errorHandler, validationHandler, responseHandler, protectDeleteRoute }

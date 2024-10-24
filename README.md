@@ -14,7 +14,6 @@ Sign up for nothing
 
 - Backend
 
-  - Protect /delete route
   - Confirm email
 
 - Testing
