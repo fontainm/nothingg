@@ -18,6 +18,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  position: relative;
+
+  &::before,
+  &::after {
+    width: 200%;
+    position: absolute;
+    opacity: 0.1;
+    border: 10px solid;
+    border-radius: 100%;
+  }
+
+  &::before {
+    content: '';
+    height: 40%;
+    background: black;
+    transform: rotate(-22deg);
+    border-color: white;
+  }
+
+  &::after {
+    content: '';
+    height: 50%;
+    background: white;
+    transform: rotate(-12deg);
+    border-color: black;
+  }
 
   .intro-container {
     z-index: 1;

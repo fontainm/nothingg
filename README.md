@@ -6,10 +6,6 @@ Sign up for nothing
 
 - Frontend
 
-  - Color Update
-  - Intro Improvments, clouds
-  - Section rounded borders
-
 - Content
 
   - Privacy Policy

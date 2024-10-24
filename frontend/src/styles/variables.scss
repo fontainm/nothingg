@@ -1,6 +1,12 @@
 $primary-color: lightseagreen;
-$primary-gradient: linear-gradient(45deg, rgba(32, 159, 178, 1) 0%, rgba(32, 178, 170, 1) 100%);
+$primary-gradient: linear-gradient(
+  45deg,
+  rgba(32, 159, 178, 1) 0%,
+  rgba(32, 178, 170, 1) 50%,
+  rgba(60, 200, 200) 100%
+);
 $primary-light: #e3f2f3;
+$primary-light-gradient: linear-gradient(180deg, $primary-light 0%, rgba(60, 200, 200, 0.2) 100%);
 $light-gray: #aaa;
 $success-color: rgb(21, 152, 86);
 $error-color: #ee4455;

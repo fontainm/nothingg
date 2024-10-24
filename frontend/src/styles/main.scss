@@ -52,7 +52,8 @@ section {
   text-align: center;
 
   &.alternate {
-    background-color: $primary-light;
+    // background-color: $primary-light;
+    background: $primary-light-gradient;
   }
 }
 
