@@ -1,5 +1,7 @@
 import axios from 'axios'
+import router from '@/router/index'
 import { useAppStore } from '@/stores/app'
+import { useUsersStore } from '@/stores/users'
 
 const api = axios.create({
   baseURL: '/api'
@@ -15,6 +17,11 @@ api.interceptors.response.use(
   (error) => {
     if (error.response.data.message) {
       useAppStore().showInfoMessage('error', error.response.data.message)
+
+      if (error.response.data.message === 'Token expired') {
+        useUsersStore().logoutUser()
+        router.push('/login')
+      }
     }
     return Promise.reject(error)
   }

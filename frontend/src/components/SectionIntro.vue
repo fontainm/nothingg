@@ -1,6 +1,6 @@
 <template>
   <section class="intro" id="home">
-    <div class="container">
+    <div class="container intro-container">
       <h1>Nothing</h1>
       <p class="intro-subheader">A place where simplicity meets tranquility</p>
       <RouterLink to="/signup" class="btn btn-negative">Get started for free</RouterLink>
@@ -14,13 +14,17 @@
 .intro {
   background: $primary-gradient;
   color: white;
-  height: 100vh;
+  height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
 
+  .intro-container {
+    z-index: 1;
+  }
+
   h1 {
-    font-size: 256px;
+    font-size: 240px;
     line-height: 1;
     font-weight: 900;
     text-transform: uppercase;
