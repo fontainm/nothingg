@@ -10,7 +10,7 @@ const getAll = async () => {
 }
 
 const countAll = async () => {
-  const response = await api.get(`${baseUrl}/total`)
+  const response = await api.get(`${baseUrl}/total`, { headers: { 'x-hide-message': true } })
   return response.data
 }
 

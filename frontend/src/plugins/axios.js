@@ -9,16 +9,20 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (response) => {
-    if (response.data.message) {
+    const showMessage = response?.config?.headers['x-hide-message'] !== 'true'
+    if (showMessage && response.data.message) {
       useAppStore().showInfoMessage('success', response.data.message)
     }
     return response.data
   },
   (error) => {
-    if (error.response.data.message) {
-      useAppStore().showInfoMessage('error', error.response.data.message)
+    const message = error.response?.data?.message || 'Something went wrong'
+    const showMessage = error.response?.config?.headers['x-hide-message'] !== 'true'
 
-      if (error.response.data.message === 'Token expired') {
+    if (showMessage) {
+      useAppStore().showInfoMessage('error', message)
+
+      if (message === 'Token expired') {
         useUsersStore().logoutUser()
         router.push('/login')
       }
