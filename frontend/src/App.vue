@@ -33,7 +33,7 @@ nav {
   justify-content: space-around;
   position: fixed;
   width: 100%;
-  background: white;
+  background: $white;
   top: 0;
   height: 60px;
   z-index: 10;

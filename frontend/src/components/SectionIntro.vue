@@ -13,7 +13,7 @@
 
 .intro {
   background: $primary-gradient;
-  color: white;
+  color: $white;
   height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
@@ -35,13 +35,13 @@
     height: 40%;
     background: $black;
     transform: rotate(-22deg);
-    border-color: white;
+    border-color: $white;
   }
 
   &::after {
     content: '';
     height: 50%;
-    background: white;
+    background: $white;
     transform: rotate(-12deg);
     border-color: $black;
   }
@@ -66,7 +66,7 @@
   }
 
   p {
-    color: white;
+    color: $white;
   }
 
   .intro-subheader {

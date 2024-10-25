@@ -35,7 +35,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
   z-index: 10;
   width: 100%;
   position: fixed;
-  background: white;
+  background: $white;
 
   nav {
     display: flex;
@@ -81,7 +81,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
         flex-direction: column;
         align-items: center;
         position: absolute;
-        background: white;
+        background: $white;
         top: 60px;
         width: 100%;
         left: 100%;

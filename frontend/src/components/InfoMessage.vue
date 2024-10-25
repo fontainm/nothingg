@@ -36,7 +36,7 @@ export default {
   align-items: center;
   padding: 16px;
   border-radius: 10px;
-  color: white;
+  color: $white;
   line-height: 1;
   transition: all 0.25s ease;
 

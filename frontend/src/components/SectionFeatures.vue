@@ -47,7 +47,7 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
     display: flex;
     background: $primary-gradient;
     width: 50%;
-    color: white;
+    color: $white;
     padding: 32px;
     margin: 16px;
     border-radius: 10px;
@@ -70,11 +70,11 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
     h3 {
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: white;
+      color: $white;
     }
 
     p {
-      color: white;
+      color: $white;
     }
 
     &:first-child {

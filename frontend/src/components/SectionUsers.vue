@@ -70,7 +70,7 @@ export default {
 
     span {
       background: $primary-gradient;
-      color: white;
+      color: $white;
       padding: 8px;
       border-radius: 10px;
       width: 100px;
@@ -88,7 +88,7 @@ export default {
     .users-quote {
       display: flex;
       align-items: center;
-      background-color: white;
+      background-color: $white;
       padding: 16px;
       margin: 16px;
       border-radius: 10px;

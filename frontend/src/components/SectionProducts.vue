@@ -87,7 +87,7 @@ import IconCheck from '~icons/mdi/check'
         display: flex;
         flex-direction: column;
         height: 100%;
-        background: white;
+        background: $white;
         border-radius: 10px;
         border: 1px solid $primary-color;
         padding: 32px;

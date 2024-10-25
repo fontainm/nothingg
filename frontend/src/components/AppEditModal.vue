@@ -77,7 +77,7 @@ export default {
 }
 
 .modal-content {
-  background: white;
+  background: $white;
   padding: 32px;
   border-radius: 10px;
   position: relative;

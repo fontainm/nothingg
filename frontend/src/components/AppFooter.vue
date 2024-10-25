@@ -25,10 +25,10 @@ import IconEmail from '~icons/mdi/email-outline'
 
 footer {
   background: $primary-gradient;
-  color: white;
+  color: $white;
 
   h2 {
-    -webkit-text-fill-color: white;
+    -webkit-text-fill-color: $white;
   }
 
   .footer-links {
@@ -37,7 +37,7 @@ footer {
     a {
       padding: 0 8px;
       position: relative;
-      color: white;
+      color: $white;
 
       &:hover {
         color: $black;

@@ -31,7 +31,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: $white;
   z-index: 9999;
   opacity: 1;
   visibility: visible;
@@ -49,6 +49,7 @@ footer,
 section {
   padding: 128px 0;
   text-align: center;
+  background: $white;
 
   &.alternate {
     background: $primary-light-gradient;
@@ -102,7 +103,7 @@ a {
 
     &:hover {
       background: $primary-gradient;
-      color: white !important;
+      color: $white !important;
     }
   }
 }
@@ -162,7 +163,7 @@ form {
     display: inline-block;
     padding: 8px;
     border-radius: 10px;
-    color: white;
+    color: $white;
     margin-bottom: 12px;
     box-sizing: content-box;
     line-height: 1;
@@ -188,11 +189,11 @@ button {
   cursor: pointer;
   transition: all 0.25s ease;
   background: $primary-gradient;
-  color: white;
+  color: $white;
   box-shadow: 0 5px 0 $black;
 
   &.btn-negative {
-    background: white;
+    background: $white;
     color: $primary-color;
 
     &:hover {

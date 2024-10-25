@@ -25,17 +25,17 @@ export default {
 
 .demo {
   background: $primary-gradient;
-  color: white;
+  color: $white;
 
   h2 {
-    color: white;
-    -webkit-text-fill-color: white;
+    color: $white;
+    -webkit-text-fill-color: $white;
   }
 
   p {
     font-size: 24px;
     margin-bottom: 32px;
-    color: white;
+    color: $white;
   }
 }
 
