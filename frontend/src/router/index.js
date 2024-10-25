@@ -10,7 +10,7 @@ const router = createRouter({
     useAppStore().closeMenu()
 
     if (to.hash) {
-      return { el: to.hash }
+      return { el: to.hash, behavior: 'smooth' }
     }
 
     return { top: 0, left: 0 }

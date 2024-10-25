@@ -1,5 +1,4 @@
 <script setup>
-import { RouterView } from 'vue-router'
 import AppNavbar from '@/components/AppNavbar.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import InfoMessage from '@/components/InfoMessage.vue'

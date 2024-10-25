@@ -6,8 +6,8 @@ Sign up for nothing
 
 - Frontend
 
-  - Route change fade
   - Update color black
+  - Mobile notifications bottom
 
 - Content
 
