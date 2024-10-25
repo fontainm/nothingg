@@ -15,7 +15,7 @@ export async function getUsersCount() {
 
 export async function getUserById(id) {
   const { rows } = await db.query(
-    `SELECT id, username, product_id, confirmed, created_at, email FROM users WHERE id = $1`,
+    `SELECT id, username, password, product_id, confirmed, created_at, email FROM users WHERE id = $1`,
     [id]
   )
   return rows[0]
