@@ -53,6 +53,9 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
     border-radius: 10px;
     text-align: left;
     align-items: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    transform-origin: center;
 
     .features-item__icon {
       width: 30px;
@@ -70,11 +73,15 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
     }
 
     &:first-child {
-      transform: translateX(-50px);
+      margin-left: -50px;
     }
 
     &:last-child {
-      transform: translateX(50px);
+      margin-right: -50px;
+    }
+
+    &:hover {
+      transform: scale(1.05);
     }
   }
 }

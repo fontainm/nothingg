@@ -11,6 +11,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
         <RouterLink to="/#features">Features</RouterLink>
         <RouterLink to="/#products">Products</RouterLink>
         <RouterLink to="/#faq">FAQ</RouterLink>
+        <RouterLink v-if="!$usersStore.isLoggedIn" to="/#demo">Demo</RouterLink>
         <RouterLink v-if="$usersStore.isLoggedIn" class="link link-bordered" to="/dashboard">
           Dashboard
         </RouterLink>
@@ -18,24 +19,11 @@ import IconBurgerMenu from '~icons/mdi/menu'
           Start for free
         </RouterLink>
         <RouterLink v-if="!$usersStore.isLoggedIn" to="/login">Login</RouterLink>
-        <RouterLink v-if="!$usersStore.isLoggedIn" to="/dashboard" @click="handleClickDemo"
-          >Demo</RouterLink
-        >
       </div>
       <IconBurgerMenu class="link navbar-menu" @click="$appStore.toggleMenu()" />
     </nav>
   </div>
 </template>
-
-<script>
-export default {
-  methods: {
-    handleClickDemo() {
-      this.$usersStore.setDemoUser()
-    }
-  }
-}
-</script>
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';
