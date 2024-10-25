@@ -56,6 +56,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
 
     a {
       transition: all 0.25s ease;
+      color: $black;
 
       &:not(:last-child) {
         margin-right: 32px;

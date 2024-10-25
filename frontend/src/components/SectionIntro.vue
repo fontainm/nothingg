@@ -33,7 +33,7 @@
   &::before {
     content: '';
     height: 40%;
-    background: black;
+    background: $black;
     transform: rotate(-22deg);
     border-color: white;
   }
@@ -43,7 +43,7 @@
     height: 50%;
     background: white;
     transform: rotate(-12deg);
-    border-color: black;
+    border-color: $black;
   }
 
   .intro-container {
@@ -55,14 +55,18 @@
     line-height: 1;
     font-weight: 900;
     text-transform: uppercase;
-    text-shadow: 0 10px 0 black;
+    text-shadow: 0 10px 0 $black;
     transition: all 0.25s ease;
     cursor: pointer;
 
     &:hover {
-      text-shadow: 0 0 0 black;
+      text-shadow: 0 0 0 $black;
       transform: translateY(5px);
     }
+  }
+
+  p {
+    color: white;
   }
 
   .intro-subheader {

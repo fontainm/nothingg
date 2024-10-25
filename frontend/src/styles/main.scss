@@ -74,10 +74,20 @@ h2 {
   line-height: 1;
 }
 
+h3 {
+  color: $black;
+}
+
+p,
+input,
+li {
+  color: $black;
+}
+
 .link,
 a {
   text-decoration: none;
-  color: inherit;
+  color: $black;
   cursor: pointer;
   transition: all 0.25s ease;
 
@@ -179,7 +189,7 @@ button {
   transition: all 0.25s ease;
   background: $primary-gradient;
   color: white;
-  box-shadow: 0 5px 0 black;
+  box-shadow: 0 5px 0 $black;
 
   &.btn-negative {
     background: white;
@@ -200,7 +210,7 @@ button {
   }
 
   &:hover {
-    box-shadow: 0 0 0 black;
+    box-shadow: 0 0 0 $black;
     transform: translateY(5px);
   }
 }

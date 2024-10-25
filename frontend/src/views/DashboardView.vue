@@ -129,6 +129,7 @@ export default {
     flex-direction: column;
     padding: 16px;
     margin-bottom: 16px;
+    color: $black;
 
     h3 {
       color: $primary-color;

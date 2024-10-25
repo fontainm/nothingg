@@ -70,6 +70,11 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
     h3 {
       text-transform: uppercase;
       letter-spacing: 3px;
+      color: white;
+    }
+
+    p {
+      color: white;
     }
 
     &:first-child {

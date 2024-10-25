@@ -73,7 +73,7 @@
     cursor: pointer;
     font-weight: 600;
     padding: 10px 0;
-    color: black;
+    color: $black;
   }
 
   .faq-answer {

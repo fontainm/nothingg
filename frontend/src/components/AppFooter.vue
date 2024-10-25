@@ -37,9 +37,10 @@ footer {
     a {
       padding: 0 8px;
       position: relative;
+      color: white;
 
       &:hover {
-        color: black;
+        color: $black;
       }
 
       &:not(:last-child)::after {
@@ -60,7 +61,7 @@ footer {
       transition: all 0.25s ease;
 
       &:hover {
-        color: black;
+        color: $black;
       }
     }
   }

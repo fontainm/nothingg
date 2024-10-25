@@ -6,7 +6,6 @@ Sign up for nothing
 
 - Frontend
 
-  - Update color black
   - Mobile notifications bottom
 
 - Content

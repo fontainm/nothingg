@@ -64,6 +64,7 @@ export default {
 
 .users {
   .users-total {
+    color: $black;
     font-size: 32px;
     margin-bottom: 32px;
 
