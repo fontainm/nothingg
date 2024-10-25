@@ -62,6 +62,7 @@ export const useUsersStore = defineStore('user', {
     async fetchUser() {
       const token = localStorage.getItem('nothing_token')
       if (!token) return
+      if (token === 'demotoken') return this.setDemoUser()
       this.setToken(token)
       const response = await usersService.getMe()
       this.setUser(response)
@@ -72,6 +73,19 @@ export const useUsersStore = defineStore('user', {
       this.isLoggedIn = false
       this.token = null
       localStorage.removeItem('nothing_token')
+    },
+
+    setDemoUser() {
+      const demoUser = {
+        id: 0,
+        username: 'demo',
+        email: 'demo',
+        created_at: new Date(),
+        product_id: 1,
+        isDemoUser: true
+      }
+      this.setUser(demoUser)
+      this.setToken('demotoken')
     },
 
     setUser(user) {

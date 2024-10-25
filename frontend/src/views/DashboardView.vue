@@ -8,7 +8,7 @@ import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
 </script>
 
 <template>
-  <section v-if="user" class="dashboard">
+  <section v-if="user" class="dashboard" :class="{ 'dashboard-disabled': user.isDemoUser }">
     <h2>Welcome to nothing!</h2>
     <div class="dashboard-wrapper">
       <div class="dashboard-info">
@@ -57,7 +57,10 @@ import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
         <button class="btn btn-small btn-danger" @click="showDeleteUserModal = true">
           Delete account
         </button>
-        <button class="btn btn-small" @click="handleLogout">Logout</button>
+        <button v-if="user.isDemoUser" class="btn btn-small btn-demo" @click="handleLogout">
+          Exit Demo
+        </button>
+        <button v-else class="btn btn-small" @click="handleLogout">Logout</button>
       </div>
     </div>
   </section>
@@ -157,6 +160,21 @@ export default {
   .dashboard-buttons {
     display: flex;
     justify-content: space-between;
+  }
+
+  &.dashboard-disabled {
+    button:not(.btn-demo),
+    .link {
+      pointer-events: none;
+    }
+
+    .link {
+      color: $light-gray;
+    }
+
+    button {
+      background-color: $light-gray;
+    }
   }
 }
 

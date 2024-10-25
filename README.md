@@ -6,6 +6,9 @@ Sign up for nothing
 
 - Frontend
 
+  - Route change fade
+  - Update color black
+
 - Content
 
   - Privacy Policy
