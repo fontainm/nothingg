@@ -14,6 +14,7 @@ Sign up for nothing
 
 - Backend
 
+  - Delete confirm with password
   - Confirm email
 
 - Testing
