@@ -8,7 +8,9 @@ import IconCloseCircle from '~icons/mdi/close-circle'
     <div v-if="infoMessage !== null" class="info-message" :class="infoMessage.type">
       <IconCheckCircle v-if="infoMessage.type === 'success'" />
       <IconCloseCircle v-if="infoMessage.type === 'error'" />
-      {{ infoMessage.message }}
+      <p>
+        {{ infoMessage.message }}
+      </p>
     </div>
   </Transition>
 </template>
@@ -39,12 +41,17 @@ export default {
   color: $white;
   line-height: 1;
   transition: all 0.25s ease;
+  justify-content: space-between;
+  min-width: 275px;
 
   svg {
+    width: auto;
     margin-right: 8px;
-    width: 16px;
-    height: 16px;
-    font-size: 16px;
+  }
+
+  p {
+    color: $white;
+    width: 90%;
   }
 
   &.success {
@@ -53,6 +60,17 @@ export default {
 
   &.error {
     background: $error-color;
+  }
+}
+
+@media screen and (max-width: $desktop) {
+  .info-message {
+    top: unset;
+    bottom: 80px;
+
+    p {
+      font-size: 18px;
+    }
   }
 }
 </style>

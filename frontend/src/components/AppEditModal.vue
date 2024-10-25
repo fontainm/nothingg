@@ -102,6 +102,7 @@ export default {
   }
 
   .modal-buttons {
+    margin: 4px 0;
     display: flex;
     justify-content: space-between;
   }

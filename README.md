@@ -6,8 +6,6 @@ Sign up for nothing
 
 - Frontend
 
-  - Mobile notifications bottom
-
 - Content
 
   - Privacy Policy
