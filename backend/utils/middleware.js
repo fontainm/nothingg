@@ -60,13 +60,6 @@ const protectDeleteRoute = (req, res, next) => {
     )
   }
 
-  // Additional authorization logic can be added here
-  // For example, check for a specific API key or token
-  // const apiKey = req.headers['x-api-key']
-  // if (apiKey !== process.env.TEST_API_KEY) {
-  //   return res.status(403).send('Forbidden: Invalid API Key')
-  // }
-
   next()
 }
 

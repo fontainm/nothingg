@@ -143,9 +143,28 @@ usersRouter.put(
   }
 )
 
-usersRouter.delete('/:id', async (req, res, next) => {
+usersRouter.delete('/me', async (req, res, next) => {
   try {
-    jwt.verify(getTokenFrom(req), process.env.SECRET)
+    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+    const user = await getUserById(decodedToken.id)
+
+    const passwordCorrect = !user
+      ? false
+      : await bcrypt.compare(req.body.password, user.password)
+
+    if (!(user && passwordCorrect)) {
+      return res.error(null, 'Password is not correct', 401)
+    }
+
+    await deleteUser(user.id)
+    res.success(null, 'User deleted successfully')
+  } catch (error) {
+    next(error)
+  }
+})
+
+usersRouter.delete('/:id', protectDeleteRoute, async (req, res, next) => {
+  try {
     await deleteUser(req.params.id)
     res.success(null, 'User deleted successfully')
   } catch (error) {
@@ -154,8 +173,12 @@ usersRouter.delete('/:id', async (req, res, next) => {
 })
 
 usersRouter.delete('/', protectDeleteRoute, async (req, res) => {
-  await deleteUsers()
-  res.success(null, 'Users deleted successfully')
+  try {
+    await deleteUsers()
+    res.success(null, 'Users deleted successfully')
+  } catch (error) {
+    next(error)
+  }
 })
 
 export default usersRouter

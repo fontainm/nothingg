@@ -55,12 +55,13 @@ const updatePassword = async ({ oldPassword, newPassword }) => {
   return response.data
 }
 
-const deleteUser = async (userId) => {
+const deleteUser = async ({ password }) => {
   const config = {
-    headers: { Authorization: useUsersStore().token }
+    headers: { Authorization: useUsersStore().token },
+    data: { password }
   }
 
-  const response = await api.delete(`${baseUrl}/${userId}`, config)
+  const response = await api.delete(`${baseUrl}/me`, config)
   return response.data
 }
 

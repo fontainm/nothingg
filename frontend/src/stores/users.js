@@ -55,8 +55,8 @@ export const useUsersStore = defineStore('user', {
       })
     },
 
-    async deleteUser() {
-      await usersService.deleteUser(this.user.id)
+    async deleteUser(password) {
+      await usersService.deleteUser({ password })
     },
 
     async fetchUser() {

@@ -13,6 +13,7 @@ import AppEditModal from '@/components/AppEditModal.vue'
     <p class="delete-info">
       Are you sure you want to permanently delete your user? This cannot be undone!
     </p>
+    <input v-model="password" type="password" placeholder="Password" required />
   </AppEditModal>
 </template>
 
@@ -27,7 +28,8 @@ export default {
 
   data() {
     return {
-      loading: false
+      loading: false,
+      password: ''
     }
   },
 
@@ -42,7 +44,7 @@ export default {
       this.loading = true
 
       try {
-        await this.$usersStore.deleteUser()
+        await this.$usersStore.deleteUser(this.password)
         this.$usersStore.logoutUser()
         this.$router.push('/')
         this.$emit('close')
