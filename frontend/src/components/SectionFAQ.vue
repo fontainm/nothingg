@@ -7,22 +7,22 @@
       <div class="faq-container">
         <div class="faq-item">
           <input type="radio" name="accordion" id="faq1" />
-          <label for="faq1" class="faq-question">What can I do on "Nothing"?</label>
+          <label for="faq1" class="faq-question">What can I do on {{ $appStore.appTitle }}?</label>
           <div class="faq-answer">
             <p>
-              On "Nothing," you can sign up, log in, log out, and update your email or password.
-              That's it - embrace the simplicity!
+              On {{ $appStore.appTitle }} you can sign up, log in, log out, and update your email or
+              password. That's it - embrace the simplicity!
             </p>
           </div>
         </div>
 
         <div class="faq-item">
           <input type="radio" name="accordion" id="faq2" />
-          <label for="faq2" class="faq-question">Is "Nothing" really free?</label>
+          <label for="faq2" class="faq-question">Is {{ $appStore.appTitle }} really free?</label>
           <div class="faq-answer">
             <p>
-              Yes, "Nothing" is completely free. There are no hidden fees or premium plans. Doing
-              nothing costs nothing!
+              Yes, {{ $appStore.appTitle }} is completely free. There are no hidden fees or premium
+              plans. Doing nothing costs nothing!
             </p>
           </div>
         </div>

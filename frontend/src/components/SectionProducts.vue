@@ -9,12 +9,13 @@ import IconCheck from '~icons/mdi/check'
       <div class="products-list">
         <div class="products-list__item">
           <div class="products-list__wrapper">
-            <h3>NOTHING</h3>
+            <h3>{{ $appStore.appTitle }}</h3>
             <p class="products-list__price">Free forever</p>
             <p class="products-list__info">
-              Get access to the full NOTHING experience. Sign up, log in, log out, and update your
-              profile details. Enjoy the pure simplicity of doing absolutely nothing! No ads, no
-              distractions - just you, your account, and a peaceful digital void.
+              Get access to the full {{ $appStore.appTitle }} experience. Sign up, log in, log out,
+              and update your profile details. Enjoy the pure simplicity of doing absolutely
+              nothing! No ads, no distractions - just you, your account, and a peaceful digital
+              void.
             </p>
             <ul class="products-list__features">
               <li>
@@ -30,18 +31,21 @@ import IconCheck from '~icons/mdi/check'
                 <p>100% free, forever.</p>
               </li>
             </ul>
-            <RouterLink to="/signup" class="products-list__cta btn"> Start NOTHING </RouterLink>
+            <RouterLink to="/signup" class="products-list__cta btn">
+              Start {{ $appStore.appTitle }}
+            </RouterLink>
           </div>
         </div>
 
         <div class="products-list__item">
           <div class="products-list__wrapper">
-            <h3>NOTHING+</h3>
+            <h3>{{ $appStore.appTitle }}+</h3>
             <p class="products-list__price">€ 1,- per month</p>
             <p class="products-list__info">
-              NOTHING+ doesn't do more, but it means more. By choosing NOTHING+, you're not just
-              signing up - you're supporting a solo developer who built this project from scratch.
-              Enjoy the same minimalism as the free tier, plus a warm sense of contribution.
+              {{ $appStore.appTitle }}+ doesn't do more, but it means more. By choosing
+              {{ $appStore.appTitle }}+, you're not just signing up - you're supporting a solo
+              developer who built this project from scratch. Enjoy the same minimalism as the free
+              tier, plus a warm sense of contribution.
             </p>
             <ul class="products-list__features">
               <li>
@@ -57,7 +61,9 @@ import IconCheck from '~icons/mdi/check'
                 <p>The satisfaction of supporting a one-person project.</p>
               </li>
             </ul>
-            <RouterLink to="/signup" class="products-list__cta btn"> Start NOTHING+ </RouterLink>
+            <RouterLink to="/signup" class="products-list__cta btn">
+              Start {{ $appStore.appTitle }}+
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -80,6 +86,7 @@ import IconCheck from '~icons/mdi/check'
       h3 {
         font-size: 32px;
         font-weight: 900;
+        text-transform: uppercase;
       }
 
       .products-list__wrapper {

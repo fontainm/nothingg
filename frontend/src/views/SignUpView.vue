@@ -4,7 +4,7 @@ import AppSignUp from '../components/AppSignUp.vue'
 
 <template>
   <section class="signup">
-    <h2>Sign Up for nothing</h2>
+    <h2>Sign Up for {{ $appStore.appTitle }}</h2>
     <AppSignUp />
   </section>
 </template>

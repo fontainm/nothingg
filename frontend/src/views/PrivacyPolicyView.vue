@@ -8,12 +8,12 @@
       <h3>Introduction</h3>
       <p>
         We respect your privacy and are committed to protecting your personal information. This
-        privacy policy explains how 'Nothing' collects, uses, and safeguards your data when you use
-        our website and services.
+        privacy policy explains how {{ $appStore.appTitle }} collects, uses, and safeguards your
+        data when you use our website and services.
       </p>
 
       <h3>Information We Collect</h3>
-      <p>We collect the following information when you use 'Nothing':</p>
+      <p>We collect the following information when you use {{ $appStore.appTitle }}:</p>
       <ul>
         <li><strong>Email Address:</strong> Required for signing up and logging in.</li>
         <li>
@@ -98,7 +98,7 @@
         If you have any questions about this privacy policy or our data practices, please contact us
         at:
       </p>
-      <p><strong>Email:</strong> support@nothing.com</p>
+      <p><strong>Email:</strong> support@{{ $appStore.appDomain }}</p>
     </div>
   </section>
 </template>

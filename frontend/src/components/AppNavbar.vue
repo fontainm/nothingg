@@ -5,7 +5,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
 <template>
   <div class="navbar">
     <nav class="container">
-      <RouterLink to="/" class="app-title navbar-title">Nothing</RouterLink>
+      <RouterLink to="/" class="app-title navbar-title">{{ $appStore.appTitle }}</RouterLink>
       <div class="navbar-items" :class="{ open: $appStore.menuIsOpen }">
         <RouterLink to="/#howto">How it works</RouterLink>
         <RouterLink to="/#features">Features</RouterLink>

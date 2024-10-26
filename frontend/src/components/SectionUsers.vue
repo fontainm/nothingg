@@ -18,7 +18,7 @@ import IconCommentQuote from '~icons/mdi/comment-quote'
           <div class="users-quote__icon">
             <IconCommentQuote />
           </div>
-          <p>"Nothing is the perfect escape from my busy life!"</p>
+          <p>"{{ $appStore.appTitle }} is the perfect escape from my busy life!"</p>
         </div>
         <div class="users-quote">
           <div class="users-quote__icon">

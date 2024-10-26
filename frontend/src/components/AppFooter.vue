@@ -6,7 +6,7 @@ import IconEmail from '~icons/mdi/email-outline'
 
 <template>
   <footer>
-    <h2>Nothing</h2>
+    <h2>{{ $appStore.appTitle }}</h2>
     <div class="footer-links">
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/privacy-policy">Privacy Policy</RouterLink>

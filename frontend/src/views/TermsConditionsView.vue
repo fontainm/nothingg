@@ -7,22 +7,22 @@
 
       <h3>1. Introduction</h3>
       <p>
-        Welcome to 'Nothing.' By using our website and services, you agree to comply with and be
-        bound by these Terms and Conditions. If you do not agree with any part of these terms, you
-        should not use our service.
+        Welcome to {{ $appStore.appTitle }}. By using our website and services, you agree to comply
+        with and be bound by these Terms and Conditions. If you do not agree with any part of these
+        terms, you should not use our service.
       </p>
 
       <h3>2. Eligibility</h3>
       <p>
-        You must be at least 13 years old to use this service. By using 'Nothing,' you warrant that
-        you meet this requirement.
+        You must be at least 13 years old to use this service. By using {{ $appStore.appTitle }},
+        you warrant that you meet this requirement.
       </p>
 
       <h3>3. Use of the Service</h3>
       <p>
-        You agree to use 'Nothing' for lawful purposes only. You must not engage in any harmful,
-        fraudulent, or illegal activities when using our service. Any misuse of the service can
-        result in account suspension or termination.
+        You agree to use {{ $appStore.appTitle }} for lawful purposes only. You must not engage in
+        any harmful, fraudulent, or illegal activities when using our service. Any misuse of the
+        service can result in account suspension or termination.
       </p>
 
       <h3>4. Account Management</h3>
@@ -34,9 +34,9 @@
 
       <h3>5. Intellectual Property</h3>
       <p>
-        The logo, branding, and content of 'Nothing' are the exclusive property of the service and
-        are protected by intellectual property laws. You are prohibited from using these without
-        permission.
+        The logo, branding, and content of {{ $appStore.appTitle }} are the exclusive property of
+        the service and are protected by intellectual property laws. You are prohibited from using
+        these without permission.
       </p>
 
       <h3>6. Modifications to the Service</h3>
@@ -48,15 +48,16 @@
 
       <h3>7. Limitation of Liability</h3>
       <p>
-        'Nothing' provides services on an "as is" and "as available" basis. We do not guarantee
-        uninterrupted service or that the service will be free of errors or harmful components. We
-        are not liable for any damages resulting from the use of the service.
+        {{ $appStore.appTitle }} provides services on an "as is" and "as available" basis. We do not
+        guarantee uninterrupted service or that the service will be free of errors or harmful
+        components. We are not liable for any damages resulting from the use of the service.
       </p>
 
       <h3>8. Termination</h3>
       <p>
-        Both you and 'Nothing' have the right to terminate your account at any time. Upon
-        termination, you will no longer have access to your account, and your data will be deleted.
+        Both you and {{ $appStore.appTitle }} have the right to terminate your account at any time.
+        Upon termination, you will no longer have access to your account, and your data will be
+        deleted.
       </p>
 
       <h3>9. Governing Law</h3>

@@ -4,7 +4,7 @@ import AppLogin from '../components/AppLogin.vue'
 
 <template>
   <section class="login">
-    <h2>Login for nothing</h2>
+    <h2>Login for {{ $appStore.appTitle }}</h2>
     <AppLogin />
   </section>
 </template>

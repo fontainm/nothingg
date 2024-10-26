@@ -31,7 +31,7 @@ import IconEmoticon from '~icons/mdi/emoticon-excited-outline'
             <div class="howto-step__icon">
               <IconEmoticon />
             </div>
-            <h3>Enjoy Nothing</h3>
+            <h3>Enjoy {{ $appStore.appTitle }}</h3>
             <p>Experience the tranquility of doing absolutely nothing.</p>
           </div>
         </div>

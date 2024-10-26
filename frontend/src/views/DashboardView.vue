@@ -9,7 +9,7 @@ import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
 
 <template>
   <section v-if="user" class="dashboard" :class="{ 'dashboard-disabled': user.isDemoUser }">
-    <h2>Welcome to nothing!</h2>
+    <h2>Welcome to {{ $appStore.appTitle }}!</h2>
     <div class="dashboard-wrapper">
       <div class="dashboard-info">
         <h3>Personal info</h3>

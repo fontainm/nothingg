@@ -24,7 +24,7 @@ import IconMail from '~icons/mdi/email'
       <div v-else-if="step === 1" class="signup-confirm">
         <IconMail class="icon-lg" />
         <h3>Check your mail</h3>
-        <p>I sent you an activation link. Use it to start enjoying Nothing!</p>
+        <p>I sent you an activation link. Use it to start enjoying {{ $appStore.appTitle }}!</p>
         <p>Didn't receive anything? <span class="link">Send the mail again</span></p>
       </div>
     </div>

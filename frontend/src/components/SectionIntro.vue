@@ -1,7 +1,7 @@
 <template>
   <section class="intro" id="home">
     <div class="container intro-container">
-      <h1>Nothing</h1>
+      <h1>{{ $appStore.appTitle }}</h1>
       <p class="intro-subheader">A place where simplicity meets tranquility</p>
       <RouterLink to="/signup" class="btn btn-negative">Get started for free</RouterLink>
     </div>
@@ -51,7 +51,7 @@
   }
 
   h1 {
-    font-size: 240px;
+    font-size: 180px;
     line-height: 1;
     font-weight: 900;
     text-transform: uppercase;
