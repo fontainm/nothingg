@@ -79,6 +79,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
       .navbar-items {
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
         align-items: center;
         position: absolute;
         background: $white;

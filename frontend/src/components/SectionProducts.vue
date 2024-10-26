@@ -142,14 +142,15 @@ import IconCheck from '~icons/mdi/check'
 }
 
 @media screen and (max-width: $tablet) {
-}
-
-@media screen and (max-width: $tablet) {
   .products {
     .products-list {
       .products-list__item {
         width: 100%;
         margin: 0 0 16px 0;
+
+        .products-list__wrapper {
+          margin: 16px 0;
+        }
       }
     }
   }

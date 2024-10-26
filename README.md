@@ -20,6 +20,7 @@ Sign up for nothing
 
   - Confirm email
   - Login with email
+  - Rename "nothingg"
   - Products table update (title, description)
 
 - Testing

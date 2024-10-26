@@ -95,7 +95,8 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
   .features {
     .features-item {
       width: 100%;
-      transform: unset !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
     }
   }
 }
