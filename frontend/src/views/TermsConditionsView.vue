@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <section class="terms">
     <h2>Terms & Conditions</h2>
@@ -76,7 +78,7 @@
 
       <h3>11. Contact Information</h3>
       <p>If you have any questions about these Terms and Conditions, please contact us at:</p>
-      <p><strong>Email:</strong> support@nothing.com</p>
+      <p><strong>Email:</strong> support@{{ $appStore.appDomain }}</p>
     </div>
   </section>
 </template>

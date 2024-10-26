@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <section class="about">
     <h2>About {{ $appStore.appTitle }}</h2>
