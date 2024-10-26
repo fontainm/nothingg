@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <section class="intro" id="home">
     <div class="container intro-container">

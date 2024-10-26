@@ -3,8 +3,8 @@ import productsService from '../services/products'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    appTitle: 'Nothinggg',
-    appDomain: 'nothinggg.space',
+    appTitle: 'Nothingg',
+    appDomain: 'nothingg.space',
     menuIsOpen: false,
     infoMessage: null,
     timeout: null,

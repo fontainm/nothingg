@@ -6,15 +6,21 @@ Sign up for nothing
 
 - Frontend
 
+  - Products from DB
+  - Login with email
+
 - Content
 
   - Privacy Policy
   - About Page
   - Terms
+  - Social Links
 
 - Backend
 
   - Confirm email
+  - Login with email
+  - Products table update (title, description)
 
 - Testing
 

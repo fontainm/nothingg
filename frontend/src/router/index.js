@@ -20,13 +20,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        title: 'A Place Where Simplicity Meets Tranquility'
+      }
     },
     {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue'),
       meta: {
+        title: 'Login',
         requiresGuest: true
       }
     },
@@ -35,6 +39,7 @@ const router = createRouter({
       name: 'signup',
       component: () => import('../views/SignUpView.vue'),
       meta: {
+        title: 'Sign Up',
         requiresGuest: true
       }
     },
@@ -48,29 +53,40 @@ const router = createRouter({
       name: 'forgot-password',
       component: () => import('../views/ForgotPasswordView.vue'),
       meta: {
+        title: 'Forgot Password',
         requiresGuest: true
       }
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
+      meta: {
+        title: 'About'
+      }
     },
     {
       path: '/privacy-policy',
       name: 'privacy-policy',
-      component: () => import('../views/PrivacyPolicyView.vue')
+      component: () => import('../views/PrivacyPolicyView.vue'),
+      meta: {
+        title: 'Privacy Policy'
+      }
     },
     {
       path: '/terms-and-conditions',
       name: 'terms-and-conditions',
-      component: () => import('../views/TermsConditionsView.vue')
+      component: () => import('../views/TermsConditionsView.vue'),
+      meta: {
+        title: 'Terms & Conditions'
+      }
     },
     {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),
       meta: {
+        title: 'Dashboard',
         requiresAuth: true
       }
     }
@@ -78,8 +94,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const hasToken = useUsersStore().token
+  const { title } = to.meta
+  const defaultTitle = useAppStore().appTitle
+  document.title = title ? `${defaultTitle} - ${title}` : defaultTitle
 
+  const hasToken = useUsersStore().token
   if (to.meta.requiresAuth && !hasToken) {
     next({ name: 'login' })
   } else if (to.meta.requiresGuest && hasToken) {

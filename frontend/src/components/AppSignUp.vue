@@ -1,6 +1,5 @@
 <script setup>
 import SubmitButton from '@/components/SubmitButton.vue'
-
 import IconMail from '~icons/mdi/email'
 </script>
 
