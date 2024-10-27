@@ -10,13 +10,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: 'cd backend'
       - name: Install dependencies
         run: npm install
+        working-directory: backend
       - name: Check style
         run: npm run lint
+        working-directory: backend
       - name: Test app
         run: npm run test
+        working-directory: backend
 
   deploy:
     needs: [test]
@@ -26,10 +28,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: 'cd backend'
       - name: Install dependencies
         run: npm install
+        working-directory: backend
       - name: Check style
         run: npm run lint
+        working-directory: backend
       - name: Build app
         run: npm run build
+        working-directory: backend
