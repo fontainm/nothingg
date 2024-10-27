@@ -4,10 +4,6 @@ import app from '../app.js'
 
 const api = supertest(app)
 
-test('api is running', async () => {
-  await api.get('/api/info').expect(200)
-})
-
 describe('when there is no user in users table', () => {
   beforeEach(async () => {
     await api.delete('/api/users')

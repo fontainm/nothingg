@@ -13,7 +13,7 @@ app.use(express.static('dist'))
 
 app.use(responseHandler)
 
-app.get('/api/info', async (req, res) => {
+app.get('/api/health', async (req, res) => {
   res.success()
 })
 
