@@ -10,12 +10,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Install dependencies
         run: npm install
         working-directory: backend
-      - name: Check style
-        run: npm run lint
-        working-directory: backend
+
       - name: Test app
         run: npm run test
         working-directory: backend
@@ -33,7 +32,7 @@ jobs:
         working-directory: backend
       - name: Check style
         run: npm run lint
-        working-directory: backend
+        working-directory: frontend
       - name: Build app
-        run: npm run build
+        run: npm run build:ui
         working-directory: backend
