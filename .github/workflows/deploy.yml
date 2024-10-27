@@ -1,28 +1,33 @@
-name: Deploy App
+name: Deployment pipeline
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
-  build-and-deploy:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      # Check out the code
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # Set up Node.js and install dependencies
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20' # Use the version you're working with
-
+          node-version: '20'
       - name: Install dependencies
         run: npm install
+      - name: Check style
+        run: npm run lint
+      - name: Test app
+        run: npm run test
 
-      # Run tests
-      - name: Run tests
-        run: npm test
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Check style
+        run: npm run lint
+      - name: Build app
+        run: npm run build
