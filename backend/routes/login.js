@@ -1,11 +1,15 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { getUserByUsername } from '../controllers/users.js'
+import { getUserByUsername, getUserByEmail } from '../controllers/users.js'
 import { validationHandler } from '../utils/middleware.js'
 import { userLoginRules } from '../validators/userValidator.js'
 
 const loginRouter = express.Router()
+
+const isEmailAddress = (string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(string)
+}
 
 loginRouter.post(
   '/',
@@ -14,7 +18,10 @@ loginRouter.post(
   async (req, res, next) => {
     try {
       const { username, password } = req.body
-      const user = await getUserByUsername(username)
+
+      const user = isEmailAddress(username)
+        ? await getUserByEmail(username)
+        : await getUserByUsername(username)
 
       const passwordCorrect = !user
         ? false

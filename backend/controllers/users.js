@@ -28,6 +28,13 @@ export async function getUserByUsername(username) {
   return rows[0]
 }
 
+export async function getUserByEmail(email) {
+  const { rows } = await db.query(`SELECT * FROM users WHERE email = $1`, [
+    email,
+  ])
+  return rows[0]
+}
+
 export async function createUser(username, email, password) {
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)
