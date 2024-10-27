@@ -41,7 +41,7 @@ const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 
   if (error.code == '23505') {
-    return res.error(error, 'Username already taken', 400)
+    return res.error(error, 'Username or email already taken', 400)
   } else if (error.name === 'JsonWebTokenError') {
     return res.error(error, 'Invalid token', 401)
   } else if (error.name === 'TokenExpiredError') {
