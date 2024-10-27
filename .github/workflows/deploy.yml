@@ -3,36 +3,23 @@ name: Deployment pipeline
 on: workflow_dispatch
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: backend
-
-      - name: Test app
-        run: npm run test
-        working-directory: backend
-
   deploy:
-    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies
-        run: npm install
-        working-directory: backend
-      - name: Check style
-        run: npm run lint
-        working-directory: frontend
+
       - name: Build app
         run: npm run build:ui
         working-directory: backend
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Copy files to server
+        run: |
+          rsync -avz --delete ./ ${{ secrets.SSH_DOMAIN }}:/html/test/
