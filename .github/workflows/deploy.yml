@@ -11,10 +11,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build app
-        run: npm run build:ui
-        working-directory: backend
-
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -22,4 +18,4 @@ jobs:
 
       - name: Copy files to server
         run: |
-          rsync -avz --delete ./ ${{ secrets.SSH_DOMAIN }}:/html/test/
+          rsync -avz --delete ./ ${{ secrets.SSH_DOMAIN }}:/html/testingdeploy/
