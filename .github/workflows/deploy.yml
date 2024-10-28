@@ -19,5 +19,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             echo "SSH connection successful!"
-            rsync -avc --delete /backend $SSH_USER@$SSH_HOST:/html
+            rsync -avc --delete /backend ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/html
             npm install
