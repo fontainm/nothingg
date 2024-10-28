@@ -11,13 +11,22 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend 
+          npm install
+          npm run build:ui
+
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.1.0
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: |
-            echo "SSH connection successful!"
-            rsync -avc --delete /backend ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/html
-            npm install
+          source: 'backend/**' # Adjust the source to copy the entire backend folder
+          target: '/html'
