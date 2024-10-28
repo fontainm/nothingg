@@ -11,31 +11,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Setup SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-
-      - name: Test SSH Connection
-        env:
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-        run: |
-          # Test SSH connection
-          ssh -i ~/.ssh/id_rsa $SSH_USER@$SSH_HOST "echo 'SSH connection successful!'"
-
       - name: Deploy via SSH
-        env:
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-        run: |
-          ssh -i ~/.ssh/id_rsa $SSH_USER@$SSH_HOST << 'EOF'
-            cd /html/testingssh
-            git pull origin main
-            # Add any additional deployment steps here, e.g., npm install, restart services, etc.
-          EOF
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "SSH connection successful!"
+            # Add any additional deployment commands, e.g., npm install, restarting services, etc.
