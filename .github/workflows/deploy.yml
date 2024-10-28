@@ -19,7 +19,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             echo "SSH connection successful!"
-            cd /html
-            git pull origin main
-            echo "Pulled main branch"
-            # Add any additional deployment commands, e.g., npm install, restarting services, etc.
+            rsync -avc --delete /backend $SSH_USER@$SSH_HOST:/html
+            npm install
