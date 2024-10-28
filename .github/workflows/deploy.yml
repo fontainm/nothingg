@@ -11,11 +11,30 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
-
-      - name: Copy files to server
+      - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
         run: |
-          rsync -avz --delete ./ ${{ secrets.SSH_DOMAIN }}:/html/testingdeploy/
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          # Test SSH connection
+          ssh -i ~/.ssh/id_rsa $SSH_USER@$SSH_HOST "echo 'SSH connection successful!'"
+
+      - name: Deploy via SSH
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          ssh -i ~/.ssh/id_rsa $SSH_USER@$SSH_HOST << 'EOF'
+            cd /html/testingssh
+            git pull origin main
+            # Add any additional deployment steps here, e.g., npm install, restart services, etc.
+          EOF
