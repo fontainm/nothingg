@@ -28,5 +28,5 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: 'backend/**' # Adjust the source to copy the entire backend folder
+          source: 'backend/**'
           target: 'html'
