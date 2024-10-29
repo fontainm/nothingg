@@ -22,13 +22,21 @@ jobs:
           npm install --omit=dev
           npm run build:ui
 
-      - name: Deploy Backend Contents and Set Up on Server
+      - name: Deploy via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: 'backend/*'
+          target: 'html'
+
+      - name: Restart app
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            whoami
             echo "it worked!"
-            ls -al
+            supervisorctl status
