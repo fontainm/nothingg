@@ -28,8 +28,9 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: 'backend'
+          source: 'backend/'
           target: 'html/'
+          strip_components: 1
 
       - name: Restart app
         uses: appleboy/ssh-action@v1.1.0
