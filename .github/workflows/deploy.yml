@@ -28,6 +28,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: |
-            rsync -av --delete backend/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/html/
-            supervisorctl status
+          script: whoami
