@@ -99,8 +99,8 @@
       <p>
         If you have any questions about this privacy policy or our data practices, please contact us
         at:
+        <a :href="`mailto:${$appStore.appEmail}`">{{ $appStore.appEmail }}</a>
       </p>
-      <p><strong>Email:</strong> support@{{ $appStore.appDomain }}</p>
     </div>
   </section>
 </template>

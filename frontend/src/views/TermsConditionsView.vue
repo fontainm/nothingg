@@ -77,8 +77,10 @@
       </p>
 
       <h3>11. Contact Information</h3>
-      <p>If you have any questions about these Terms and Conditions, please contact us at:</p>
-      <p><strong>Email:</strong> support@{{ $appStore.appDomain }}</p>
+      <p>
+        If you have any questions about these Terms and Conditions, please contact us at:
+        <a :href="`mailto:${$appStore.appEmail}`">{{ $appStore.appEmail }}</a>
+      </p>
     </div>
   </section>
 </template>

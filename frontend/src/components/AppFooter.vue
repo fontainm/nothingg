@@ -15,7 +15,9 @@ import IconEmail from '~icons/mdi/email-outline'
     <div class="footer-socials">
       <IconGithub />
       <IconInstagram />
-      <IconEmail />
+      <a :href="`mailto:${$appStore.appEmail}`">
+        <IconEmail />
+      </a>
     </div>
   </footer>
 </template>
@@ -54,6 +56,10 @@ footer {
   }
 
   .footer-socials {
+    a {
+      color: $white;
+    }
+
     svg {
       cursor: pointer;
       font-size: 30px;

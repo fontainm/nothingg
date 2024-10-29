@@ -30,5 +30,4 @@ Sign up for nothing
 
 - Deploy
 
-  - Github Actions
   - Update db password
