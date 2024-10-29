@@ -14,19 +14,20 @@ jobs:
       - name: Install Frontend Dependencies
         run: |
           cd frontend
-          npm install
+          npm install --production
 
       - name: Install Backend Dependencies
         run: |
           cd backend 
-          npm install
+          npm install --production
           npm run build:ui
 
-      - name: Deploy via SSH
-        uses: appleboy/scp-action@v0.1.7
+      - name: Deploy Backend Contents and Set Up on Server
+        uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: 'backend/*'
-          target: 'html'
+          script: |
+            rsync --delete backend/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/html/
+            supervisorctl status
