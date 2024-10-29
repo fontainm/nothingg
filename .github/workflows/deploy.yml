@@ -39,6 +39,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            echo "it worked!"
-
-#            supervisorctl status
+            supervisorctl restart nothing
