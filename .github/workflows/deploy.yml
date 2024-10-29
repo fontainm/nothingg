@@ -14,12 +14,12 @@ jobs:
       - name: Install Frontend Dependencies
         run: |
           cd frontend
-          npm install --production
+          npm install --omit=dev
 
       - name: Install Backend Dependencies
         run: |
           cd backend 
-          npm install --production
+          npm install --omit=dev
           npm run build:ui
 
       - name: Deploy Backend Contents and Set Up on Server
