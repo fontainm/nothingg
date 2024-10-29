@@ -29,5 +29,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            rsync --delete backend/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/html/
+            rsync -av --delete backend/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/html/
             supervisorctl status
