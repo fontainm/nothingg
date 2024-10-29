@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: 'backend/*'
-          target: 'html'
+          target: 'html/'
 
       - name: Restart app
         uses: appleboy/ssh-action@v1.1.0
@@ -39,4 +39,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             echo "it worked!"
-            supervisorctl status
+
+#            supervisorctl status
