@@ -77,6 +77,11 @@ const router = createRouter({
       }
     },
     {
+      path: '/users/verify',
+      name: 'users-verify',
+      component: () => import('../views/VerifyUserView.vue')
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),

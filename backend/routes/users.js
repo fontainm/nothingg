@@ -9,6 +9,7 @@ import {
 } from '../validators/userValidator.js'
 import {
   getUserById,
+  getUserByToken,
   getUsers,
   getUsersCount,
   createUser,
@@ -17,9 +18,12 @@ import {
   updateUsername,
   updateEmail,
   updatePassword,
+  verifyUser,
 } from '../controllers/users.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import nodemailer from 'nodemailer'
+import { v4 as uuidv4 } from 'uuid'
 
 const getTokenFrom = (req) => {
   const authorization = req.get('authorization')
@@ -27,6 +31,27 @@ const getTokenFrom = (req) => {
     return authorization.replace('Bearer ', '')
   }
   return null
+}
+
+const transporter = nodemailer.createTransport({
+  host: 'bootes.uberspace.de',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+})
+
+const sendVerificationEmail = async (email, token) => {
+  const verificationUrl = `${process.env.DOMAIN}/users/verify?token=${token}`
+  const mailOptions = {
+    from: 'support@nothingg.space',
+    to: email,
+    subject: 'Verify Your Email',
+    html: `Please click the following link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a>`,
+  }
+  await transporter.sendMail(mailOptions)
 }
 
 const usersRouter = express.Router()
@@ -78,13 +103,49 @@ usersRouter.post(
   async (req, res, next) => {
     const { username, email, password } = req.body
     try {
-      const user = await createUser(username, email, password)
+      const emailToken = uuidv4()
+      await sendVerificationEmail(email, emailToken)
+      const user = await createUser(username, email, password, emailToken)
       res.success(user, 'User created successfully', 201)
     } catch (error) {
       next(error)
     }
   }
 )
+
+usersRouter.post('/verify', async (req, res, next) => {
+  // TODO: Add rules & validation
+  const emailToken = req.query.token
+  try {
+    const userToVerify = await getUserByToken(emailToken)
+    if (!userToVerify) res.error(null, 'User not found', 404)
+    if (userToVerify.confirmed)
+      res.error(null, 'User has already been verified', 409)
+
+    const user = await verifyUser(userToVerify.id)
+
+    const userForToken = {
+      username: user.username,
+      id: user.id,
+    }
+
+    const token = jwt.sign(userForToken, process.env.SECRET, {
+      expiresIn: 60 * 60,
+    })
+
+    delete user.password
+
+    res.success({ token, ...user }, 'User verified successfully')
+  } catch (error) {
+    next(error)
+  }
+})
+
+usersRouter.post('/resend-email', async (req, res, next) => {
+  // TODO: Add rules & validation
+  const { email, token } = req.body
+  sendVerificationEmail(email, token)
+})
 
 usersRouter.put(
   '/username',

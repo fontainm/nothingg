@@ -6,6 +6,7 @@ Sign up for nothing
 
 - Frontend
 
+  - Verification email styling
   - Products from DB
 
 - Content

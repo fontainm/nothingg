@@ -68,6 +68,16 @@ export const useUsersStore = defineStore('user', {
       this.setUser(response)
     },
 
+    async resendEmail(email) {
+      await usersService.resendEmail(email)
+    },
+
+    async verifyUser(token) {
+      const user = await usersService.verifyUser(token)
+      this.setUser(user)
+      this.setToken(user.token)
+    },
+
     logoutUser() {
       this.user = null
       this.isLoggedIn = false
