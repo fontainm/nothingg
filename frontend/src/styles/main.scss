@@ -22,6 +22,12 @@ body {
   }
 }
 
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 #loading {
   position: fixed;
   top: 0;

@@ -8,8 +8,8 @@ import SubmitButton from '@/components/SubmitButton.vue'
       <form @submit="handleLogin" class="form-small" :class="{ disabled: loading }">
         <input v-model="username" type="text" placeholder="Username or Email" />
         <input v-model="password" type="password" placeholder="Password" />
-        <RouterLink to="/forgot-password" class="login-forgot">Forgot your password?</RouterLink>
         <SubmitButton text="Login" :loading="loading" />
+        <RouterLink to="/forgot-password" class="login-forgot">Forgot your password?</RouterLink>
       </form>
     </div>
   </div>
@@ -48,8 +48,7 @@ export default {
 <style scoped lang="scss">
 .login {
   .login-forgot {
-    margin-bottom: 16px;
-    font-size: 14px;
+    margin-top: 16px;
   }
 }
 </style>

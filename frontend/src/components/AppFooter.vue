@@ -28,6 +28,7 @@ import IconEmail from '~icons/mdi/email-outline'
 footer {
   background: $primary-gradient;
   color: $white;
+  margin-top: auto;
 
   h2 {
     -webkit-text-fill-color: $white;
