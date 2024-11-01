@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Titillium Web', sans-serif;
+      }
+
+      h2,
+      p {
+        margin-bottom: 16px;
+      }
+
+      .header,
+      .footer {
+        background: linear-gradient(
+          45deg,
+          rgba(32, 159, 178, 1) 0%,
+          rgba(32, 178, 170, 1) 50%,
+          rgba(60, 200, 200) 100%
+        );
+        color: white;
+        padding: 8px;
+        text-align: center;
+      }
+      .content {
+        padding: 32px;
+        text-align: center;
+      }
+
+      .btn {
+        display: inline-block;
+        font-weight: 700;
+        padding: 16px;
+        border-radius: 10px;
+        border: 0;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        background: lightseagreen;
+        color: white;
+        box-shadow: 0 5px 0 black;
+        text-decoration: none;
+        margin-bottom: 16px;
+      }
+
+      .btn:hover {
+        box-shadow: 0 0 0 black;
+        transform: translateY(5px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>NOTHINGG</h1>
+      </div>
+      <div class="content">
+        <h2>Welcome to Nothingg!</h2>
+        <p>
+          Thank you for signing up! Please verify your email by clicking the
+          button below:
+        </p>
+        <a href="{{verificationUrl}}" class="btn">Verify Email</a>
+        <p>Or paste it into your browser manually:</p>
+        <p>{{verificationUrl}}</p>
+      </div>
+      <div class="footer">
+        <span>If you did not request this, please ignore this email.</span>
+      </div>
+    </div>
+  </body>
+</html>

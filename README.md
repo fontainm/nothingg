@@ -6,7 +6,6 @@ Sign up for nothing
 
 - Frontend
 
-  - Verification email styling
   - Products from DB
 
 - Content
@@ -18,7 +17,7 @@ Sign up for nothing
 
 - Backend
 
-  - Confirm email
+  - Resend email
   - Rename "nothingg"
   - Products table update (title, description)
 

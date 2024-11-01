@@ -24,6 +24,8 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import nodemailer from 'nodemailer'
 import { v4 as uuidv4 } from 'uuid'
+import fs from 'fs-extra'
+import path from 'path'
 
 const getTokenFrom = (req) => {
   const authorization = req.get('authorization')
@@ -31,6 +33,10 @@ const getTokenFrom = (req) => {
     return authorization.replace('Bearer ', '')
   }
   return null
+}
+
+const replacePlaceholders = (template, variables) => {
+  return template.replace(/{{(.*?)}}/g, (_, key) => variables[key.trim()] || '')
 }
 
 const transporter = nodemailer.createTransport({
@@ -43,13 +49,25 @@ const transporter = nodemailer.createTransport({
   },
 })
 
+const templatePath = path.join(
+  path.dirname(new URL(import.meta.url).pathname),
+  '..',
+  'templates',
+  'verificationEmail.html'
+)
+
 const sendVerificationEmail = async (email, token) => {
-  const verificationUrl = `${process.env.DOMAIN}/users/verify?token=${token}`
+  let template = await fs.readFile(templatePath, 'utf-8')
+
+  const htmlContent = replacePlaceholders(template, {
+    verificationUrl: `${process.env.DOMAIN}/users/verify?token=${token}`,
+  })
+
   const mailOptions = {
     from: 'support@nothingg.space',
     to: email,
     subject: 'Verify Your Email',
-    html: `Please click the following link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a>`,
+    html: htmlContent,
   }
   await transporter.sendMail(mailOptions)
 }
