@@ -104,8 +104,8 @@ usersRouter.post(
     const { username, email, password } = req.body
     try {
       const emailToken = uuidv4()
-      await sendVerificationEmail(email, emailToken)
       const user = await createUser(username, email, password, emailToken)
+      await sendVerificationEmail(email, emailToken)
       res.success(user, 'User created successfully', 201)
     } catch (error) {
       next(error)
