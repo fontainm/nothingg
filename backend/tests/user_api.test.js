@@ -3,6 +3,7 @@ import supertest from 'supertest'
 import app from '../app.js'
 
 const api = supertest(app)
+const authToken = process.env.AUTH_TOKEN
 
 describe('when there is no user in users table', () => {
   beforeEach(async () => {
@@ -18,6 +19,7 @@ describe('when there is no user in users table', () => {
 
     await api
       .post('/api/users')
+      .set('x-auth-token', authToken)
       .send(user)
       .expect(201)
       .expect('Content-Type', /application\/json/)
@@ -34,6 +36,7 @@ test('user can log in', async () => {
 
   await api
     .post('/api/login')
+    .set('x-auth-token', authToken)
     .send(user)
     .expect(200)
     .expect('Content-Type', /application\/json/)
@@ -42,6 +45,7 @@ test('user can log in', async () => {
 test('get one user', async () => {
   await api
     .get('/api/users/1')
+    .set('x-auth-token', authToken)
     .expect(200)
     .expect('Content-Type', /application\/json/)
 
@@ -51,6 +55,7 @@ test('get one user', async () => {
 test('get all users', async () => {
   await api
     .get('/api/users')
+    .set('x-auth-token', authToken)
     .expect(200)
     .expect('Content-Type', /application\/json/)
 })
@@ -58,6 +63,7 @@ test('get all users', async () => {
 test('get total number of users', async () => {
   await api
     .get('/api/users/total')
+    .set('x-auth-token', authToken)
     .expect(200)
     .expect('Content-Type', /application\/json/)
 
@@ -65,7 +71,7 @@ test('get total number of users', async () => {
 })
 
 describe('as a logged in user', () => {
-  let authToken = null
+  let userToken = null
 
   beforeEach(async () => {
     const user = {
@@ -75,13 +81,13 @@ describe('as a logged in user', () => {
 
     const response = await api.post('/api/login').send(user)
 
-    authToken = response.body.data.token
+    userToken = response.body.data.token
   })
 
   test('logged in user can update username', async () => {
     await api
       .put('/api/users/username')
-      .set('Authorization', `Bearer ${authToken}`)
+      .set('Authorization', `Bearer ${userToken}`)
       .send({ username: 'testuser' })
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -90,7 +96,7 @@ describe('as a logged in user', () => {
   test('logged in user can update email', async () => {
     await api
       .put('/api/users/email')
-      .set('Authorization', `Bearer ${authToken}`)
+      .set('Authorization', `Bearer ${userToken}`)
       .send({ email: 'newmail@newmail.newmail' })
       .expect(200)
       .expect('Content-Type', /application\/json/)
