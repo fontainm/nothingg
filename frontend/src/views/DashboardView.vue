@@ -42,7 +42,14 @@ import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
             <IconCheckCircle class="color-success" v-if="user.confirmed" />
             <IconCloseCircle class="color-danger" v-else />
           </div>
-          <div v-if="!user.confirmed" class="link">Resend</div>
+          <div
+            v-if="!user.confirmed"
+            class="link"
+            :class="{ disabled: loading }"
+            @click="handleResendEmail"
+          >
+            Resend
+          </div>
         </div>
       </div>
       <div v-if="product" class="dashboard-info">
@@ -74,6 +81,7 @@ import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
 export default {
   data() {
     return {
+      loading: false,
       showEditUsernameModal: false,
       showEditEmailModal: false,
       showEditPasswordModal: false,
@@ -95,6 +103,14 @@ export default {
     handleLogout() {
       this.$usersStore.logoutUser()
       this.$router.push('/')
+    },
+
+    async handleResendEmail() {
+      this.loading = true
+      await this.$usersStore.resendEmail({
+        email: this.user.email
+      })
+      this.loading = false
     },
 
     formatDate(date) {
