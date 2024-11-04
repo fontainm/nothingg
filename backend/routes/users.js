@@ -1,5 +1,9 @@
 import express from 'express'
-import { validationHandler, protectDeleteRoute } from '../utils/middleware.js'
+import {
+  protectRoute,
+  validationHandler,
+  protectDeleteRoute,
+} from '../utils/middleware.js'
 import {
   userIdRules,
   userSignUpRules,
@@ -76,14 +80,22 @@ const sendVerificationEmail = async (email, token) => {
 
 const usersRouter = express.Router()
 
-usersRouter.get('/', async (req, res) => {
-  const users = await getUsers()
-  res.success(users, 'Users fetched successfully')
+usersRouter.get('/', protectRoute, async (req, res, next) => {
+  try {
+    const users = await getUsers()
+    res.success(users, 'Users fetched successfully')
+  } catch (error) {
+    next(error)
+  }
 })
 
-usersRouter.get('/total', async (req, res) => {
-  const total = await getUsersCount()
-  res.success(total, 'Total users fetched successfully')
+usersRouter.get('/total', protectRoute, async (req, res, next) => {
+  try {
+    const total = await getUsersCount()
+    res.success(total, 'Total users fetched successfully')
+  } catch (error) {
+    next(error)
+  }
 })
 
 usersRouter.get('/me', async (req, res, next) => {
@@ -98,6 +110,7 @@ usersRouter.get('/me', async (req, res, next) => {
 
 usersRouter.get(
   '/:id',
+  protectRoute,
   userIdRules(),
   validationHandler,
   async (req, res, next) => {
@@ -117,6 +130,7 @@ usersRouter.get(
 
 usersRouter.post(
   '/',
+  protectRoute,
   usernameRules(),
   userSignUpRules(),
   validationHandler,
@@ -167,6 +181,7 @@ usersRouter.post(
 
 usersRouter.post(
   '/resend-email',
+  protectRoute,
   emailRules(),
   validationHandler,
   async (req, res, next) => {
@@ -270,7 +285,7 @@ usersRouter.delete('/:id', protectDeleteRoute, async (req, res, next) => {
   }
 })
 
-usersRouter.delete('/', protectDeleteRoute, async (req, res) => {
+usersRouter.delete('/', protectDeleteRoute, async (req, res, next) => {
   try {
     await deleteUsers()
     res.success(null, 'Users deleted successfully')

@@ -6,6 +6,7 @@ Sign up for nothing
 
 - Frontend
 
+  - Redirect invalid routes
   - Products from DB
   - Upgrade Product
 
@@ -18,8 +19,9 @@ Sign up for nothing
 
 - Backend
 
-  - Upgrade product
+  - Authentication for API
   - Rename "nothingg"
+  - Upgrade product
   - Products table update (title, description)
 
 - Testing

@@ -7,6 +7,8 @@ const api = axios.create({
   baseURL: '/api'
 })
 
+api.defaults.headers.common['x-auth-token'] = import.meta.env.VITE_AUTH_TOKEN
+
 api.interceptors.response.use(
   (response) => {
     const showMessage = response?.config?.headers['x-hide-message'] !== 'true'
