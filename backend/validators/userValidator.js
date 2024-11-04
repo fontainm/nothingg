@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator'
+import { body, param, query } from 'express-validator'
 
 const userIdRules = () => {
   return [param('id').isInt().withMessage('User ID must be an integer')]
@@ -23,6 +23,16 @@ const usernameRules = () => {
 const emailRules = () => {
   return [
     body('email').isEmail().withMessage('Please provide a valid email address'),
+  ]
+}
+
+const verifyTokenRules = () => {
+  return [
+    query('token')
+      .not()
+      .isEmpty()
+      .isUUID(4)
+      .withMessage('Invalid verification token format.'),
   ]
 }
 
@@ -58,5 +68,6 @@ export {
   userLoginRules,
   usernameRules,
   emailRules,
+  verifyTokenRules,
   passwordUpdateRules,
 }

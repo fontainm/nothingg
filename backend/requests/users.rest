@@ -20,6 +20,17 @@ content-type: application/json
 POST http://localhost:3001/api/users/verify?token=6d1af66b-41ec-4f3a-a981-3b7bf6c49321 HTTP/1.1
 
 ###
+POST http://localhost:3001/api/users/verify?token=e HTTP/1.1
+
+###
+POST http://localhost:3001/api/users/resend-email HTTP/1.1
+content-type: application/json
+
+{
+    "email": "aseg"
+}
+
+###
 PUT http://localhost:3001/api/users/username HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwiaWQiOiIxMTMiLCJpYXQiOjE3MjkzMjc4MDAsImV4cCI6MTcyOTMzMTQwMH0.CQfyfVuvA85iqvroC3pq7HH0OXLAmL3TpLqLhbVcAnM

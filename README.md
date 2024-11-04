@@ -7,6 +7,7 @@ Sign up for nothing
 - Frontend
 
   - Products from DB
+  - Upgrade Product
 
 - Content
 
@@ -17,7 +18,7 @@ Sign up for nothing
 
 - Backend
 
-  - Resend email
+  - Upgrade product
   - Rename "nothingg"
   - Products table update (title, description)
 

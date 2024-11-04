@@ -5,10 +5,12 @@ import {
   userSignUpRules,
   usernameRules,
   emailRules,
+  verifyTokenRules,
   passwordUpdateRules,
 } from '../validators/userValidator.js'
 import {
   getUserById,
+  getUserByEmail,
   getUserByToken,
   getUsers,
   getUsersCount,
@@ -39,24 +41,24 @@ const replacePlaceholders = (template, variables) => {
   return template.replace(/{{(.*?)}}/g, (_, key) => variables[key.trim()] || '')
 }
 
-const transporter = nodemailer.createTransport({
-  host: 'bootes.uberspace.de',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-})
-
-const templatePath = path.join(
-  path.dirname(new URL(import.meta.url).pathname),
-  '..',
-  'templates',
-  'verificationEmail.html'
-)
-
 const sendVerificationEmail = async (email, token) => {
+  const transporter = nodemailer.createTransport({
+    host: 'bootes.uberspace.de',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  })
+
+  const templatePath = path.join(
+    path.dirname(new URL(import.meta.url).pathname),
+    '..',
+    'templates',
+    'verificationEmail.html'
+  )
+
   let template = await fs.readFile(templatePath, 'utf-8')
 
   const htmlContent = replacePlaceholders(template, {
@@ -131,39 +133,56 @@ usersRouter.post(
   }
 )
 
-usersRouter.post('/verify', async (req, res, next) => {
-  // TODO: Add rules & validation
-  const emailToken = req.query.token
-  try {
-    const userToVerify = await getUserByToken(emailToken)
-    if (!userToVerify) res.error(null, 'User not found', 404)
-    if (userToVerify.confirmed)
-      res.error(null, 'User has already been verified', 409)
+usersRouter.post(
+  '/verify',
+  verifyTokenRules(),
+  validationHandler,
+  async (req, res, next) => {
+    const emailToken = req.query.token
+    try {
+      const userToVerify = await getUserByToken(emailToken)
+      if (!userToVerify) res.error(null, 'User not found', 404)
+      if (userToVerify.confirmed)
+        res.error(null, 'User has already been verified', 409)
 
-    const user = await verifyUser(userToVerify.id)
+      const user = await verifyUser(userToVerify.id)
 
-    const userForToken = {
-      username: user.username,
-      id: user.id,
+      const userForToken = {
+        username: user.username,
+        id: user.id,
+      }
+
+      const token = jwt.sign(userForToken, process.env.SECRET, {
+        expiresIn: 60 * 60,
+      })
+
+      delete user.password
+
+      res.success({ token, ...user }, 'User verified successfully')
+    } catch (error) {
+      next(error)
     }
-
-    const token = jwt.sign(userForToken, process.env.SECRET, {
-      expiresIn: 60 * 60,
-    })
-
-    delete user.password
-
-    res.success({ token, ...user }, 'User verified successfully')
-  } catch (error) {
-    next(error)
   }
-})
+)
 
-usersRouter.post('/resend-email', async (req, res, next) => {
-  // TODO: Add rules & validation
-  const { email, token } = req.body
-  sendVerificationEmail(email, token)
-})
+usersRouter.post(
+  '/resend-email',
+  emailRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const { email } = req.body
+      const user = await getUserByEmail(email)
+      if (!user) {
+        return res.error(null, 'User not found', 404)
+      }
+      await sendVerificationEmail(email, user.verify_token)
+      res.success(null, 'Mail sent successfully')
+    } catch (error) {
+      next(error)
+    }
+  }
+)
 
 usersRouter.put(
   '/username',

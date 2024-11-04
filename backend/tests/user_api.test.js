@@ -100,3 +100,5 @@ describe('as a logged in user', () => {
 // TODO: Test update password
 
 // TODO: Test email verification
+
+// TODO: Test email resend

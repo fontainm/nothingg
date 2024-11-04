@@ -26,7 +26,9 @@ import IconMail from '~icons/mdi/email'
         <p>I sent you an activation link. Use it to start enjoying {{ $appStore.appTitle }}!</p>
         <p>
           Didn't receive anything?
-          <span class="link" @click="handleResendEmail">Send the mail again</span>
+          <span class="link" :class="{ disabled: loading }" @click="handleResendEmail">
+            Send the mail again
+          </span>
         </p>
       </div>
     </div>
@@ -60,12 +62,15 @@ export default {
       } catch (error) {
         this.loading = false
       }
+      this.loading = false
     },
 
     async handleResendEmail() {
+      this.loading = true
       await this.$usersStore.resendEmail({
         email: this.email
       })
+      this.loading = false
     }
   }
 }

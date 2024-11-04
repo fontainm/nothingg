@@ -66,7 +66,7 @@ const deleteUser = async ({ password }) => {
 }
 
 const resendEmail = async (email) => {
-  const response = await api.post(`${baseUrl}/resend-email`, { email })
+  const response = await api.post(`${baseUrl}/resend-email`, email)
   return response.data
 }
 
