@@ -1,4 +1,5 @@
 <script setup>
+import SubmitButton from '@/components/SubmitButton.vue'
 import IconMail from '~icons/mdi/email'
 </script>
 
@@ -8,13 +9,13 @@ import IconMail from '~icons/mdi/email'
     <div v-if="step === 0">
       <form class="form-small" @submit="handlePasswordRecovery">
         <input v-model="email" type="email" placeholder="Email address" />
-        <button type="submit">Recover password</button>
+        <SubmitButton text="Recover password" :loading="loading" />
       </form>
     </div>
     <div v-else-if="step === 1" class="forgot-confirm">
       <IconMail class="icon-lg" />
       <h3>Check your mail</h3>
-      <p>I sent you a new password.</p>
+      <p>You should receive a link to reset your password.</p>
     </div>
   </section>
 </template>
@@ -23,16 +24,23 @@ import IconMail from '~icons/mdi/email'
 export default {
   data() {
     return {
+      loading: false,
       email: '',
       step: 0
     }
   },
 
   methods: {
-    handlePasswordRecovery(event) {
+    async handlePasswordRecovery(event) {
       event.preventDefault()
-      // TODO: Recover password
-      this.step = 1
+      this.loading = true
+      try {
+        await this.$usersStore.recoverPassword({ email: this.email })
+        this.step = 1
+      } catch (error) {
+        this.loading = false
+      }
+      this.loading = false
     }
   }
 }

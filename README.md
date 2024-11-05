@@ -9,7 +9,7 @@ Sign up for nothing
   - Upgrade & Downgrade
     - Add product, description, price in db
     - add Stripe
-  - Password recovery
+  - Send email timeouts
 
 - Tech Debt
 

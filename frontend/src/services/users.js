@@ -70,6 +70,16 @@ const loginUser = async (credentials) => {
   return response
 }
 
+const recoverPassword = async (email) => {
+  const response = await api.post(`${baseUrl}/recover-password`, email)
+  return response.data
+}
+
+const resetPassword = async (token, password) => {
+  const response = await api.post(`${baseUrl}/reset-password`, { token, password })
+  return response.data
+}
+
 const resendEmail = async (email) => {
   const response = await api.post(`${baseUrl}/resend-email`, email)
   return response.data
@@ -89,6 +99,8 @@ export default {
   updateEmail,
   updatePassword,
   deleteUser,
+  recoverPassword,
+  resetPassword,
   resendEmail,
   verifyUser,
   loginUser

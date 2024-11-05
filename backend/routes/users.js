@@ -28,6 +28,7 @@ import {
   updateEmail,
   updatePassword,
   verifyUser,
+  setPasswordResetToken,
 } from '../controllers/users.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
@@ -48,17 +49,17 @@ const replacePlaceholders = (template, variables) => {
   return template.replace(/{{(.*?)}}/g, (_, key) => variables[key.trim()] || '')
 }
 
-const sendVerificationEmail = async (email, token) => {
-  const transporter = nodemailer.createTransport({
-    host: 'bootes.uberspace.de',
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  })
+const transporter = nodemailer.createTransport({
+  host: 'bootes.uberspace.de',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+})
 
+const sendVerificationEmail = async (email, token) => {
   const templatePath = path.join(
     path.dirname(new URL(import.meta.url).pathname),
     '..',
@@ -76,6 +77,29 @@ const sendVerificationEmail = async (email, token) => {
     from: 'support@nothingg.space',
     to: email,
     subject: 'Verify Your Email',
+    html: htmlContent,
+  }
+  await transporter.sendMail(mailOptions)
+}
+
+const sendPasswordRecoveryEmail = async (email, token) => {
+  const templatePath = path.join(
+    path.dirname(new URL(import.meta.url).pathname),
+    '..',
+    'templates',
+    'passwordRecoveryEmail.html'
+  )
+
+  let template = await fs.readFile(templatePath, 'utf-8')
+
+  const htmlContent = replacePlaceholders(template, {
+    recoveryUrl: `${process.env.DOMAIN}/users/reset-password?token=${token}`,
+  })
+
+  const mailOptions = {
+    from: 'support@nothingg.space',
+    to: email,
+    subject: 'Reset your password',
     html: htmlContent,
   }
   await transporter.sendMail(mailOptions)
@@ -239,6 +263,62 @@ usersRouter.post(
     }
   }
 )
+
+usersRouter.post('/recover-password', async (req, res, next) => {
+  // TODO: Add validation
+  try {
+    const { email } = req.body
+    const user = await getUserByEmail(email)
+    if (!user) {
+      return res.error(null, 'User not found', 404)
+    }
+
+    const userForToken = {
+      username: user.username,
+      id: user.id,
+    }
+
+    const resetToken = jwt.sign(userForToken, process.env.SECRET, {
+      expiresIn: 60 * 60,
+    })
+
+    const hashedToken = await bcrypt.hash(resetToken, 10)
+    const expirationDate = new Date(Date.now() + 3600000)
+
+    await setPasswordResetToken(hashedToken, expirationDate, user.id)
+
+    await sendPasswordRecoveryEmail(email, resetToken)
+    res.success(null, 'Mail sent successfully')
+  } catch (error) {
+    next(error)
+  }
+})
+
+usersRouter.post('/reset-password', async (req, res, next) => {
+  // TODO: Add validation
+  try {
+    const { token, password } = req.body
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    const user = await getUserById(decodedToken.id)
+    if (
+      !user ||
+      !user.password_reset_token ||
+      user.password_reset_expires < new Date()
+    ) {
+      return res.error(null, 'Invalid or expired token')
+    }
+
+    const tokenCorrect = await bcrypt.compare(token, user.password_reset_token)
+    if (!tokenCorrect) {
+      return res.error(null, 'Invalid or expired token')
+    }
+
+    await updatePassword(user.id, password)
+    res.success(null, 'Password successfully reset')
+  } catch (error) {
+    next(error)
+  }
+})
 
 usersRouter.put(
   '/username',

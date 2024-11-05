@@ -67,6 +67,14 @@ export const useUsersStore = defineStore('user', {
       this.setUser(response)
     },
 
+    async recoverPassword(email) {
+      await usersService.recoverPassword(email)
+    },
+
+    async resetPassword(token, password) {
+      await usersService.resetPassword(token, password)
+    },
+
     async resendEmail(email) {
       await usersService.resendEmail(email)
     },
