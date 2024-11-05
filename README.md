@@ -19,7 +19,6 @@ Sign up for nothing
 
 - Backend
 
-  - Authentication for API
   - Rename "nothingg"
   - Upgrade product
   - Products table update (title, description)
