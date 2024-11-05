@@ -11,10 +11,6 @@ Sign up for nothing
     - add Stripe
   - Send email timeouts
 
-- Tech Debt
-
-  - Rename "nothingg"
-
 - Content
 
   - Privacy Policy
@@ -28,7 +24,3 @@ Sign up for nothing
   - Check test responses .expect
   - Add error testing
   - Cleaner tests
-
-- Deploy
-
-  - Update db password
