@@ -16,7 +16,9 @@ jobs:
           cd frontend
           npm install
 
-      - name: Install Backend Dependencies
+      - name: Install Backend Dependencies and build Frontend
+        env:
+          VITE_AUTH_TOKEN: ${{ secrets.VITE_AUTH_TOKEN }}
         run: |
           cd backend 
           npm install --omit=dev
