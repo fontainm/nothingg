@@ -1,4 +1,6 @@
 GET http://localhost:3001/api/products
+x-auth-token: {{authToken}}
 
 ###
 GET http://localhost:3001/api/products/1
+x-auth-token: {{authToken}}

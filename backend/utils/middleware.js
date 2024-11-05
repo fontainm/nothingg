@@ -1,5 +1,13 @@
 import { validationResult } from 'express-validator'
 
+const protectRoute = (req, res, next) => {
+  const authToken = req.headers['x-auth-token']
+  if (!authToken || authToken !== process.env.AUTH_TOKEN) {
+    res.error(null, 'Access denied', 403)
+  }
+  next()
+}
+
 const validationHandler = (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -63,4 +71,10 @@ const protectDeleteRoute = (req, res, next) => {
   next()
 }
 
-export { errorHandler, validationHandler, responseHandler, protectDeleteRoute }
+export {
+  errorHandler,
+  validationHandler,
+  responseHandler,
+  protectRoute,
+  protectDeleteRoute,
+}
