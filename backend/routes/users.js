@@ -4,7 +4,11 @@ import {
   validationHandler,
   protectDeleteRoute,
 } from '../utils/middleware.js'
-import { isEmailAddress } from '../utils/helpers.js'
+import { getTokenFrom, isEmailAddress } from '../utils/helpers.js'
+import {
+  sendVerificationEmail,
+  sendPasswordRecoveryEmail,
+} from '../utils/email.js'
 import {
   userIdRules,
   userSignUpRules,
@@ -32,78 +36,7 @@ import {
 } from '../controllers/users.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import nodemailer from 'nodemailer'
 import { v4 as uuidv4 } from 'uuid'
-import fs from 'fs-extra'
-import path from 'path'
-
-const getTokenFrom = (req) => {
-  const authorization = req.get('authorization')
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-  }
-  return null
-}
-
-const replacePlaceholders = (template, variables) => {
-  return template.replace(/{{(.*?)}}/g, (_, key) => variables[key.trim()] || '')
-}
-
-const transporter = nodemailer.createTransport({
-  host: 'bootes.uberspace.de',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-})
-
-const sendVerificationEmail = async (email, token) => {
-  const templatePath = path.join(
-    path.dirname(new URL(import.meta.url).pathname),
-    '..',
-    'templates',
-    'verificationEmail.html'
-  )
-
-  let template = await fs.readFile(templatePath, 'utf-8')
-
-  const htmlContent = replacePlaceholders(template, {
-    verificationUrl: `${process.env.DOMAIN}/users/verify?token=${token}`,
-  })
-
-  const mailOptions = {
-    from: 'support@nothingg.space',
-    to: email,
-    subject: 'Verify Your Email',
-    html: htmlContent,
-  }
-  await transporter.sendMail(mailOptions)
-}
-
-const sendPasswordRecoveryEmail = async (email, token) => {
-  const templatePath = path.join(
-    path.dirname(new URL(import.meta.url).pathname),
-    '..',
-    'templates',
-    'passwordRecoveryEmail.html'
-  )
-
-  let template = await fs.readFile(templatePath, 'utf-8')
-
-  const htmlContent = replacePlaceholders(template, {
-    recoveryUrl: `${process.env.DOMAIN}/users/reset-password?token=${token}`,
-  })
-
-  const mailOptions = {
-    from: 'support@nothingg.space',
-    to: email,
-    subject: 'Reset your password',
-    html: htmlContent,
-  }
-  await transporter.sendMail(mailOptions)
-}
 
 const usersRouter = express.Router()
 
