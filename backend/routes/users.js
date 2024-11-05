@@ -4,6 +4,7 @@ import {
   validationHandler,
   protectDeleteRoute,
 } from '../utils/middleware.js'
+import { isEmailAddress } from '../utils/helpers.js'
 import {
   userIdRules,
   userSignUpRules,
@@ -11,11 +12,13 @@ import {
   emailRules,
   verifyTokenRules,
   passwordUpdateRules,
+  userLoginRules,
 } from '../validators/userValidator.js'
 import {
   getUserById,
   getUserByEmail,
   getUserByToken,
+  getUserByUsername,
   getUsers,
   getUsersCount,
   createUser,
@@ -141,6 +144,44 @@ usersRouter.post(
       const user = await createUser(username, email, password, emailToken)
       await sendVerificationEmail(email, emailToken)
       res.success(user, 'User created successfully', 201)
+    } catch (error) {
+      next(error)
+    }
+  }
+)
+
+usersRouter.post(
+  '/login',
+  userLoginRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const { username, password } = req.body
+
+      const user = isEmailAddress(username)
+        ? await getUserByEmail(username)
+        : await getUserByUsername(username)
+
+      const passwordCorrect = !user
+        ? false
+        : await bcrypt.compare(password, user.password)
+
+      if (!(user && passwordCorrect)) {
+        return res.error(null, 'Invalid username or password', 401)
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user.id,
+      }
+
+      const token = jwt.sign(userForToken, process.env.SECRET, {
+        expiresIn: 60 * 60,
+      })
+
+      delete user.password
+
+      res.success({ token, ...user }, 'Login successful')
     } catch (error) {
       next(error)
     }

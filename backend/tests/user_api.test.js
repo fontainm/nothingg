@@ -35,7 +35,7 @@ test('user can log in', async () => {
   }
 
   await api
-    .post('/api/login')
+    .post('/api/users/login')
     .set('x-auth-token', authToken)
     .send(user)
     .expect(200)
@@ -79,7 +79,7 @@ describe('as a logged in user', () => {
       password: 'password',
     }
 
-    const response = await api.post('/api/login').send(user)
+    const response = await api.post('/api/users/login').send(user)
 
     userToken = response.body.data.token
   })

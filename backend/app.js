@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import usersRouter from './routes/users.js'
-import loginRouter from './routes/login.js'
 import productsRouter from './routes/products.js'
 import { responseHandler, errorHandler } from './utils/middleware.js'
 
@@ -18,7 +17,6 @@ app.get('/api/health', async (req, res) => {
 })
 
 app.use('/api/users', usersRouter)
-app.use('/api/login', loginRouter)
 app.use('/api/products', productsRouter)
 
 app.get('*', (req, res) => {

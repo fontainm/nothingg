@@ -21,6 +21,15 @@ x-auth-token: {{authToken}}
 }
 
 ###
+POST http://localhost:3001/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "newusername",
+    "password": "password"
+}
+
+###
 POST http://localhost:3001/api/users/verify?token=6d1af66b-41ec-4f3a-a981-3b7bf6c49321 HTTP/1.1
 
 ###

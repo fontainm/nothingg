@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import usersService from '../services/users'
-import loginService from '../services/login'
 
 export const useUsersStore = defineStore('user', {
   state: () => ({
@@ -25,7 +24,7 @@ export const useUsersStore = defineStore('user', {
     },
 
     async loginUser(credentials) {
-      const response = await loginService.login({
+      const response = await usersService.loginUser({
         username: credentials.username,
         password: credentials.password
       })

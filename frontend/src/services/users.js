@@ -65,6 +65,11 @@ const deleteUser = async ({ password }) => {
   return response.data
 }
 
+const loginUser = async (credentials) => {
+  const response = await api.post(`${baseUrl}/login`, credentials)
+  return response
+}
+
 const resendEmail = async (email) => {
   const response = await api.post(`${baseUrl}/resend-email`, email)
   return response.data
@@ -85,5 +90,6 @@ export default {
   updatePassword,
   deleteUser,
   resendEmail,
-  verifyUser
+  verifyUser,
+  loginUser
 }
