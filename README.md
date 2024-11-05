@@ -4,10 +4,16 @@ Sign up for nothing
 
 ## TODO
 
-- Frontend
+- General
 
-  - Products from DB
-  - Upgrade Product
+  - Upgrade & Downgrade
+    - Add product, description, price in db
+    - add Stripe
+  - Password recovery
+
+- Tech Debt
+
+  - Rename "nothingg"
 
 - Content
 
@@ -15,13 +21,6 @@ Sign up for nothing
   - About Page
   - Terms
   - Social Links
-
-- Backend
-
-  - password recovery
-  - Rename "nothingg"
-  - Upgrade product
-  - Products table update (title, description)
 
 - Testing
 
