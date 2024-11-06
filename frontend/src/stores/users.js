@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import userService from '../services/user'
 import usersService from '../services/users'
 
 export const useUsersStore = defineStore('user', {
@@ -16,7 +17,7 @@ export const useUsersStore = defineStore('user', {
     },
 
     async createUser(credentials) {
-      await usersService.createUser({
+      await userService.createUser({
         username: credentials.username,
         email: credentials.email,
         password: credentials.password
@@ -24,7 +25,7 @@ export const useUsersStore = defineStore('user', {
     },
 
     async loginUser(credentials) {
-      const response = await usersService.loginUser({
+      const response = await userService.loginUser({
         username: credentials.username,
         password: credentials.password
       })
@@ -34,21 +35,21 @@ export const useUsersStore = defineStore('user', {
     },
 
     async updateUsername(username) {
-      const response = await usersService.updateUsername({
+      const response = await userService.updateUsername({
         username
       })
       this.user.username = response.username
     },
 
     async updateEmail(email) {
-      const response = await usersService.updateEmail({
+      const response = await userService.updateEmail({
         email
       })
       this.user.email = response.email
     },
 
     async updatePassword({ oldPassword, newPassword }) {
-      await usersService.updatePassword({
+      await userService.updatePassword({
         oldPassword,
         newPassword
       })
@@ -63,24 +64,24 @@ export const useUsersStore = defineStore('user', {
       if (!token) return
       if (token === 'demotoken') return this.setDemoUser()
       this.setToken(token)
-      const response = await usersService.getMe()
+      const response = await userService.getMe()
       this.setUser(response)
     },
 
     async recoverPassword(email) {
-      await usersService.recoverPassword(email)
+      await userService.recoverPassword(email)
     },
 
     async resetPassword(token, password) {
-      await usersService.resetPassword(token, password)
+      await userService.resetPassword(token, password)
     },
 
     async resendEmail(email) {
-      await usersService.resendEmail(email)
+      await userService.resendEmail(email)
     },
 
     async verifyUser(token) {
-      const user = await usersService.verifyUser(token)
+      const user = await userService.verifyUser(token)
       this.setUser(user)
       this.setToken(user.token)
     },

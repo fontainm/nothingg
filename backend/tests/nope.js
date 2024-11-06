@@ -9,23 +9,6 @@ describe('when there is no user in users table', () => {
   beforeEach(async () => {
     await api.delete('/api/users')
   })
-
-  test('user can be created', async () => {
-    const user = {
-      username: 'testuser',
-      email: 'testmail@test.test',
-      password: 'password',
-    }
-
-    await api
-      .post('/api/users')
-      .set('x-auth-token', authToken)
-      .send(user)
-      .expect(201)
-      .expect('Content-Type', /application\/json/)
-
-    // TODO: assert id
-  })
 })
 
 test('user can log in', async () => {

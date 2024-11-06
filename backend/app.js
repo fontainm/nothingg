@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import userRouter from './routes/user.js'
 import usersRouter from './routes/users.js'
 import productsRouter from './routes/products.js'
 import { responseHandler, errorHandler } from './utils/middleware.js'
@@ -16,6 +17,7 @@ app.get('/api/health', async (req, res) => {
   res.success()
 })
 
+app.use('/api/user', userRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/products', productsRouter)
 

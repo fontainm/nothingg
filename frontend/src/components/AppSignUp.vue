@@ -53,7 +53,7 @@ export default {
       this.loading = true
 
       try {
-        await this.$usersStore.createUser({
+        await this.$userStore.createUser({
           username: this.username,
           email: this.email,
           password: this.password
