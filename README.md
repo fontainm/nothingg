@@ -9,7 +9,6 @@ Sign up for nothing
   - Upgrade & Downgrade
     - Add product, description, price in db
     - add Stripe
-  - Send email timeouts
 
 - Content
 

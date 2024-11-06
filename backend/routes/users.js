@@ -4,7 +4,11 @@ import {
   validationHandler,
   protectDeleteRoute,
 } from '../utils/middleware.js'
-import { getTokenFrom, isEmailAddress } from '../utils/helpers.js'
+import {
+  getTokenFrom,
+  isEmailAddress,
+  lastEmailSentRecently,
+} from '../utils/helpers.js'
 import {
   sendVerificationEmail,
   sendPasswordRecoveryEmail,
@@ -188,9 +192,19 @@ usersRouter.post(
     try {
       const { email } = req.body
       const user = await getUserByEmail(email)
+
       if (!user) {
         return res.error(null, 'User not found', 404)
       }
+
+      if (lastEmailSentRecently(user.last_email_sent)) {
+        return res.error(
+          null,
+          'Please wait before requesting another email',
+          429
+        )
+      }
+
       await sendVerificationEmail(email, user.verify_token)
       res.success(null, 'Mail sent successfully')
     } catch (error) {
@@ -210,6 +224,14 @@ usersRouter.post(
       const user = await getUserByEmail(email)
       if (!user) {
         return res.error(null, 'User not found', 404)
+      }
+
+      if (lastEmailSentRecently(user.last_email_sent)) {
+        return res.error(
+          null,
+          'Please wait before requesting another email',
+          429
+        )
       }
 
       const userForToken = {

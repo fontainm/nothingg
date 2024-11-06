@@ -107,9 +107,13 @@ export default {
 
     async handleResendEmail() {
       this.loading = true
-      await this.$usersStore.resendEmail({
-        email: this.user.email
-      })
+      try {
+        await this.$usersStore.resendEmail({
+          email: this.user.email
+        })
+      } catch (error) {
+        this.loading = false
+      }
       this.loading = false
     },
 

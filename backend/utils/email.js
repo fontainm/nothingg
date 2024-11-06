@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer'
 import fs from 'fs-extra'
 import path from 'path'
 import { replacePlaceholders } from '../utils/helpers.js'
+import { updateUserLastEmailSent } from '../controllers/users.js'
 
 const setupTransporter = () => {
   return nodemailer.createTransport({
@@ -42,6 +43,7 @@ export const sendVerificationEmail = async (email, token) => {
     html: htmlContent,
   }
   await transporter.sendMail(mailOptions)
+  await updateUserLastEmailSent(email)
 }
 
 export const sendPasswordRecoveryEmail = async (email, token) => {
@@ -59,4 +61,5 @@ export const sendPasswordRecoveryEmail = async (email, token) => {
     html: htmlContent,
   }
   await transporter.sendMail(mailOptions)
+  await updateUserLastEmailSent(email)
 }

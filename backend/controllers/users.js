@@ -15,7 +15,7 @@ export async function getUsersCount() {
 
 export async function getUserById(id) {
   const { rows } = await db.query(
-    `SELECT id, username, password, product_id, confirmed, created_at, email, password_reset_token, password_reset_expires FROM users WHERE id = $1`,
+    `SELECT id, username, password, product_id, confirmed, created_at, email, password_reset_token, password_reset_expires, last_email_sent FROM users WHERE id = $1`,
     [id]
   )
   return rows[0]
@@ -82,6 +82,15 @@ export async function updatePassword(id, password) {
   const { rows } = await db.query(
     `UPDATE users SET password = $1 WHERE id = $2`,
     [passwordHash, id]
+  )
+  return rows[0]
+}
+
+export async function updateUserLastEmailSent(email) {
+  const now = new Date()
+  const { rows } = await db.query(
+    `UPDATE users SET last_email_sent = $1 WHERE email = $2`,
+    [now, email]
   )
   return rows[0]
 }
