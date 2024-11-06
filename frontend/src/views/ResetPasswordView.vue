@@ -6,7 +6,13 @@ import SubmitButton from '@/components/SubmitButton.vue'
   <section class="reset">
     <h2>Password reset</h2>
     <form class="form-small" @submit="handlePasswordReset">
-      <input v-model="password" type="password" placeholder="New password" />
+      <input v-model="password" type="password" placeholder="New password" required />
+      <input
+        v-model="passwordConfirm"
+        type="password"
+        placeholder="Confirm new password"
+        required
+      />
       <SubmitButton text="Reset password" :loading="loading" />
     </form>
   </section>
@@ -17,7 +23,8 @@ export default {
   data() {
     return {
       loading: false,
-      password: ''
+      password: '',
+      passwordConfirm: ''
     }
   },
 
@@ -25,6 +32,13 @@ export default {
     async handlePasswordReset(event) {
       event.preventDefault()
       this.loading = true
+
+      if (this.password !== this.passwordConfirm) {
+        this.$appStore.showInfoMessage('error', 'Passwords do not match')
+        this.loading = false
+        return
+      }
+
       try {
         const urlParams = new URLSearchParams(window.location.search)
         const token = urlParams.get('token')

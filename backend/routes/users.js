@@ -11,12 +11,12 @@ import {
 } from '../utils/email.js'
 import {
   userIdRules,
-  userSignUpRules,
   usernameRules,
   emailRules,
   verifyTokenRules,
   passwordUpdateRules,
   userLoginRules,
+  passwordRules,
 } from '../validators/userValidator.js'
 import {
   getUserById,
@@ -33,6 +33,7 @@ import {
   updatePassword,
   verifyUser,
   setPasswordResetToken,
+  unsetPasswordResetToken,
 } from '../controllers/users.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
@@ -92,7 +93,8 @@ usersRouter.post(
   '/',
   protectRoute,
   usernameRules(),
-  userSignUpRules(),
+  emailRules(),
+  passwordRules(),
   validationHandler,
   async (req, res, next) => {
     const { username, email, password } = req.body
@@ -197,61 +199,76 @@ usersRouter.post(
   }
 )
 
-usersRouter.post('/recover-password', async (req, res, next) => {
-  // TODO: Add validation
-  try {
-    const { email } = req.body
-    const user = await getUserByEmail(email)
-    if (!user) {
-      return res.error(null, 'User not found', 404)
+usersRouter.post(
+  '/recover-password',
+  protectRoute,
+  emailRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const { email } = req.body
+      const user = await getUserByEmail(email)
+      if (!user) {
+        return res.error(null, 'User not found', 404)
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user.id,
+      }
+
+      const resetToken = jwt.sign(userForToken, process.env.SECRET, {
+        expiresIn: 60 * 60,
+      })
+
+      const hashedToken = await bcrypt.hash(resetToken, 10)
+      const expirationDate = new Date(Date.now() + 3600000)
+
+      await setPasswordResetToken(hashedToken, expirationDate, user.id)
+
+      await sendPasswordRecoveryEmail(email, resetToken)
+      res.success(null, 'Mail sent successfully')
+    } catch (error) {
+      next(error)
     }
-
-    const userForToken = {
-      username: user.username,
-      id: user.id,
-    }
-
-    const resetToken = jwt.sign(userForToken, process.env.SECRET, {
-      expiresIn: 60 * 60,
-    })
-
-    const hashedToken = await bcrypt.hash(resetToken, 10)
-    const expirationDate = new Date(Date.now() + 3600000)
-
-    await setPasswordResetToken(hashedToken, expirationDate, user.id)
-
-    await sendPasswordRecoveryEmail(email, resetToken)
-    res.success(null, 'Mail sent successfully')
-  } catch (error) {
-    next(error)
   }
-})
+)
 
-usersRouter.post('/reset-password', async (req, res, next) => {
-  // TODO: Add validation
-  try {
-    const { token, password } = req.body
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-    const user = await getUserById(decodedToken.id)
-    if (
-      !user ||
-      !user.password_reset_token ||
-      user.password_reset_expires < new Date()
-    ) {
-      return res.error(null, 'Invalid or expired token')
+usersRouter.post(
+  '/reset-password',
+  passwordRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const { token, password } = req.body
+      const decodedToken = jwt.verify(token, process.env.SECRET)
+      const user = await getUserById(decodedToken.id)
+
+      if (
+        !user ||
+        !user.password_reset_token ||
+        user.password_reset_expires < new Date()
+      ) {
+        return res.error(null, 'Invalid or expired token')
+      }
+
+      const tokenCorrect = await bcrypt.compare(
+        token,
+        user.password_reset_token
+      )
+
+      if (!tokenCorrect) {
+        return res.error(null, 'Invalid or expired token')
+      }
+
+      await updatePassword(user.id, password)
+      await unsetPasswordResetToken(user.id)
+      res.success(null, 'Password successfully reset')
+    } catch (error) {
+      next(error)
     }
-
-    const tokenCorrect = await bcrypt.compare(token, user.password_reset_token)
-    if (!tokenCorrect) {
-      return res.error(null, 'Invalid or expired token')
-    }
-
-    await updatePassword(user.id, password)
-    res.success(null, 'Password successfully reset')
-  } catch (error) {
-    next(error)
   }
-})
+)
 
 usersRouter.put(
   '/username',

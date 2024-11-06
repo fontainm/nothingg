@@ -36,20 +36,18 @@ const verifyTokenRules = () => {
   ]
 }
 
-const passwordUpdateRules = () => {
+const passwordRules = () => {
   return [
-    body('oldPassword').not().isEmpty(),
-    body('newPassword')
+    body('password')
       .isLength({ min: 6 })
       .withMessage('Password must be at least 6 characters long'),
   ]
 }
 
-const userSignUpRules = () => {
-  // TODO: Make password rule
+const passwordUpdateRules = () => {
   return [
-    body('email').isEmail().withMessage('Please provide a valid email address'),
-    body('password')
+    body('oldPassword').not().isEmpty(),
+    body('newPassword')
       .isLength({ min: 6 })
       .withMessage('Password must be at least 6 characters long'),
   ]
@@ -64,10 +62,10 @@ const userLoginRules = () => {
 
 export {
   userIdRules,
-  userSignUpRules,
   userLoginRules,
   usernameRules,
   emailRules,
+  passwordRules,
   verifyTokenRules,
   passwordUpdateRules,
 }

@@ -8,7 +8,7 @@ import IconMail from '~icons/mdi/email'
     <h2>Password recovery</h2>
     <div v-if="step === 0">
       <form class="form-small" @submit="handlePasswordRecovery">
-        <input v-model="email" type="email" placeholder="Email address" />
+        <input v-model="email" type="email" placeholder="Email address" required />
         <SubmitButton text="Recover password" :loading="loading" />
       </form>
     </div>

@@ -102,6 +102,14 @@ export async function setPasswordResetToken(hashedToken, expirationDate, id) {
   return rows[0]
 }
 
+export async function unsetPasswordResetToken(id) {
+  const { rows } = await db.query(
+    `UPDATE users SET password_reset_token = NULL, password_reset_expires = NULL WHERE id = $1`,
+    [id]
+  )
+  return rows[0]
+}
+
 export async function deleteUser(id) {
   await db.query('DELETE FROM users WHERE id = $1', [id])
 }
