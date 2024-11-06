@@ -4,18 +4,6 @@ import path from 'path'
 import { replacePlaceholders } from '../utils/helpers.js'
 import { updateUserLastEmailSent } from '../controllers/users.js'
 
-const setupTransporter = () => {
-  return nodemailer.createTransport({
-    host: 'bootes.uberspace.de',
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  })
-}
-
 const getTemplate = async (filename) => {
   const templatePath = path.join(
     path.dirname(new URL(import.meta.url).pathname),
@@ -28,10 +16,28 @@ const getTemplate = async (filename) => {
   return template
 }
 
-export const sendVerificationEmail = async (email, token) => {
-  const transporter = setupTransporter()
-  const template = await getTemplate('verificationEmail.html')
+const sendEmail = async (mailOptions) => {
+  if (process.env.NODE_ENV === 'test') {
+    console.log('Email sending skipped in test environment')
+    return
+  }
 
+  const transporter = nodemailer.createTransport({
+    host: 'bootes.uberspace.de',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  })
+
+  await transporter.sendMail(mailOptions)
+  await updateUserLastEmailSent(mailOptions.to)
+}
+
+export const sendVerificationEmail = async (email, token) => {
+  const template = await getTemplate('verificationEmail.html')
   const htmlContent = replacePlaceholders(template, {
     verificationUrl: `${process.env.DOMAIN}/users/verify?token=${token}`,
   })
@@ -42,14 +48,12 @@ export const sendVerificationEmail = async (email, token) => {
     subject: 'Verify Your Email',
     html: htmlContent,
   }
-  await transporter.sendMail(mailOptions)
-  await updateUserLastEmailSent(email)
+
+  await sendEmail(mailOptions)
 }
 
 export const sendPasswordRecoveryEmail = async (email, token) => {
-  const transporter = setupTransporter()
   const template = await getTemplate('passwordRecoveryEmail.html')
-
   const htmlContent = replacePlaceholders(template, {
     recoveryUrl: `${process.env.DOMAIN}/users/reset-password?token=${token}`,
   })
@@ -60,6 +64,6 @@ export const sendPasswordRecoveryEmail = async (email, token) => {
     subject: 'Reset your password',
     html: htmlContent,
   }
-  await transporter.sendMail(mailOptions)
-  await updateUserLastEmailSent(email)
+
+  await sendEmail(mailOptions)
 }
