@@ -10,13 +10,6 @@ Sign up for nothing
     - Add product, description, price in db
     - add Stripe
 
-- Content
-
-  - Privacy Policy
-  - About Page
-  - Terms
-  - Social Links
-
 - Testing
 
   - Migration for test db

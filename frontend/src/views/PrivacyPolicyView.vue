@@ -21,11 +21,6 @@
         <li>
           <strong>Password:</strong> Used to secure your account (stored securely using encryption).
         </li>
-        <li><strong>Optional Profile Information:</strong> Such as name, if provided.</li>
-        <li>
-          <strong>Log Data:</strong> Automatically collected information such as IP address and
-          browser type when you interact with our website.
-        </li>
       </ul>
 
       <h3>How We Use Your Information</h3>

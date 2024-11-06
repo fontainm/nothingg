@@ -26,9 +26,11 @@
         to do <em>nothing</em>?
       </p>
 
-      <p class="about-highlight">
-        Thank you for being part of <strong>{{ $appStore.appTitle }}</strong
-        >. It means everything.
+      <h3>Who am I?</h3>
+      <p>
+        I am a web developer and multimedia artist from Vienna, Austria. Check out my other projects
+        or send me a message on
+        <a href="https://mathiasfontain.at" target="_blank"><strong>my website</strong></a>
       </p>
     </div>
   </section>

@@ -65,8 +65,7 @@
       <h3>9. Governing Law</h3>
       <p>
         These Terms and Conditions are governed by and construed in accordance with the laws of
-        [Insert Jurisdiction], and you submit to the exclusive jurisdiction of the courts in that
-        location.
+        Austria, and you submit to the exclusive jurisdiction of the courts in that location.
       </p>
 
       <h3>10. Changes to the Terms</h3>

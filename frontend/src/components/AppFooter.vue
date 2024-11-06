@@ -1,6 +1,5 @@
 <script setup>
 import IconGithub from '~icons/mdi/github'
-import IconInstagram from '~icons/mdi/instagram'
 import IconEmail from '~icons/mdi/email-outline'
 </script>
 
@@ -13,8 +12,9 @@ import IconEmail from '~icons/mdi/email-outline'
       <RouterLink to="/terms-and-conditions">Terms & Conditions</RouterLink>
     </div>
     <div class="footer-socials">
-      <IconGithub />
-      <IconInstagram />
+      <a href="https://github.com/fontainm/nothing" target="_blank">
+        <IconGithub />
+      </a>
       <a :href="`mailto:${$appStore.appEmail}`">
         <IconEmail />
       </a>
