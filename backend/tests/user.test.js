@@ -17,6 +17,8 @@ after(async () => {
 })
 
 describe('user.test.js', async () => {
+  let userToken = ''
+
   describe('user.test.js', async () => {
     describe('POST /api/user/login', () => {
       test('Should fail with invalid username', async () => {
@@ -50,6 +52,8 @@ describe('user.test.js', async () => {
           .expect('Content-Type', /application\/json/)
 
         const { message } = response.body
+        userToken = response.body.data.token
+        assert.ok(response.body.data.token)
         assert.equal(message, expectedMessage)
       })
     })
