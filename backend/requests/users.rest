@@ -2,65 +2,12 @@ GET http://localhost:3001/api/users
 x-auth-token: {{authToken}}
 
 ###
-GET http://localhost:3001/api/users/175
+GET http://localhost:3001/api/users/3
 x-auth-token: {{authToken}}
 
 ###
 GET http://localhost:3001/api/users/total
 x-auth-token: {{authToken}}
-
-###
-POST http://localhost:3001/api/users HTTP/1.1
-content-type: application/json
-x-auth-token: {{authToken}}
-
-{
-    "username": "test",
-    "email": "test",
-    "password": "test"
-}
-
-###
-POST http://localhost:3001/api/users/login HTTP/1.1
-content-type: application/json
-
-{
-    "username": "newusername",
-    "password": "password"
-}
-
-###
-POST http://localhost:3001/api/users/verify?token=6d1af66b-41ec-4f3a-a981-3b7bf6c49321 HTTP/1.1
-
-###
-POST http://localhost:3001/api/users/verify?token=e HTTP/1.1
-
-###
-POST http://localhost:3001/api/users/resend-email HTTP/1.1
-x-auth-token: {{authToken}}
-content-type: application/json
-
-{
-    "email": "aseg"
-}
-
-###
-PUT http://localhost:3001/api/users/username HTTP/1.1
-content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwiaWQiOiIxMTMiLCJpYXQiOjE3MjkzMjc4MDAsImV4cCI6MTcyOTMzMTQwMH0.CQfyfVuvA85iqvroC3pq7HH0OXLAmL3TpLqLhbVcAnM
-
-{
-    "username": "newusername"
-}
-
-###
-PUT http://localhost:3001/api/users/email HTTP/1.1
-content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwiaWQiOiIxMTMiLCJpYXQiOjE3MjkzMjc4MDAsImV4cCI6MTcyOTMzMTQwMH0.CQfyfVuvA85iqvroC3pq7HH0OXLAmL3TpLqLhbVcAnM
-
-{
-    "email": "newmail@newmail.newmail"
-}
 
 ###
 DELETE http://localhost:3001/api/users/

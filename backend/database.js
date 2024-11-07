@@ -4,7 +4,7 @@ import logger from './utils/logger.js'
 
 const { Pool } = pg
 
-const pool = new Pool({
+export const pool = new Pool({
   host: config.SQL_HOST,
   database: config.SQL_DATABASE,
   user: config.SQL_USER,

@@ -124,6 +124,5 @@ export async function deleteUser(id) {
 }
 
 export async function deleteUsers() {
-  await db.query('TRUNCATE TABLE users')
-  await db.query('ALTER SEQUENCE users_id_seq RESTART WITH 1')
+  await db.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE')
 }

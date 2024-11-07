@@ -1,43 +1,18 @@
-import { test, describe } from 'node:test'
+import { test, describe, before, after, beforeEach } from 'node:test'
 import supertest from 'supertest'
 import app from '../app.js'
 import assert from 'assert'
+import { clearDbUsers, seedDbUsers } from './db_utils.js'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
 
-const clearDb = async () => {
-  await api.delete('/api/users')
-}
-
-const seedDb = async () => {
-  const users = [
-    {
-      email: 'test1@example.com',
-      username: 'testuser1',
-      password: 'hashedpassword1',
-    },
-    {
-      email: 'test2@example.com',
-      username: 'testuser2',
-      password: 'hashedpassword2',
-    },
-    {
-      email: 'test3@example.com',
-      username: 'testuser3',
-      password: 'hashedpassword3',
-    },
-  ]
-
-  for (const user of users) {
-    await api.post('/api/user/signup').set('x-auth-token', authToken).send(user)
-  }
-}
+before(async () => {
+  await clearDbUsers(api)
+  await seedDbUsers(api)
+})
 
 describe('users.test.js', async () => {
-  await clearDb()
-  await seedDb()
-
   describe('GET /api/users', () => {
     test('Should get 3 users', async () => {
       const expectedLength = 3
@@ -58,11 +33,11 @@ describe('users.test.js', async () => {
     })
 
     test('Should return the user with the given id', async () => {
-      const expectedId = 2
-      const expectedUsername = 'testuser2'
+      const expectedId = 1
+      const expectedUsername = 'testuser1'
 
       const response = await api
-        .get('/api/users/2')
+        .get('/api/users/1')
         .set('x-auth-token', authToken)
         .expect(200)
         .expect('Content-Type', /application\/json/)
@@ -121,7 +96,7 @@ describe('users.test.js', async () => {
 
   describe('DELETE /api/users', () => {
     test('Should delete all users', async () => {
-      await api.delete('/api/users').set('x-auth-token', authToken).expect(200)
+      await api.delete('/api/users').expect(200)
     })
 
     test('Should return a total of 0', async () => {
