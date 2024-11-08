@@ -43,19 +43,20 @@ export async function getUserByEmail(email) {
   return rows[0]
 }
 
-export async function createUser(username, email, password, token) {
+export async function createUser(username, email, password, verify_token) {
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)
 
   const created_at = new Date()
   const result = await db.query(
     `INSERT INTO users (username, email, password, verify_token, created_at) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-    [username, email, passwordHash, token, created_at]
+    [username, email, passwordHash, verify_token, created_at]
   )
   return {
     id: result.rows[0].id,
     username,
     email,
+    verify_token,
   }
 }
 

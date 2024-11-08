@@ -3,6 +3,7 @@ import supertest from 'supertest'
 import app from '../app.js'
 import assert from 'assert'
 import { clearDbUsers, endPool, seedDbUsers } from './db_utils.js'
+import { v4 as uuidv4 } from 'uuid'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
@@ -19,6 +20,7 @@ after(async () => {
 
 describe('user.test.js', async () => {
   let userToken = ''
+  let emailVerifyToken = ''
 
   describe('user.test.js', () => {
     describe('POST /api/user/signup', () => {
@@ -91,6 +93,55 @@ describe('user.test.js', async () => {
           .set('x-auth-token', authToken)
           .send(credentials)
           .expect(201)
+
+        emailVerifyToken = response.body.data.verify_token
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+    })
+
+    describe('POST /api/user/verify', () => {
+      test('Should fail with invalid token', async () => {
+        const expectedMessage = 'Invalid verification token format.'
+        const invalidToken = '0000-invalid-token-0000'
+
+        const response = await api
+          .post(`/api/user/verify?token=${invalidToken}`)
+          .expect(400)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should fail if no user can be found', async () => {
+        const expectedMessage = 'User not found'
+        const notFoundToken = uuidv4()
+
+        const response = await api
+          .post(`/api/user/verify?token=${notFoundToken}`)
+          .expect(404)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should succeed with valid token', async () => {
+        const expectedMessage = 'User verified successfully'
+
+        const response = await api
+          .post(`/api/user/verify?token=${emailVerifyToken}`)
+          .expect(200)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should fail when user has already been verified', async () => {
+        const expectedMessage = 'User has already been verified'
+
+        const response = await api
+          .post(`/api/user/verify?token=${emailVerifyToken}`)
+          .expect(409)
 
         const { message } = response.body
         assert.equal(message, expectedMessage)
@@ -269,11 +320,17 @@ describe('user.test.js', async () => {
         assert.equal(message, expectedMessage)
       })
     })
-  })
 
-  // TODO: Test verify
-  // TODO: Test resend
-  // TODO: Test recover
-  // TODO: Test reset password
-  // TODO: Test delete me
+    describe('POST /api/user/recover-password', () => {
+      // TODO: Test recover password
+    })
+
+    describe('POST /api/user/reset-password', () => {
+      // TODO: Test reset password
+    })
+
+    describe('DELETE /api/user/me', () => {
+      // TODO: Test delete me
+    })
+  })
 })
