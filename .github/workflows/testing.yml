@@ -39,6 +39,7 @@ jobs:
           echo "SQL_USER=${{ secrets.SQL_USER }}" >> $GITHUB_ENV
           echo "SQL_PASSWORD=${{ secrets.SQL_PASSWORD }}" >> $GITHUB_ENV
           echo "AUTH_TOKEN=${{ secrets.AUTH_TOKEN }}" >> $GITHUB_ENV
+          echo "SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm install
