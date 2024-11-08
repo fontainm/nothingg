@@ -3,6 +3,7 @@ import supertest from 'supertest'
 import app from '../app.js'
 import assert from 'assert'
 import { clearDbUsers, seedDbUsers } from './db_utils.js'
+import { pool } from '../database.js'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
@@ -14,6 +15,8 @@ before(async () => {
 
 after(async () => {
   await clearDbUsers(api)
+  console.log('END POOL now')
+  await pool.end()
 })
 
 describe('user.test.js', async () => {
