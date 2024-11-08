@@ -14,6 +14,12 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   confirmed BOOLEAN DEFAULT false,
   product_id INTEGER DEFAULT 1 NOT NULL,
+  verify_token VARCHAR(255),
+  password_reset_token VARCHAR(255),
+  password_reset_expires TIMESTAMP,
+  last_email_sent TIMESTAMP,
   CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(id),
-  CONSTRAINT unique_username UNIQUE (username)  -- Table-level UNIQUE constraint
+  CONSTRAINT unique_username UNIQUE (username)
 );
+
+-- INSERT INTO users (username, email, password, verify_token, created_at) VALUES ($1, $2, $3, $4, $5);
