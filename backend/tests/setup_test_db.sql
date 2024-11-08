@@ -21,5 +21,3 @@ CREATE TABLE IF NOT EXISTS users (
   CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(id),
   CONSTRAINT unique_username UNIQUE (username)
 );
-
--- INSERT INTO users (username, email, password, verify_token, created_at) VALUES ($1, $2, $3, $4, $5);
