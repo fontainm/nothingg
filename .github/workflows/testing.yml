@@ -11,15 +11,43 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpassword
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U testuser"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
+      - name: Set up environment variables
+        run: |
+          echo "SQL_HOST=localhost" >> $GITHUB_ENV
+          echo "SQL_DATABASE=${{ secrets.SQL_DATABASE }}" >> $GITHUB_ENV
+          echo "SQL_USER=${{ secrets.SQL_USER }}" >> $GITHUB_ENV
+          echo "SQL_PASSWORD=${{ secrets.SQL_PASSWORD }}" >> $GITHUB_ENV
+          echo "AUTH_TOKEN=${{ secrets.AUTH_TOKEN }}" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm install
         working-directory: backend
+
+      # - name: Run migrations (if needed)
+      #   run: npm run migrate
+      #   working-directory: backend
+
       - name: Test app
         run: npm run test -- tests/products.test.js
         working-directory: backend
