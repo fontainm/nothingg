@@ -2,8 +2,7 @@ import { test, describe, before, after } from 'node:test'
 import supertest from 'supertest'
 import app from '../app.js'
 import assert from 'assert'
-import { clearDbUsers, seedDbUsers } from './db_utils.js'
-import { pool } from '../database.js'
+import { clearDbUsers, endPool, seedDbUsers } from './db_utils.js'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
@@ -15,8 +14,7 @@ before(async () => {
 
 after(async () => {
   await clearDbUsers(api)
-  console.log('END POOL now')
-  await pool.end()
+  await endPool()
 })
 
 describe('user.test.js', async () => {

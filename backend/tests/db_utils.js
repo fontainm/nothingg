@@ -1,15 +1,12 @@
-import * as db from '../database.js'
+import { pool } from '../database.js'
 
 export const clearDbUsers = async (api) => {
-  console.log('clearing database...')
+  console.log('Clearing users table...')
   await api.delete('/api/users')
-  const resultAfter = await db.query('SELECT COUNT(*) FROM users')
-  console.log(`Users after truncation: ${resultAfter.rows[0].count}`)
 }
 
 export const seedDbUsers = async (api) => {
-  console.log('seeding database...')
-
+  console.log('Seeding users table...')
   const users = [
     {
       email: 'test1@example.com',
@@ -34,7 +31,9 @@ export const seedDbUsers = async (api) => {
       .set('x-auth-token', process.env.AUTH_TOKEN)
       .send(user)
   }
+}
 
-  const resultAfter = await db.query('SELECT COUNT(*) FROM users')
-  console.log(`Users after seeding: ${resultAfter.rows[0].count}`)
+export const endPool = async () => {
+  console.log('Ending pool...')
+  await pool.end()
 }

@@ -2,8 +2,7 @@ import { test, describe, before, after } from 'node:test'
 import supertest from 'supertest'
 import app from '../app.js'
 import assert from 'assert'
-import { clearDbUsers, seedDbUsers } from './db_utils.js'
-import { pool } from '../database.js'
+import { clearDbUsers, endPool, seedDbUsers } from './db_utils.js'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
@@ -14,8 +13,7 @@ before(async () => {
 })
 
 after(async () => {
-  console.log('END POOL now')
-  await pool.end()
+  await endPool()
 })
 
 describe('users.test.js', async () => {
@@ -28,8 +26,6 @@ describe('users.test.js', async () => {
         .set('x-auth-token', authToken)
         .expect(200)
         .expect('Content-Type', /application\/json/)
-
-      console.log(response.body.data[2])
 
       assert.equal(response.body.data.length, expectedLength)
     })
@@ -89,9 +85,6 @@ describe('users.test.js', async () => {
     })
 
     test('Should reduce the total number of users', async () => {
-      const r = await api.get('/api/users').set('x-auth-token', authToken)
-      console.log(r.body.data[2])
-
       const expectedTotal = 2
 
       const response = await api

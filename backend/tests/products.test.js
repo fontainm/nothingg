@@ -2,13 +2,13 @@ import { test, describe, after } from 'node:test'
 import supertest from 'supertest'
 import app from '../app.js'
 import assert from 'assert'
-import { pool } from '../database.js'
+import { endPool } from './db_utils.js'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
 
 after(async () => {
-  await pool.end()
+  await endPool()
 })
 
 describe('products.test.js', () => {
