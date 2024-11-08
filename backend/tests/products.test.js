@@ -13,9 +13,15 @@ after(async () => {
 
 describe('products.test.js', () => {
   describe('GET /api/products', () => {
-    const expectedLength = 2
+    test('Should fail without auth token', async () => {
+      const expectedMessage = 'Access denied'
+      const response = await api.get('/api/products').expect(403)
+
+      assert.equal(response.body.message, expectedMessage)
+    })
 
     test('Should get all products', async () => {
+      const expectedLength = 2
       const response = await api
         .get('/api/products')
         .set('x-auth-token', authToken)
@@ -35,7 +41,7 @@ describe('products.test.js', () => {
     })
 
     test('Should return one product', async () => {
-      const expectedProductTitle = 'Nothing' // TODO: update product name
+      const expectedProductTitle = 'Nothingg'
 
       const response = await api
         .get('/api/products/1')

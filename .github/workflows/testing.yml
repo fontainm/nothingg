@@ -51,10 +51,6 @@ jobs:
         run: |
           psql -h localhost -U testuser -d testdb -f ./backend/tests/setup_test_db.sql
 
-      # - name: Run migrations (if needed)
-      #   run: npm run migrate
-      #   working-directory: backend
-
       - name: Test app
         run: npm run test
         working-directory: backend
