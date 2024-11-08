@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS products (
 INSERT INTO products (title, price) VALUES ('Nothing', 0), ('Nothing+', 1.00);
 
 CREATE TABLE IF NOT EXISTS users (
-  id BIGINT PRIMARY KEY,
+  id BIGSERIAL PRIMARY KEY,
   username VARCHAR(50) NOT NULL,
   password TEXT NOT NULL,
   email VARCHAR(50) NOT NULL,
