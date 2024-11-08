@@ -55,5 +55,5 @@ jobs:
       #   working-directory: backend
 
       - name: Test app
-        run: npm run test -- tests/products.test.js
+        run: npm run test
         working-directory: backend
