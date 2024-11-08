@@ -44,6 +44,12 @@ jobs:
         run: npm install
         working-directory: backend
 
+      - name: Set up database schema
+        env:
+          PGPASSWORD: testpassword
+        run: |
+          psql -h localhost -U testuser -d testdb -f ./backend/tests/setup_test_db.sql
+
       # - name: Run migrations (if needed)
       #   run: npm run migrate
       #   working-directory: backend

@@ -1,22 +1,11 @@
-import { test, describe, before, after } from 'node:test'
+import { test, describe, after } from 'node:test'
 import supertest from 'supertest'
 import app from '../app.js'
 import assert from 'assert'
-import * as db from '../database.js'
 import { pool } from '../database.js'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
-
-before(async () => {
-  await db.query(`
-    CREATE TABLE IF NOT EXISTS products (
-      id SERIAL PRIMARY KEY,
-      title VARCHAR(255) NOT NULL,
-      price DECIMAL NOT NULL
-    );
-  `)
-})
 
 after(async () => {
   await pool.end()
