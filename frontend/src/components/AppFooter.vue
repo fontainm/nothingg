@@ -12,7 +12,7 @@ import IconEmail from '~icons/mdi/email-outline'
       <RouterLink to="/terms-and-conditions">Terms & Conditions</RouterLink>
     </div>
     <div class="footer-socials">
-      <a href="https://github.com/fontainm/nothing" target="_blank">
+      <a href="https://github.com/fontainm/nothingg" target="_blank">
         <IconGithub />
       </a>
       <a :href="`mailto:${$appStore.appEmail}`">
