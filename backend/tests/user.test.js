@@ -4,6 +4,7 @@ import app from '../app.js'
 import assert from 'assert'
 import { clearDbUsers, endPool, seedDbUsers } from './db_utils.js'
 import { v4 as uuidv4 } from 'uuid'
+import timekeeper from 'timekeeper'
 
 const api = supertest(app)
 const authToken = process.env.AUTH_TOKEN
@@ -21,6 +22,7 @@ after(async () => {
 describe('user.test.js', async () => {
   let userToken = ''
   let emailVerifyToken = ''
+  let passwordResetToken = ''
 
   describe('user.test.js', () => {
     describe('POST /api/user/signup', () => {
@@ -39,8 +41,6 @@ describe('user.test.js', async () => {
           .set('x-auth-token', authToken)
           .send({ ...credentials, username: '&/()§$' })
           .expect(400)
-
-        console.log(response.body)
 
         const { message } = response.body
         assert.equal(message, expectedMessage)
@@ -94,9 +94,11 @@ describe('user.test.js', async () => {
           .send(credentials)
           .expect(201)
 
-        emailVerifyToken = response.body.data.verify_token
         const { message } = response.body
         assert.equal(message, expectedMessage)
+        assert.ok(response.body.data.verify_token)
+
+        emailVerifyToken = response.body.data.verify_token
       })
     })
 
@@ -322,11 +324,91 @@ describe('user.test.js', async () => {
     })
 
     describe('POST /api/user/recover-password', () => {
-      // TODO: Test recover password
+      test('Should fail if email is not found', async () => {
+        const expectedMessage = 'User not found'
+
+        const response = await api
+          .post('/api/user/recover-password')
+          .set('x-auth-token', authToken)
+          .send({ email: 'notfound@test.test' })
+          .expect(404)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should succeed with valid email', async () => {
+        const expectedMessage = 'Mail sent successfully'
+
+        const response = await api
+          .post('/api/user/recover-password')
+          .set('x-auth-token', authToken)
+          .send({ email: 'test3@example.com' })
+          .expect(200)
+
+        const { message } = response.body
+
+        assert.equal(message, expectedMessage)
+        assert.ok(response.body.data.resetToken)
+
+        passwordResetToken = response.body.data.resetToken
+      })
     })
 
     describe('POST /api/user/reset-password', () => {
-      // TODO: Test reset password
+      test('Should fail with invalid token', async () => {
+        const expectedMessage = 'Invalid token'
+
+        const response = await api
+          .post('/api/user/reset-password')
+          .send({ token: 'invalidtoken', password: 'newpassword' })
+          .expect(401)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should fail with expired token', async () => {
+        const expectedMessage = 'Token expired'
+
+        const now = new Date()
+        const expiredTime = new Date(now.getTime() + 2 * 60 * 60 * 1000) // 2 hours
+        timekeeper.travel(expiredTime)
+
+        const response = await api
+          .post('/api/user/reset-password')
+          .send({ token: passwordResetToken, password: 'newpassword' })
+          .expect(401)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+
+        timekeeper.reset()
+      })
+
+      test('Should fail with invalid password', async () => {
+        const expectedMessage = 'Password must be at least 6 characters long'
+
+        const response = await api
+          .post('/api/user/reset-password')
+          .send({ token: passwordResetToken, password: 'short' })
+          .expect(400)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should succeed with valid password', async () => {
+        const expectedMessage = 'Password successfully reset'
+
+        const response = await api
+          .post('/api/user/reset-password')
+          .send({ token: passwordResetToken, password: 'newpassword' })
+          .expect(200)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
     })
 
     describe('DELETE /api/user/me', () => {

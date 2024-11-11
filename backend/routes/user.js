@@ -203,7 +203,7 @@ userRouter.post(
       await setPasswordResetToken(hashedToken, expirationDate, user.id)
 
       await sendPasswordRecoveryEmail(email, resetToken)
-      res.success(null, 'Mail sent successfully')
+      res.success({ resetToken }, 'Mail sent successfully')
     } catch (error) {
       next(error)
     }
