@@ -2,7 +2,7 @@
 
 Welcome to **Nothingg** – the project where you can do... almost nothing! The app’s main features are signing up and editing your user profile. Perfect for those who appreciate the beauty of simplicity.
 
-Check it out here: [https://nothingg.space](https://nothingg.space)
+Check it out here: <a href="https://nothingg.space" target="_blank">https://nothingg.space</a>
 
 ## Features
 
