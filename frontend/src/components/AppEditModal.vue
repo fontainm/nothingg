@@ -17,7 +17,7 @@ import IconClose from '~icons/mdi/close'
         <h3>{{ title }}</h3>
         <form :class="{ disabled: loading }">
           <slot></slot>
-          <div class="modal-buttons">
+          <div v-if="!hideButtons" class="modal-buttons">
             <button class="btn btn-small btn-danger" type="button" @click="closeModal">
               Cancel
             </button>
@@ -41,6 +41,10 @@ export default {
       default: 'Edit'
     },
     loading: {
+      type: Boolean,
+      default: false
+    },
+    hideButtons: {
       type: Boolean,
       default: false
     }

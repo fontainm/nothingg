@@ -5,6 +5,7 @@ import ModalEditUsername from '@/components/ModalEditUsername.vue'
 import ModalEditEmail from '@/components/ModalEditEmail.vue'
 import ModalEditPassword from '@/components/ModalEditPassword.vue'
 import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
+import ModalChangeSubscription from '@/components/ModalChangeSubscription.vue'
 </script>
 
 <template>
@@ -57,7 +58,7 @@ import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
         <div class="dashboard-row">
           <div>{{ product.title }}</div>
           <div>{{ formatPrice(product.price) }} / month</div>
-          <div class="link">Upgrade</div>
+          <div class="link" @click="showChangeSubscriptionModal = true">Upgrade</div>
         </div>
       </div>
       <div class="dashboard-buttons">
@@ -75,6 +76,10 @@ import ModalDeleteUser from '@/components/ModalDeleteUser.vue'
   <ModalEditEmail :show="showEditEmailModal" @close="showEditEmailModal = false" />
   <ModalEditPassword :show="showEditPasswordModal" @close="showEditPasswordModal = false" />
   <ModalDeleteUser :show="showDeleteUserModal" @close="showDeleteUserModal = false" />
+  <ModalChangeSubscription
+    :show="showChangeSubscriptionModal"
+    @close="showChangeSubscriptionModal = false"
+  />
 </template>
 
 <script>
@@ -85,7 +90,8 @@ export default {
       showEditUsernameModal: false,
       showEditEmailModal: false,
       showEditPasswordModal: false,
-      showDeleteUserModal: false
+      showDeleteUserModal: false,
+      showChangeSubscriptionModal: false
     }
   },
 
