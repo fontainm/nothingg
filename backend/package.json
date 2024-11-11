@@ -6,7 +6,10 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r dist ../backend",
-    "test": "NODE_ENV=test node --test"
+    "test": "npm-run-all --sequential test:api test:users test:user",
+    "test:api": "NODE_ENV=test node --test tests/api.test.js",
+    "test:users": "NODE_ENV=test node --test tests/users.test.js",
+    "test:user": "NODE_ENV=test node --test tests/user.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +29,7 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.7",
+    "npm-run-all": "^4.1.5",
     "supertest": "^7.0.0",
     "timekeeper": "^2.3.1"
   }
