@@ -19,4 +19,3 @@ And that’s it! No distractions, no complex features – just a simple app to d
 - Upgrade & Downgrade
   - Add product, description, price in db
   - add Stripe
-    test
