@@ -1,0 +1,23 @@
+## API
+
+- Products
+  - GET /products
+  - GET /products/:id
+- Users
+  - GET /users
+  - GET /users/total
+  - GET /users/:id
+  - DELETE /users/:id
+  - DELETE /users
+- User
+  - GET /user/me
+  - POST /users/signup
+  - POST /user/login
+  - POST /user/verify
+  - POST /user/resend-email
+  - POST /user/recover-password
+  - POST /user/reset-password
+  - PUT /user/username
+  - PUT /user/email
+  - PUT /user/password
+  - DELETE /user/me

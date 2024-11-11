@@ -1,40 +1,19 @@
-# Nothing
+# Nothingg
 
-Sign up for nothing
+Welcome to **Nothingg** – the project where you can do... almost nothing! The app’s main features are signing up and editing your user profile. Perfect for those who appreciate the beauty of simplicity.
 
-## API
+Check it out here: [https://nothingg.space](https://nothingg.space)
 
-- Products
-  - GET /products OK
-  - GET /products/:id OK
-- Users
-  - GET /users OK
-  - GET /users/total OK
-  - GET /users/:id OK
-  - DELETE /users/:id OK
-  - DELETE /users OK
-- User
-  - GET /user/me
-  - POST /users/signup
-  - POST /user/login
-  - POST /user/verify
-  - POST /user/resend-email
-  - POST /user/recover-password
-  - POST /user/reset-password
-  - PUT /user/username
-  - PUT /user/email
-  - PUT /user/password
-  - DELETE /user/me
+## Features
+
+- **Sign Up**: Create an account to join the Nothingg community.
+- **Edit Profile**: Once registered, you can update your profile details, ensuring that your user data is always up to date.
+
+And that’s it! No distractions, no complex features – just a simple app to do almost nothing.
 
 ## TODO
 
-- General
-
-  - Upgrade & Downgrade
-    - Add product, description, price in db
-    - add Stripe
-  - GitHub public
-
-- Testing
-
-  - Migration for test db
+- Add migration
+- Upgrade & Downgrade
+  - Add product, description, price in db
+  - add Stripe
