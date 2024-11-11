@@ -37,5 +37,4 @@ Sign up for nothing
 
 - Testing
 
-  - Test email service?
   - Migration for test db
