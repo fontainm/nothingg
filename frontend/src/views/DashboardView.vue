@@ -58,7 +58,7 @@ import ModalChangeSubscription from '@/components/ModalChangeSubscription.vue'
         <div class="dashboard-row">
           <div>{{ product.title }}</div>
           <div>{{ formatPrice(product.price) }} / month</div>
-          <div class="link" @click="showChangeSubscriptionModal = true">Upgrade</div>
+          <div class="link" @click="handleClickUpgrade">Upgrade</div>
         </div>
       </div>
       <div class="dashboard-buttons">
@@ -121,6 +121,14 @@ export default {
         this.loading = false
       }
       this.loading = false
+    },
+
+    handleClickUpgrade() {
+      if (this.user.confirmed) {
+        this.showChangeSubscriptionModal = true
+        return
+      }
+      this.$appStore.showInfoMessage('error', 'Please verify your email first')
     },
 
     formatDate(date) {
