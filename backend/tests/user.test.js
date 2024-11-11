@@ -412,7 +412,44 @@ describe('user.test.js', async () => {
     })
 
     describe('DELETE /api/user/me', () => {
-      // TODO: Test delete me
+      test('Should fail with invalid token', async () => {
+        const expectedMessage = 'Invalid token'
+
+        const response = await api
+          .delete('/api/user/me')
+          .set('Authorization', `Bearer eyInavlidtoken`)
+          .send({ password: '123456' })
+          .expect(401)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should fail with incorrect password', async () => {
+        const expectedMessage = 'Password is not correct'
+
+        const response = await api
+          .delete('/api/user/me')
+          .set('Authorization', userToken)
+          .send({ password: 'incorrectpw' })
+          .expect(401)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should succeed with valid token', async () => {
+        const expectedMessage = 'User deleted successfully'
+
+        const response = await api
+          .delete('/api/user/me')
+          .set('Authorization', userToken)
+          .send({ password: '123456' })
+          .expect(200)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
     })
   })
 })
