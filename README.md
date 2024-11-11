@@ -11,6 +11,8 @@ Check it out here: [https://nothingg.space](https://nothingg.space)
 
 And that’s it! No distractions, no complex features – just a simple app to do almost nothing.
 
+![Screenshot of Nothingg](images/preview.png)
+
 ## TODO
 
 - Add migration
