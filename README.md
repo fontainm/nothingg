@@ -15,7 +15,6 @@ And that’s it! No distractions, no complex features – just a simple app to d
 
 ## TODO
 
-- Verify new email after change
 - Add migration
 - Add versioning
 - Add social login
