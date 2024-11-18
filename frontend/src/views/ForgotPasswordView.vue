@@ -15,7 +15,7 @@ import IconMail from '~icons/mdi/email'
     <div v-else-if="step === 1" class="forgot-confirm">
       <IconMail class="icon-lg" />
       <h3>Check your mail</h3>
-      <p>You should receive a link to reset your password.</p>
+      <p>You should receive a link to reset your password. Please also check your spam folder.</p>
     </div>
   </section>
 </template>

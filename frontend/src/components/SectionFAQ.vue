@@ -21,8 +21,8 @@
           <label for="faq2" class="faq-question">Is {{ $appStore.appTitle }} really free?</label>
           <div class="faq-answer">
             <p>
-              Yes, {{ $appStore.appTitle }} is completely free. There are no hidden fees or premium
-              plans. Doing nothing costs nothing!
+              Yes, {{ $appStore.appTitle }} is completely free and has no hidden fees. Doing nothing
+              costs nothing! Upgrading to a premium plan is completely optional.
             </p>
           </div>
         </div>
