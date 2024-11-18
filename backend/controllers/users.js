@@ -68,9 +68,17 @@ export async function updateUsername(id, username) {
   return rows[0]
 }
 
+export async function setEmailChangeToken(id, newEmail, token, expirationDate) {
+  const { rows } = await db.query(
+    `UPDATE users SET new_email = $1, verify_token = $2, verify_token_expires = $3 WHERE id = $4`,
+    [newEmail, token, expirationDate, id]
+  )
+  return rows[0]
+}
+
 export async function updateEmail(id, email) {
   const { rows } = await db.query(
-    `UPDATE users SET email = $1 WHERE id = $2 RETURNING email`,
+    `UPDATE users SET email = $1, new_email = NULL WHERE id = $2 RETURNING email`,
     [email, id]
   )
   return rows[0]

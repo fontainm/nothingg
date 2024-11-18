@@ -82,6 +82,11 @@ const router = createRouter({
       component: () => import('../views/VerifyUserView.vue')
     },
     {
+      path: '/users/verify-change-email',
+      name: 'users-verify-change-email',
+      component: () => import('../views/VerifyChangeEmailView.vue')
+    },
+    {
       path: '/users/reset-password',
       name: 'users-reset-password',
       component: () => import('../views/ResetPasswordView.vue')

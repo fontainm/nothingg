@@ -18,6 +18,7 @@
   - POST /user/recover-password
   - POST /user/reset-password
   - PUT /user/username
-  - PUT /user/email
+  - POST /user/change-email
+  - POST /user/verify-change-email
   - PUT /user/password
   - DELETE /user/me

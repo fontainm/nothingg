@@ -42,7 +42,7 @@ export default {
       this.loading = true
 
       try {
-        await this.$usersStore.updateEmail(this.email)
+        await this.$usersStore.changeEmail(this.email)
         this.closeModal()
       } catch (error) {
         this.loading = false

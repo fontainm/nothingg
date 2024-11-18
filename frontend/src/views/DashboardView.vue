@@ -38,7 +38,7 @@ import ModalChangeSubscription from '@/components/ModalChangeSubscription.vue'
           <div>{{ formatDate(user.created_at) }}</div>
         </div>
         <div class="dashboard-row">
-          <div>Email confirmed</div>
+          <div>Email verified</div>
           <div>
             <IconCheckCircle class="color-success" v-if="user.confirmed" />
             <IconCloseCircle class="color-danger" v-else />

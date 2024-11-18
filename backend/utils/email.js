@@ -45,7 +45,23 @@ export const sendVerificationEmail = async (email, token) => {
   const mailOptions = {
     from: 'support@nothingg.space',
     to: email,
-    subject: 'Verify Your Email',
+    subject: 'Verify Your Email Address',
+    html: htmlContent,
+  }
+
+  await sendEmail(mailOptions)
+}
+
+export const sendEmailChangeVerificationEmail = async (email, token) => {
+  const template = await getTemplate('emailChangeVerificationEmail.html')
+  const htmlContent = replacePlaceholders(template, {
+    verificationUrl: `${process.env.DOMAIN}/users/verify-change-email?token=${token}`,
+  })
+
+  const mailOptions = {
+    from: 'support@nothingg.space',
+    to: email,
+    subject: 'Verify Your New Email Address',
     html: htmlContent,
   }
 

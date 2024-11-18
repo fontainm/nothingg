@@ -41,6 +41,15 @@ export const useUsersStore = defineStore('user', {
       this.user.username = response.username
     },
 
+    async changeEmail(newEmail) {
+      await userService.changeEmail(newEmail)
+    },
+
+    async verifyChangeEmail(token) {
+      const response = await userService.verifyChangeEmail(token)
+      this.user.email = response.email
+    },
+
     async updateEmail(email) {
       const response = await userService.updateEmail({
         email

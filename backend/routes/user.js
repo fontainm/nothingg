@@ -8,6 +8,7 @@ import {
 import {
   sendVerificationEmail,
   sendPasswordRecoveryEmail,
+  sendEmailChangeVerificationEmail,
 } from '../utils/email.js'
 import {
   usernameRules,
@@ -25,6 +26,7 @@ import {
   getUserByUsername,
   deleteUser,
   updateUsername,
+  setEmailChangeToken,
   updateEmail,
   updatePassword,
   verifyUser,
@@ -130,7 +132,7 @@ userRouter.post(
 
       delete user.password
 
-      res.success({ token, ...user }, 'User verified successfully')
+      res.success({ token, ...user }, 'Email verified successfully')
     } catch (error) {
       next(error)
     }
@@ -225,7 +227,7 @@ userRouter.post(
         !user.password_reset_token ||
         user.password_reset_expires < new Date()
       ) {
-        return res.error(null, 'Invalid or expired token')
+        return res.error(null, 'Invalid or expired token', 400)
       }
 
       const tokenCorrect = await bcrypt.compare(
@@ -234,7 +236,7 @@ userRouter.post(
       )
 
       if (!tokenCorrect) {
-        return res.error(null, 'Invalid or expired token')
+        return res.error(null, 'Invalid or expired token', 400)
       }
 
       await updatePassword(user.id, password)
@@ -262,15 +264,44 @@ userRouter.put(
   }
 )
 
-userRouter.put(
-  '/email',
+userRouter.post(
+  '/change-email',
   emailRules(),
   validationHandler,
   async (req, res, next) => {
     try {
+      const newEmail = req.body.email
+      const emailToken = uuidv4()
+      const expirationDate = new Date(Date.now() + 3600000)
       const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
-      const user = await getUserById(decodedToken.id)
-      const response = await updateEmail(user.id, req.body.email)
+      await setEmailChangeToken(
+        decodedToken.id,
+        newEmail,
+        emailToken,
+        expirationDate
+      )
+      await sendEmailChangeVerificationEmail(newEmail, emailToken)
+      res.success({ emailToken }, 'Please verify your new email address')
+    } catch (error) {
+      next(error)
+    }
+  }
+)
+
+userRouter.post(
+  '/verify-change-email',
+  verifyTokenRules(),
+  validationHandler,
+  async (req, res, next) => {
+    try {
+      const emailToken = req.query.token
+      const user = await getUserByToken(emailToken)
+      if (!user) return res.error(null, 'User not found', 404)
+      if (!user.new_email || user.verify_token_expires < new Date()) {
+        return res.error(null, 'Invalid or expired token', 400)
+      }
+
+      const response = await updateEmail(user.id, user.new_email)
       res.success(response, 'Email updated successfully')
     } catch (error) {
       next(error)

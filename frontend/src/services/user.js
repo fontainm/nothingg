@@ -27,6 +27,20 @@ const updateUsername = async (username) => {
   return response.data
 }
 
+const changeEmail = async (newEmail) => {
+  const config = {
+    headers: { Authorization: useUsersStore().token }
+  }
+
+  const response = await api.post(`${baseUrl}/change-email`, { email: newEmail }, config)
+  return response.data
+}
+
+const verifyChangeEmail = async (token) => {
+  const response = await api.post(`${baseUrl}/verify-change-email?token=${token}`)
+  return response.data
+}
+
 const updateEmail = async (email) => {
   const config = {
     headers: { Authorization: useUsersStore().token }
@@ -84,6 +98,8 @@ export default {
   createUser,
   getMe,
   updateUsername,
+  changeEmail,
+  verifyChangeEmail,
   updateEmail,
   updatePassword,
   deleteUser,

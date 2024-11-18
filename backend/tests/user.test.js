@@ -23,6 +23,7 @@ describe('user.test.js', async () => {
   let userToken = ''
   let emailVerifyToken = ''
   let passwordResetToken = ''
+  let emailChangeToken = ''
 
   describe('user.test.js', () => {
     describe('POST /api/user/signup', () => {
@@ -128,7 +129,7 @@ describe('user.test.js', async () => {
       })
 
       test('Should succeed with valid token', async () => {
-        const expectedMessage = 'User verified successfully'
+        const expectedMessage = 'Email verified successfully'
 
         const response = await api
           .post(`/api/user/verify?token=${emailVerifyToken}`)
@@ -240,6 +241,92 @@ describe('user.test.js', async () => {
           .set('Authorization', userToken)
           .send({ username })
           .expect(200)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+    })
+
+    describe('POST /api/user/change-email', () => {
+      test('Should fail with invalid auth token', async () => {
+        const expectedMessage = 'Invalid token'
+        const email = 'newemail@tester.test'
+
+        const response = await api
+          .post('/api/user/change-email')
+          .send({ email })
+          .expect(401)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should fail with invalid email address', async () => {
+        const expectedMessage = 'Please provide a valid email address'
+        const email = 'newemail'
+
+        const response = await api
+          .post('/api/user/change-email')
+          .set('Authorization', userToken)
+          .send({ email })
+          .expect(400)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should succeed with valid email', async () => {
+        const expectedMessage = 'Please verify your new email address'
+        const email = 'newemail@tester.test'
+
+        const response = await api
+          .post('/api/user/change-email')
+          .set('Authorization', userToken)
+          .send({ email })
+          .expect(200)
+
+        const { message } = response.body
+
+        assert.equal(message, expectedMessage)
+        assert.ok(response.body.data.emailToken)
+
+        emailChangeToken = response.body.data.emailToken
+      })
+    })
+
+    describe('POST /api/user/verify-change-email', () => {
+      test('Should fail with invalid token', async () => {
+        const expectedMessage = 'Invalid verification token format.'
+
+        const response = await api
+          .post(`/api/user/verify-change-email?token=invalidtoken`)
+          .expect(400)
+
+        const { message } = response.body
+        assert.equal(message, expectedMessage)
+      })
+
+      test('Should succeed with valid token', async () => {
+        const expectedMessage = 'Email updated successfully'
+        const expectedNewEmail = 'newemail@tester.test'
+
+        const response = await api
+          .post(`/api/user/verify-change-email?token=${emailChangeToken}`)
+          .expect(200)
+
+        const { message } = response.body
+        const { email } = response.body.data
+
+        assert.equal(message, expectedMessage)
+        assert.equal(email, expectedNewEmail)
+      })
+
+      test('Should fail if user tries again', async () => {
+        const expectedMessage = 'Invalid or expired token'
+
+        const response = await api
+          .post(`/api/user/verify-change-email?token=${emailChangeToken}`)
+          .expect(400)
 
         const { message } = response.body
         assert.equal(message, expectedMessage)
