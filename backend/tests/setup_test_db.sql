@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
   confirmed BOOLEAN DEFAULT false,
   product_id INTEGER DEFAULT 1 NOT NULL,
   verify_token VARCHAR(255),
-  verify_token_expires TIMESTAMP;
+  verify_token_expires TIMESTAMP,
   password_reset_token VARCHAR(255),
   password_reset_expires TIMESTAMP,
   last_email_sent TIMESTAMP,
