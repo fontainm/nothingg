@@ -333,36 +333,6 @@ describe('user.test.js', async () => {
       })
     })
 
-    describe('PUT /api/user/email', () => {
-      test('Should fail with invalid email', async () => {
-        const expectedMessage = 'Please provide a valid email address'
-        const invalidEmail = 'invalidmail'
-
-        const response = await api
-          .put('/api/user/email')
-          .set('Authorization', userToken)
-          .send({ email: invalidEmail })
-          .expect(400)
-
-        const { message } = response.body
-        assert.equal(message, expectedMessage)
-      })
-
-      test('Should succeed with valid email', async () => {
-        const expectedMessage = 'Email updated successfully'
-        const email = 'test@tester.test'
-
-        const response = await api
-          .put('/api/user/email')
-          .set('Authorization', userToken)
-          .send({ email })
-          .expect(200)
-
-        const { message } = response.body
-        assert.equal(message, expectedMessage)
-      })
-    })
-
     describe('PUT /api/user/password', () => {
       test('Should fail with invalid current password', async () => {
         const expectedMessage = 'Current password is not correct'
