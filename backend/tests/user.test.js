@@ -275,6 +275,21 @@ describe('user.test.js', async () => {
         assert.equal(message, expectedMessage)
       })
 
+      test('Should fail if email is already taken', async () => {
+        const expectedMessage = 'Email is already taken'
+        const email = 'test3@example.com'
+
+        const response = await api
+          .post('/api/user/change-email')
+          .set('Authorization', userToken)
+          .send({ email })
+          .expect(400)
+
+        const { message } = response.body
+
+        assert.equal(message, expectedMessage)
+      })
+
       test('Should succeed with valid email', async () => {
         const expectedMessage = 'Please verify your new email address'
         const email = 'newemail@tester.test'

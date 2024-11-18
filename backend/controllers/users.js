@@ -68,6 +68,14 @@ export async function updateUsername(id, username) {
   return rows[0]
 }
 
+export async function isEmailInUse(email) {
+  const result = await db.query(
+    `SELECT COUNT(*) FROM users WHERE email = $1 OR new_email = $1`,
+    [email]
+  )
+  return result.rows[0].count > 0
+}
+
 export async function setEmailChangeToken(id, newEmail, token, expirationDate) {
   const { rows } = await db.query(
     `UPDATE users SET new_email = $1, verify_token = $2, verify_token_expires = $3 WHERE id = $4`,

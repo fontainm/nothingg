@@ -26,6 +26,7 @@ import {
   getUserByUsername,
   deleteUser,
   updateUsername,
+  isEmailInUse,
   setEmailChangeToken,
   updateEmail,
   updatePassword,
@@ -271,6 +272,12 @@ userRouter.post(
   async (req, res, next) => {
     try {
       const newEmail = req.body.email
+
+      const emailExists = await isEmailInUse(newEmail)
+      if (emailExists) {
+        return res.error(null, 'Email is already taken', 400)
+      }
+
       const emailToken = uuidv4()
       const expirationDate = new Date(Date.now() + 3600000)
       const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
