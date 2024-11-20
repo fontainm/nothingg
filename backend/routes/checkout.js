@@ -3,6 +3,8 @@ import { protectRoute } from '../utils/middleware.js'
 import config from '../utils/config.js'
 import Stripe from 'stripe'
 import { upgradeUser } from '../controllers/users.js'
+import jwt from 'jsonwebtoken'
+import { getTokenFrom } from '../utils/helpers.js'
 
 const checkoutRouter = express.Router()
 const stripe = new Stripe(config.STRIPE_PRIVATE_KEY)
@@ -50,9 +52,10 @@ checkoutRouter.post('/webhook', async (req, res, next) => {
 
     if (event.type === 'checkout.session.completed') {
       await upgradeUser(user.id)
+      return res.success(null, 'Upgrade successful!')
     }
 
-    res.success(null, 'Upgrade was successful!')
+    res.success(null, 'Webhook received!')
   } catch (error) {
     next(error)
   }
