@@ -39,11 +39,11 @@ import IconCheck from '~icons/mdi/check'
 
         <div class="products-list__item">
           <div class="products-list__wrapper">
-            <h3>{{ $appStore.appTitle }}+</h3>
-            <p class="products-list__price">€ 1,- per month</p>
+            <h3>{{ $appStore.appTitle }} PRO</h3>
+            <p class="products-list__price">5€ - once - forever</p>
             <p class="products-list__info">
-              {{ $appStore.appTitle }}+ doesn't do more, but it means more. By choosing
-              {{ $appStore.appTitle }}+, you're not just signing up - you're supporting a solo
+              {{ $appStore.appTitle }} PRO doesn't do more, but it means more. By choosing
+              {{ $appStore.appTitle }} PRO, you're not just signing up - you're supporting a solo
               developer who built this project from scratch. Enjoy the same minimalism as the free
               tier, plus a warm sense of contribution.
             </p>
@@ -54,7 +54,7 @@ import IconCheck from '~icons/mdi/check'
               </li>
               <li>
                 <IconCheck />
-                <p>A heartfelt thank you from the developer.</p>
+                <p>Pay once, and enjoy doing nothing forever.</p>
               </li>
               <li>
                 <IconCheck />
@@ -62,7 +62,7 @@ import IconCheck from '~icons/mdi/check'
               </li>
             </ul>
             <RouterLink to="/signup" class="products-list__cta btn">
-              Start {{ $appStore.appTitle }}+
+              Start {{ $appStore.appTitle }} PRO
             </RouterLink>
           </div>
         </div>

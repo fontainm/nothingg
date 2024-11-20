@@ -29,7 +29,20 @@
 
         <div class="faq-item">
           <input type="radio" name="accordion" id="faq3" />
-          <label for="faq3" class="faq-question">Can I delete my account?</label>
+          <label for="faq3" class="faq-question">
+            What is {{ $appStore.appTitle }} PRO, and why should I get it?
+          </label>
+          <div class="faq-answer">
+            <p>
+              Nothingg Pro doesn't offer more features—it offers more meaning. For just 5€, you'll
+              support the solo developer behind this project.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <input type="radio" name="accordion" id="faq4" />
+          <label for="faq4" class="faq-question">Can I delete my account?</label>
           <div class="faq-answer">
             <p>
               Yes, you can delete your account anytime. However, after deleting it, you'll have
@@ -39,8 +52,8 @@
         </div>
 
         <div class="faq-item">
-          <input type="radio" name="accordion" id="faq4" />
-          <label for="faq4" class="faq-question">What if I forget my password?</label>
+          <input type="radio" name="accordion" id="faq5" />
+          <label for="faq5" class="faq-question">What if I forget my password?</label>
           <div class="faq-answer">
             <p>
               If you forget your password, you can easily reset it by clicking the "Forgot Password"

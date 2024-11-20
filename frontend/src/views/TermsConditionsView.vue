@@ -62,20 +62,39 @@
         deleted.
       </p>
 
-      <h3>9. Governing Law</h3>
+      <h3>9. {{ $appStore.appTitle }} PRO Plan</h3>
+      <ul>
+        <li>
+          Payment: The {{ $appStore.appTitle }} PRO plan is a one-time payment of 5€, granting you
+          lifetime access to the same features as the free tier.
+        </li>
+        <li>No Refunds: Payments for {{ $appStore.appTitle }} PRO are non-refundable.</li>
+        <li>
+          Support: By purchasing {{ $appStore.appTitle }} PRO, you acknowledge that your payment
+          supports the development and maintenance of this project by a solo developer.
+        </li>
+      </ul>
+
+      <h3>10. Governing Law</h3>
       <p>
         These Terms and Conditions are governed by and construed in accordance with the laws of
         Austria, and you submit to the exclusive jurisdiction of the courts in that location.
       </p>
 
-      <h3>10. Changes to the Terms</h3>
+      <h3>11. Changes to the Terms</h3>
       <p>
         We may update these Terms and Conditions from time to time. Any changes will be posted on
         this page, and you are encouraged to review them periodically. Continued use of the service
         constitutes acceptance of any changes.
       </p>
 
-      <h3>11. Contact Information</h3>
+      <h3>12. Changes to the Service</h3>
+      <p>
+        We reserve the right to modify or discontinue any aspect of the service, including the
+        {{ $appStore.appTitle }} PRO plan, at any time without prior notice.
+      </p>
+
+      <h3>13. Contact Information</h3>
       <p>
         If you have any questions about these Terms and Conditions, please contact us at:
         <a :href="`mailto:${$appStore.appEmail}`">{{ $appStore.appEmail }}</a>
@@ -90,6 +109,10 @@
 
   h3 {
     margin: 32px 0 16px 0;
+  }
+
+  ul {
+    padding: 0 32px;
   }
 }
 </style>
