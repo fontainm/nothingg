@@ -1,9 +1,8 @@
 import express from 'express'
 import Stripe from 'stripe'
 import jwt from 'jsonwebtoken'
-import bodyParser from 'body-parser'
 import config from '../utils/config.js'
-import { upgradeUser } from '../controllers/users.js'
+import { upgradeUser, createPayment } from '../controllers/users.js'
 import { getTokenFrom } from '../utils/helpers.js'
 
 const checkoutRouter = express.Router()
@@ -52,9 +51,10 @@ checkoutRouter.post('/webhook', async (req, res, next) => {
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object
-      const userId = session.metadata.userId
 
-      await upgradeUser(userId)
+      await upgradeUser(session.metadata.userId)
+      await createPayment(session)
+
       return res.success(session, 'Upgrade successful!')
     }
 

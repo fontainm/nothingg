@@ -24,3 +24,14 @@ CREATE TABLE IF NOT EXISTS users (
   CONSTRAINT unique_username UNIQUE (username)
 );
 
+CREATE TABLE payments (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(id),
+  product_id INTEGER NOT NULL REFERENCES products(id),
+  amount INTEGER NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  stripe_payment_intent_id VARCHAR(255),
+  stripe_session_id VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

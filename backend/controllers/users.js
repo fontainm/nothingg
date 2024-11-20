@@ -144,6 +144,22 @@ export async function upgradeUser(id) {
   return rows[0]
 }
 
+export async function createPayment(session) {
+  const { rows } = await db.query(
+    `INSERT INTO payments (user_id, product_id, amount, status, stripe_payment_intent_id, stripe_session_id)
+    VALUES ($1, $2, $3, $4, $5, $6)`,
+    [
+      session.metadata.userId,
+      session.metadata.productId || 2,
+      session.amount_total,
+      session.payment_status,
+      session.payment_intent,
+      session.id,
+    ]
+  )
+  return rows[0]
+}
+
 export async function deleteUser(id) {
   await db.query('DELETE FROM users WHERE id = $1', [id])
 }
