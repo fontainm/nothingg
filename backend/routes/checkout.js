@@ -1,9 +1,9 @@
 import express from 'express'
-import { protectRoute } from '../utils/middleware.js'
-import config from '../utils/config.js'
 import Stripe from 'stripe'
-import { upgradeUser } from '../controllers/users.js'
 import jwt from 'jsonwebtoken'
+import bodyParser from 'body-parser'
+import config from '../utils/config.js'
+import { upgradeUser } from '../controllers/users.js'
 import { getTokenFrom } from '../utils/helpers.js'
 
 const checkoutRouter = express.Router()
@@ -41,27 +41,31 @@ checkoutRouter.post('/sessions', async (req, res, next) => {
   }
 })
 
-checkoutRouter.post('/webhook', async (req, res, next) => {
-  const signature = req.headers['stripe-signature']
-  try {
-    const event = stripe.webhooks.constructEvent(
-      req.body,
-      signature,
-      endpointSecret
-    )
+checkoutRouter.post(
+  '/webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  async (req, res, next) => {
+    const signature = req.headers['stripe-signature']
+    try {
+      const event = stripe.webhooks.constructEvent(
+        req.body,
+        signature,
+        endpointSecret
+      )
 
-    if (event.type === 'checkout.session.completed') {
-      const session = event.data.object
-      const userId = session.metadata.userId
+      if (event.type === 'checkout.session.completed') {
+        const session = event.data.object
+        const userId = session.metadata.userId
 
-      await upgradeUser(userId)
-      return res.success(session, 'Upgrade successful!')
+        await upgradeUser(userId)
+        return res.success(session, 'Upgrade successful!')
+      }
+
+      res.success(null, 'Webhook received!')
+    } catch (error) {
+      next(error)
     }
-
-    res.success(null, 'Webhook received!')
-  } catch (error) {
-    next(error)
   }
-})
+)
 
 export default checkoutRouter
