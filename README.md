@@ -16,5 +16,6 @@ And that’s it! No distractions, no complex features – just a simple app to d
 ## TODO
 
 - Add migration
+- Add dev.nothingg.space
 - Add versioning
 - Add social login
