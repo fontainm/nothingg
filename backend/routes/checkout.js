@@ -39,6 +39,9 @@ checkoutRouter.post('/sessions', protectRoute, async (req, res, next) => {
 checkoutRouter.post('/webhook', async (req, res, next) => {
   const signature = req.headers['stripe-signature']
   try {
+    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+    const user = await getUserById(decodedToken.id)
+
     const event = stripe.webhooks.constructEvent(
       req.body,
       signature,
@@ -46,11 +49,10 @@ checkoutRouter.post('/webhook', async (req, res, next) => {
     )
 
     if (event.type === 'checkout.session.completed') {
-      const session = event.data.object
-      await upgradeUser(session)
+      await upgradeUser(user.id)
     }
 
-    res.success(null, 'Webhook received')
+    res.success(null, 'Upgrade was successful!')
   } catch (error) {
     next(error)
   }
