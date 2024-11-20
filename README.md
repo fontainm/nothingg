@@ -18,6 +18,3 @@ And that’s it! No distractions, no complex features – just a simple app to d
 - Add migration
 - Add versioning
 - Add social login
-- Upgrade & Downgrade
-  - Add product, description, price in db
-  - add Stripe

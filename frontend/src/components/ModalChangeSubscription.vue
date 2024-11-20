@@ -7,7 +7,6 @@ import AppEditModal from '@/components/AppEditModal.vue'
     :isVisible="show"
     :title="'Change Subscription'"
     :loading="loading"
-    :hideButtons="true"
     @submit="checkoutProduct"
     @close="closeModal"
   >

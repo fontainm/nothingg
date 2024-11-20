@@ -10,13 +10,16 @@ const checkoutRouter = express.Router()
 const stripe = new Stripe(config.STRIPE_PRIVATE_KEY)
 const endpointSecret = config.STRIPE_SIGNING_SECRET
 
-checkoutRouter.post('/sessions', protectRoute, async (req, res, next) => {
+checkoutRouter.post('/sessions', async (req, res, next) => {
   try {
+    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
       success_url: `${process.env.DOMAIN}/success`,
       cancel_url: `${process.env.DOMAIN}/dashboard`,
+      metadata: { userId: decodedToken.id },
       line_items: [
         {
           price_data: {
@@ -41,9 +44,6 @@ checkoutRouter.post('/sessions', protectRoute, async (req, res, next) => {
 checkoutRouter.post('/webhook', async (req, res, next) => {
   const signature = req.headers['stripe-signature']
   try {
-    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
-    const user = await getUserById(decodedToken.id)
-
     const event = stripe.webhooks.constructEvent(
       req.body,
       signature,
@@ -51,8 +51,11 @@ checkoutRouter.post('/webhook', async (req, res, next) => {
     )
 
     if (event.type === 'checkout.session.completed') {
-      await upgradeUser(user.id)
-      return res.success(null, 'Upgrade successful!')
+      const session = event.data.object
+      const userId = session.metadata.userId
+
+      await upgradeUser(userId)
+      return res.success(session, 'Upgrade successful!')
     }
 
     res.success(null, 'Webhook received!')
