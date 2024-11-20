@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS products (
   price_in_cents INTEGER NOT NULL
 );
 
-INSERT INTO products (title, price) VALUES ('Nothingg', 0), ('Nothingg PRO', 500);
+INSERT INTO products (title, price_in_cents) VALUES ('Nothingg', 0), ('Nothingg PRO', 500);
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGSERIAL PRIMARY KEY,
