@@ -9,7 +9,15 @@ import { responseHandler, errorHandler } from './utils/middleware.js'
 const app = express()
 
 app.use(cors())
-app.use(express.json())
+app.use(
+  express.json({
+    verify: (req, res, buf) => {
+      if (req.originalUrl === '/api/checkout/webhook') {
+        req.rawBody = buf.toString() // Save raw body for Stripe
+      }
+    },
+  })
+)
 app.use(express.static('dist'))
 
 app.use(responseHandler)

@@ -27,7 +27,7 @@ checkoutRouter.post('/sessions', async (req, res, next) => {
             product_data: {
               name: 'Nothingg PRO',
               description:
-                'Support the developer with a lifetime of Nothingg Pro.',
+                'Support the developer with a lifetime of Nothingg PRO.',
             },
             unit_amount: 500,
           },
@@ -41,31 +41,27 @@ checkoutRouter.post('/sessions', async (req, res, next) => {
   }
 })
 
-checkoutRouter.post(
-  '/webhook',
-  bodyParser.raw({ type: 'application/json' }),
-  async (req, res, next) => {
-    const signature = req.headers['stripe-signature']
-    try {
-      const event = stripe.webhooks.constructEvent(
-        req.body,
-        signature,
-        endpointSecret
-      )
+checkoutRouter.post('/webhook', async (req, res, next) => {
+  const signature = req.headers['stripe-signature']
+  try {
+    const event = stripe.webhooks.constructEvent(
+      req.body,
+      signature,
+      endpointSecret
+    )
 
-      if (event.type === 'checkout.session.completed') {
-        const session = event.data.object
-        const userId = session.metadata.userId
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object
+      const userId = session.metadata.userId
 
-        await upgradeUser(userId)
-        return res.success(session, 'Upgrade successful!')
-      }
-
-      res.success(null, 'Webhook received!')
-    } catch (error) {
-      next(error)
+      await upgradeUser(userId)
+      return res.success(session, 'Upgrade successful!')
     }
+
+    res.success(null, 'Webhook received!')
+  } catch (error) {
+    next(error)
   }
-)
+})
 
 export default checkoutRouter
