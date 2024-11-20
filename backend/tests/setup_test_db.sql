@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS products (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  price DECIMAL NOT NULL
+  price_in_cents INTEGER NOT NULL
 );
 
-INSERT INTO products (title, price) VALUES ('Nothingg', 0), ('Nothingg PRO', 5.00);
+INSERT INTO products (title, price) VALUES ('Nothingg', 0), ('Nothingg PRO', 500);
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGSERIAL PRIMARY KEY,

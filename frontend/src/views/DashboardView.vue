@@ -57,7 +57,7 @@ import ModalChangeSubscription from '@/components/ModalChangeSubscription.vue'
         <h3>Your Product</h3>
         <div class="dashboard-row">
           <div>{{ product.title }}</div>
-          <div>{{ formatPrice(product.price) }} / month</div>
+          <div>{{ formatPrice(product.price_in_cents) }}</div>
           <div class="link" @click="handleClickUpgrade">Upgrade</div>
         </div>
       </div>
@@ -140,7 +140,7 @@ export default {
     },
 
     formatPrice(price) {
-      return `€ ${price}`
+      return `€ ${price / 100}`
     }
   }
 }

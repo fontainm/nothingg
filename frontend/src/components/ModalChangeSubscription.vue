@@ -7,10 +7,10 @@ import AppEditModal from '@/components/AppEditModal.vue'
     :isVisible="show"
     :title="'Change Subscription'"
     :loading="loading"
-    :hide-buttons="true"
+    @submit="checkoutProduct"
     @close="closeModal"
   >
-    <p>I'm sorry. This feature is not available yet.</p>
+    <p>Thank you for upgrading!</p>
   </AppEditModal>
 </template>
 
@@ -31,6 +31,17 @@ export default {
   },
 
   methods: {
+    async checkoutProduct(event) {
+      event.preventDefault()
+      this.loading = true
+
+      try {
+        await this.$usersStore.upgradeUser()
+      } catch (error) {
+        this.loading = false
+      }
+    },
+
     closeModal() {
       this.loading = false
       this.$emit('close')
