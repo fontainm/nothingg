@@ -7,10 +7,11 @@ import AppEditModal from '@/components/AppEditModal.vue'
     :isVisible="show"
     :title="'Change Subscription'"
     :loading="loading"
+    :hideButtons="true"
     @submit="checkoutProduct"
     @close="closeModal"
   >
-    <p>Thank you for upgrading!</p>
+    <p>Sorry, this feature is not available yet!</p>
   </AppEditModal>
 </template>
 
