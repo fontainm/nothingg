@@ -45,7 +45,7 @@ checkoutRouter.post('/webhook', async (req, res, next) => {
   const signature = req.headers['stripe-signature']
   try {
     const event = stripe.webhooks.constructEvent(
-      req.body,
+      req.rawBody,
       signature,
       endpointSecret
     )
