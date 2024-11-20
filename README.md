@@ -17,8 +17,8 @@ And that’s it! No distractions, no complex features – just a simple app to d
 
 - Payment
 
-  - Add payments table
   - Add checkout tests
+  - Handle Payment incomplete
 
 - Add migration
 - Add dev.nothingg.space
