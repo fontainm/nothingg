@@ -5,12 +5,16 @@ import AppEditModal from '@/components/AppEditModal.vue'
 <template>
   <AppEditModal
     :isVisible="show"
-    :title="'Change Subscription'"
+    :title="`Upgrade to ${$appStore.appTitle} PRO`"
+    confirmText="Checkout"
     :loading="loading"
     @submit="checkoutProduct"
     @close="closeModal"
   >
-    <p>Sorry, this feature is not available yet!</p>
+    <p>
+      Support the project and upgrade to {{ $appStore.appTitle }} PRO! Your payment will be securely
+      processed by Stripe.
+    </p>
   </AppEditModal>
 </template>
 
@@ -66,4 +70,8 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';
+
+p {
+  margin-bottom: 16px;
+}
 </style>

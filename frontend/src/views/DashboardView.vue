@@ -58,7 +58,7 @@ import ModalChangeSubscription from '@/components/ModalChangeSubscription.vue'
         <div class="dashboard-row">
           <div>{{ product.title }}</div>
           <div>{{ formatPrice(product.price_in_cents) }}</div>
-          <div class="link" @click="handleClickUpgrade">Upgrade</div>
+          <div v-if="product.id === 1" class="link" @click="handleClickUpgrade">Upgrade</div>
         </div>
       </div>
       <div class="dashboard-buttons">

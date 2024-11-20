@@ -21,7 +21,7 @@ import IconClose from '~icons/mdi/close'
             <button class="btn btn-small btn-danger" type="button" @click="closeModal">
               Cancel
             </button>
-            <SubmitButton class="btn-small" text="Confirm" :loading="loading" />
+            <SubmitButton class="btn-small" :text="confirmText" :loading="loading" />
           </div>
         </form>
       </div>
@@ -43,6 +43,10 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    confirmText: {
+      type: String,
+      default: 'Confirm'
     },
     hideButtons: {
       type: Boolean,
