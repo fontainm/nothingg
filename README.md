@@ -15,6 +15,11 @@ And that’s it! No distractions, no complex features – just a simple app to d
 
 ## TODO
 
+- Payment
+
+  - Add payments table
+  - Add checkout tests
+
 - Add migration
 - Add dev.nothingg.space
 - Add versioning
