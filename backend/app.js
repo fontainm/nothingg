@@ -3,6 +3,7 @@ import cors from 'cors'
 import userRouter from './routes/user.js'
 import usersRouter from './routes/users.js'
 import productsRouter from './routes/products.js'
+import checkoutRouter from './routes/checkout.js'
 import { responseHandler, errorHandler } from './utils/middleware.js'
 
 const app = express()
@@ -20,6 +21,7 @@ app.get('/api/health', async (req, res) => {
 app.use('/api/user', userRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/products', productsRouter)
+app.use('/api/checkout', checkoutRouter)
 
 app.get('*', (req, res) => {
   res.sendFile('index.html', { root: 'dist' })

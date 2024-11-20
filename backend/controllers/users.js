@@ -136,6 +136,11 @@ export async function unsetPasswordResetToken(id) {
   return rows[0]
 }
 
+export async function upgradeUser(session) {
+  console.log(session)
+  // TODO: update user product id
+}
+
 export async function deleteUser(id) {
   await db.query('DELETE FROM users WHERE id = $1', [id])
 }

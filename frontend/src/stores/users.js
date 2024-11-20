@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import userService from '../services/user'
 import usersService from '../services/users'
+import checkoutService from '../services/checkout'
 
 export const useUsersStore = defineStore('user', {
   state: () => ({
@@ -93,6 +94,10 @@ export const useUsersStore = defineStore('user', {
       const user = await userService.verifyUser(token)
       this.setUser(user)
       this.setToken(user.token)
+    },
+
+    async upgradeUser() {
+      await checkoutService.createCheckoutSession()
     },
 
     logoutUser() {

@@ -6,10 +6,11 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r dist ../backend",
-    "test": "npm-run-all --sequential test:api test:users test:user",
+    "test": "npm-run-all --sequential test:api test:users test:user test:products",
     "test:api": "NODE_ENV=test node --test tests/api.test.js",
     "test:users": "NODE_ENV=test node --test tests/users.test.js",
-    "test:user": "NODE_ENV=test node --test tests/user.test.js"
+    "test:user": "NODE_ENV=test node --test tests/user.test.js",
+    "test:products": "NODE_ENV=test node --test tests/products.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.16",
     "pg": "^8.13.0",
+    "stripe": "^17.3.1",
     "uuid": "^11.0.2"
   },
   "devDependencies": {
