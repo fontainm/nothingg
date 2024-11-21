@@ -9,16 +9,11 @@ Check it out here: <a href="https://nothingg.space" target="_blank">https://noth
 - **Sign Up**: Create an account to join the Nothingg community.
 - **Edit Profile**: Once registered, you can update your profile details, ensuring that your user data is always up to date.
 
-And that’s it! No distractions, no complex features – just a simple app to do almost nothing.
+And that's it! No distractions, no complex features – just a simple app to do almost nothing.
 
 ![Screenshot of Nothingg](images/preview.png)
 
 ## TODO
-
-- Payment
-
-  - Add checkout tests
-  - Handle Payment incomplete
 
 - Add migration
 - Add dev.nothingg.space
