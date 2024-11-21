@@ -40,11 +40,25 @@ describe('products.test.js', () => {
         .expect(404)
     })
 
-    test('Should return one product', async () => {
+    test('Should return first product tier', async () => {
       const expectedProductTitle = 'Nothingg'
 
       const response = await api
         .get('/api/products/1')
+        .set('x-auth-token', authToken)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+      const product = response.body.data
+
+      assert.equal(product.title, expectedProductTitle)
+    })
+
+    test('Should return second product tier', async () => {
+      const expectedProductTitle = 'Nothingg PRO'
+
+      const response = await api
+        .get('/api/products/2')
         .set('x-auth-token', authToken)
         .expect(200)
         .expect('Content-Type', /application\/json/)

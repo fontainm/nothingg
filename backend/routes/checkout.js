@@ -12,7 +12,6 @@ const endpointSecret = config.STRIPE_SIGNING_SECRET
 checkoutRouter.post('/sessions', async (req, res, next) => {
   try {
     const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
