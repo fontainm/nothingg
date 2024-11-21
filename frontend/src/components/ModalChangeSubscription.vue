@@ -11,10 +11,14 @@ import AppEditModal from '@/components/AppEditModal.vue'
     @submit="checkoutProduct"
     @close="closeModal"
   >
-    <p>
-      Support the project and upgrade to {{ $appStore.appTitle }} PRO! Your payment will be securely
-      processed by Stripe.
-    </p>
+    <p>Support the project and upgrade to {{ $appStore.appTitle }} PRO!</p>
+    <div class="upgrade-overview">
+      <div class="upgrade-product">
+        {{ $appStore.appTitle }}<span class="badge primary-badge small-badge">PRO</span>
+      </div>
+      <div>5€ <span class="small">(one-time payment)</span></div>
+    </div>
+    <p>Your payment will be securely processed by Stripe.</p>
   </AppEditModal>
 </template>
 
@@ -70,6 +74,24 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/variables.scss';
+
+div.upgrade-overview {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid $primary-color;
+  border-radius: 10px;
+
+  .upgrade-product {
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .small {
+    font-size: 12px;
+  }
+}
 
 p {
   margin-bottom: 16px;

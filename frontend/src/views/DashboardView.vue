@@ -59,7 +59,7 @@ import ModalChangeSubscription from '@/components/ModalChangeSubscription.vue'
           <div>{{ product.title }}</div>
           <div>
             {{ formatPrice(product.price_in_cents)
-            }}<span v-if="product.id === 2" class="dashboard-badge">PAID</span>
+            }}<span v-if="product.id === 2" class="badge success-badge small-badge">PAID</span>
           </div>
           <div v-if="product.id === 1" class="link" @click="handleClickUpgrade">Upgrade</div>
         </div>
@@ -198,16 +198,6 @@ export default {
   .dashboard-buttons {
     display: flex;
     justify-content: space-between;
-  }
-
-  .dashboard-badge {
-    background: $success-color;
-    font-size: 12px;
-    margin-left: 8px;
-    padding: 0 8px;
-    font-weight: 700;
-    border-radius: 4px;
-    color: white;
   }
 
   &.dashboard-disabled {

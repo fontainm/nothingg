@@ -9,6 +9,7 @@ const SQL_USER = process.env.SQL_USER
 const SQL_PASSWORD = process.env.SQL_PASSWORD
 const STRIPE_PRIVATE_KEY = process.env.STRIPE_PRIVATE_KEY
 const STRIPE_SIGNING_SECRET = process.env.STRIPE_SIGNING_SECRET
+const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID
 
 export default {
   PORT,
@@ -18,4 +19,5 @@ export default {
   SQL_PASSWORD,
   STRIPE_PRIVATE_KEY,
   STRIPE_SIGNING_SECRET,
+  STRIPE_PRICE_ID,
 }

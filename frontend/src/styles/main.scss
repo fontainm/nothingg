@@ -134,6 +134,27 @@ svg.icon-lg {
   color: $error-color;
 }
 
+span.badge {
+  color: white;
+  padding: 0 8px;
+  margin-left: 8px;
+  border-radius: 10px;
+
+  &.primary-badge {
+    background: $primary-gradient;
+  }
+
+  &.success-badge {
+    background: $success-color;
+  }
+
+  &.small-badge {
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+  }
+}
+
 form {
   display: flex;
   flex-direction: column;

@@ -23,6 +23,48 @@
         </li>
       </ul>
 
+      <h3>Types of Payment Data Collected</h3>
+
+      <p>We collect transaction-related information such as:</p>
+      <ul>
+        <li>Product details</li>
+        <li>Transaction amount</li>
+        <li>Currency used for the transaction</li>
+        <li>Unique payment identifiers provided by Stripe</li>
+        <li>Transaction status</li>
+        <li>Timestamps for transaction tracking</li>
+      </ul>
+
+      <p>
+        We do <strong>not</strong> store sensitive payment information such as credit card numbers.
+        Payment processing is handled securely through our third-party provider, Stripe.
+      </p>
+
+      <h3>Purpose of Collecting Payment Data</h3>
+
+      <p>The data we collect is used for the following purposes:</p>
+
+      <ul>
+        <li>To process and track payments for orders and subscriptions.</li>
+        <li>To verify payment statuses and manage order fulfillment.</li>
+        <li>To provide customer support and resolve issues related to transactions.</li>
+      </ul>
+
+      <h3>Payment Processing and Third-Party Providers</h3>
+
+      <p>
+        We use Stripe as our payment processor. When you make a purchase, your payment is processed
+        by Stripe, and Stripe generates payment-related identifiers such as `payment_intent_id` and
+        `session_id`. These identifiers are used to track the payment status and facilitate secure
+        transactions.
+      </p>
+
+      <p>
+        We do not store your sensitive payment information, such as your credit card details. Stripe
+        handles all payment processing securely in accordance with their own privacy and security
+        policies.
+      </p>
+
       <h3>How We Use Your Information</h3>
       <p>We use your information for the following purposes:</p>
       <ul>

@@ -39,7 +39,7 @@ import IconCheck from '~icons/mdi/check'
 
         <div class="products-list__item">
           <div class="products-list__wrapper">
-            <h3>{{ $appStore.appTitle }} PRO</h3>
+            <h3>{{ $appStore.appTitle }} <span class="badge primary-badge">PRO</span></h3>
             <p class="products-list__price">5€ - once - forever</p>
             <p class="products-list__info">
               {{ $appStore.appTitle }} PRO doesn't do more, but it means more. By choosing

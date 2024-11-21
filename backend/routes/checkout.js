@@ -2,7 +2,11 @@ import express from 'express'
 import Stripe from 'stripe'
 import jwt from 'jsonwebtoken'
 import config from '../utils/config.js'
-import { upgradeUser, createPayment } from '../controllers/users.js'
+import {
+  getUserById,
+  upgradeUser,
+  createPayment,
+} from '../controllers/users.js'
 import { getTokenFrom } from '../utils/helpers.js'
 
 const checkoutRouter = express.Router()
@@ -12,23 +16,18 @@ const endpointSecret = config.STRIPE_SIGNING_SECRET
 checkoutRouter.post('/sessions', async (req, res, next) => {
   try {
     const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+    const user = await getUserById(decodedToken.id)
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
       success_url: `${process.env.DOMAIN}/success`,
       cancel_url: `${process.env.DOMAIN}/dashboard`,
-      metadata: { userId: decodedToken.id },
+      metadata: { userId: user.id },
+      customer_email: user.email,
       line_items: [
         {
-          price_data: {
-            currency: 'eur',
-            product_data: {
-              name: 'Nothingg PRO',
-              description:
-                'Support the developer with a lifetime of Nothingg PRO.',
-            },
-            unit_amount: 500,
-          },
+          price: config.STRIPE_PRICE_ID,
           quantity: 1,
         },
       ],
