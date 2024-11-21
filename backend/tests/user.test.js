@@ -205,6 +205,13 @@ describe('user.test.js', async () => {
 
       test('Should succeed with valid token', async () => {
         const expectedMessage = 'User fetched successfully'
+        const expectedData = {
+          id: 1,
+          username: 'testuser1',
+          product_id: 1,
+          confirmed: false,
+          email: 'test1@example.com',
+        }
 
         const response = await api
           .get('/api/user/me')
@@ -213,7 +220,15 @@ describe('user.test.js', async () => {
           .expect('Content-Type', /application\/json/)
 
         const { message } = response.body
+        const { id, username, product_id, confirmed, email } =
+          response.body.data
+
         assert.equal(message, expectedMessage)
+        assert.equal(id, expectedData.id)
+        assert.equal(username, expectedData.username)
+        assert.equal(product_id, expectedData.product_id)
+        assert.equal(confirmed, expectedData.confirmed)
+        assert.equal(email, expectedData.email)
       })
     })
 
