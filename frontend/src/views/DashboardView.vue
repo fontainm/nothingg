@@ -1,6 +1,6 @@
 <script setup>
 import IconCheckCircle from '~icons/mdi/check-circle'
-import IconCloseCircle from '~icons/mdi/close-circle'
+import IconAlertCircle from '~icons/mdi/alert-circle'
 import ModalEditUsername from '@/components/ModalEditUsername.vue'
 import ModalEditEmail from '@/components/ModalEditEmail.vue'
 import ModalEditPassword from '@/components/ModalEditPassword.vue'
@@ -41,7 +41,7 @@ import ModalChangeSubscription from '@/components/ModalChangeSubscription.vue'
           <div>Email verified</div>
           <div>
             <IconCheckCircle class="color-success" v-if="user.confirmed" />
-            <IconCloseCircle class="color-danger" v-else />
+            <IconAlertCircle class="color-danger" v-else />
           </div>
           <div
             v-if="!user.confirmed"
