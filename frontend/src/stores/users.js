@@ -66,7 +66,7 @@ export const useUsersStore = defineStore('user', {
     },
 
     async deleteUser(password) {
-      await usersService.deleteUser({ password })
+      await userService.deleteUser({ password })
     },
 
     async fetchUser() {
