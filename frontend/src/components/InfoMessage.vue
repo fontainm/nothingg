@@ -1,13 +1,13 @@
 <script setup>
 import IconCheckCircle from '~icons/mdi/check-circle'
-import IconCloseCircle from '~icons/mdi/close-circle'
+import IconAlertCircle from '~icons/mdi/alert-circle'
 </script>
 
 <template>
   <Transition>
     <div v-if="infoMessage !== null" class="info-message" :class="infoMessage.type">
       <IconCheckCircle v-if="infoMessage.type === 'success'" />
-      <IconCloseCircle v-if="infoMessage.type === 'error'" />
+      <IconAlertCircle v-if="infoMessage.type === 'error'" />
       <p>
         {{ infoMessage.message }}
       </p>
