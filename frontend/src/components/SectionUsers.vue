@@ -30,7 +30,7 @@ import IconCommentQuote from '~icons/mdi/comment-quote'
           <div class="users-quote__icon">
             <IconCommentQuote />
           </div>
-          <p>"I feel indifferent about it."</p>
+          <p>"The {{ $appStore.appTitle }} PRO plan is totally worth every penny."</p>
         </div>
       </div>
     </div>
