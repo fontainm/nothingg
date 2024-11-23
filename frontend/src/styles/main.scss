@@ -91,6 +91,13 @@ li {
   color: $black;
 }
 
+span,
+p {
+  &.text-small {
+    font-size: 12px;
+  }
+}
+
 .link,
 a {
   text-decoration: none;

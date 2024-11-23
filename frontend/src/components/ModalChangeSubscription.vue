@@ -16,9 +16,19 @@ import AppEditModal from '@/components/AppEditModal.vue'
       <div class="upgrade-product">
         {{ $appStore.appTitle }}<span class="badge primary-badge small-badge">PRO</span>
       </div>
-      <div>5€ <span class="small">(one-time payment)</span></div>
+      <div>5€ <span class="text-small">(one-time payment)</span></div>
     </div>
-    <p>Your payment will be securely processed by Stripe.</p>
+    <p>
+      <label>
+        <input type="checkbox" name="agree" required />
+        I have read and agree to the
+        <RouterLink to="/terms-and-conditions" target="_blank">Terms & Conditions</RouterLink>
+      </label>
+    </p>
+    <p class="text-small">
+      Your payment will be securely processed by
+      <a href="https://stripe.com" target="_blank">Stripe</a>.
+    </p>
   </AppEditModal>
 </template>
 
@@ -86,10 +96,6 @@ div.upgrade-overview {
   .upgrade-product {
     font-weight: 900;
     text-transform: uppercase;
-  }
-
-  .small {
-    font-size: 12px;
   }
 }
 
