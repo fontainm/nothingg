@@ -72,7 +72,7 @@ import IconCheck from '~icons/mdi/check'
 </template>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 .products {
   .products-list {

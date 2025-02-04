@@ -23,7 +23,7 @@ import IconEmail from '~icons/mdi/email-outline'
 </template>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 footer {
   background: $primary-gradient;

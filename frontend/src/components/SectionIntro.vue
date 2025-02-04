@@ -11,7 +11,7 @@
 </template>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 .intro {
   background: $primary-gradient;

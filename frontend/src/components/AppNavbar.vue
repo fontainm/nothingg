@@ -26,7 +26,7 @@ import IconBurgerMenu from '~icons/mdi/menu'
 </template>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 .navbar {
   height: 60px;

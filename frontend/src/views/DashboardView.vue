@@ -150,7 +150,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 .dashboard {
   .dashboard-wrapper {

@@ -34,7 +34,7 @@ import IconCheckCircleOutline from '~icons/mdi/check-circle-outline'
 </template>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 .features {
   .features-list {

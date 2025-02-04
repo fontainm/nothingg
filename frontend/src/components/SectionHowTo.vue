@@ -41,7 +41,7 @@ import IconEmoticon from '~icons/mdi/emoticon-excited-outline'
 </template>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 .howto {
   .howto-steps {

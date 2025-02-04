@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss';
 
 nav {
   padding: 16px 0;
